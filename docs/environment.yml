@@ -1,0 +1,8 @@
+name: egp-editing-tools-docs
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - pydata-sphinx-theme=0.7.2
+  - python=3.9.2
+  - sphinx=4.0.0
