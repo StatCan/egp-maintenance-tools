@@ -18,7 +18,7 @@ from datetime import datetime
 
 # -- Project information -----------------------------------------------------
 
-project = 'Editing Tools Home'
+project = 'Maintenance Tools Home'
 copyright = f"{datetime.now().year}, Statistics Canada"
 author = 'Statistics Canada'
 
@@ -58,7 +58,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "GitHub",
-            "url": "https://github.com/StatCan/egp-editing-tools",
+            "url": "https://github.com/StatCan/egp-maintenance-tools",
             "icon": "fab fa-github",
             "type": "fontawesome"
         }

@@ -1,12 +1,12 @@
-Editing Tools
-=============
+Maintenance Tools
+=================
 
 .. toctree::
    :hidden:
 
    About <source/about>
-   Editing Tools <source/editing_tools>
+   Maintenance Tools <source/maintenance_tools>
 
 .. container:: button
 
-    :doc:`About <source/about>` :doc:`Editing Tools <source/editing_tools>`
+    :doc:`About <source/about>` :doc:`Maintenance Tools <source/maintenance_tools>`

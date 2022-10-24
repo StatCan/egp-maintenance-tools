@@ -1,4 +1,4 @@
-name: egp-editing-tools-docs
+name: egp-maintenance-tools-docs
 channels:
   - conda-forge
   - defaults
