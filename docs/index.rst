@@ -4,9 +4,9 @@ Maintenance Tools
 .. toctree::
    :hidden:
 
-   About <source/about>
-   Maintenance Tools <source/maintenance_tools>
+   About <source/about/index>
+   Maintenance Tools <source/maintenance_tools/index>
 
 .. container:: button
 
-    :doc:`About <source/about>` :doc:`Maintenance Tools <source/maintenance_tools>`
+    :doc:`About <source/about/index>` :doc:`Maintenance Tools <source/maintenance_tools/index>`

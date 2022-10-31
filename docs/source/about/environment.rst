@@ -9,8 +9,8 @@ Environment
 Software
 ========
 
-Data Editing
-------------
+Data Editing and Tool Implementation
+------------------------------------
 
 - `QGIS <https://www.qgis.org/en/site/forusers/download.html>`_: Open source GIS application.
 
