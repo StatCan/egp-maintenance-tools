@@ -52,8 +52,6 @@ address_range:
     unique: False
     dtype: int
     foreign keys:
-      acquisition_technique_lookup:
-        code: [n,1]
   provider:
     not null: True
     unique: False
@@ -182,6 +180,11 @@ junction:
     unique: False
     dtype: int
     foreign keys:
+  province:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
   acquisition_technique:
     not null: True
     unique: False
@@ -209,7 +212,7 @@ junction:
     foreign keys:
   geometry:
     not null: True
-    unique: True
+    unique: False
     dtype: int
     foreign keys:
 
