@@ -1,0 +1,688 @@
+address_range:
+  address_range_id:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+      segment:
+        address_range_id_left: [1,1]
+        address_range_id_right: [1,1]
+  first_house_number:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  first_house_number_suffix:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  first_house_number_type:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  last_house_number:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  last_house_number_suffix:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  last_house_number_type:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  house_number_structure:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  reference_system_indicator:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  acquisition_technique:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+      acquisition_technique_lookup:
+        code: [n,1]
+  provider:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  creation_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  revision_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+
+basic_block:
+  bb_uid:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  cb_uid:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  geometry:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+
+blocked_passage:
+  blocked_passage_id:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  segment_id:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  blocked_passage_type:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  acquisition_technique:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  planimetric_accuracy:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  provider:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  creation_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  revision_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  geometry:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+
+crossing:
+  crossing_id:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  crossing_status:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  crossing_order:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  creation_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  revision_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  geometry:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+
+junction:
+  junction_id:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  junction_type:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  exit_number:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  acquisition_technique:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  planimetric_accuracy:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  provider:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  creation_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  revision_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  geometry:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+
+place_name:
+  place_name_id:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  place_name:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  place_type:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  province:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  acquisition_technique:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  provider:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  creation_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  revision_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+
+place_name_translation:
+  place_name_translation_id:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  place_name_id:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  place_name:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  language_code:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  creation_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  revision_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+
+route_name:
+  route_name_id:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  route_name_en:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  route_name_fr:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  creation_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  revision_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+
+route_name_link:
+  route_name_link_id:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  segment_id:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  route_name_id:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+
+route_number:
+  route_number_id:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  route_number:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  creation_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  revision_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+
+route_number_link:
+  route_number_link_id:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  segment_id:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  route_number_id:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+
+segment:
+  segment_id:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  segment_id_left:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  segment_id_right:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  element_id:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  dissolve_id:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  segment_type:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  exit_number:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  speed:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  number_of_lanes:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  road_jurisdiction:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  closing_period:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  functional_road_class:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  traffic_direction:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  road_surface_type:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  structure_id:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  address_range_id_left:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  address_range_id_right:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  place_name_id_left:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  place_name_id_right:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  bb_uid_l:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  bb_uid_r:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  acquisition_technique:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  planimetric_accuracy:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  provider:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  creation_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  revision_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  geometry:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+
+street_name:
+  street_name_id:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  street_name_concatenated:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  street_direction_prefix:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  street_type_prefix:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  street_article:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  street_name_body:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  street_type_suffix:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  street_direction_suffix:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  creation_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  revision_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+
+street_name_translation:
+  street_name_translation_id:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  street_name_id:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  street_name_concatenated:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  language_code:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  creation_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  revision_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+
+street_name_link:
+  street_name_link_id:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  segment_id:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  street_name_id:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+
+structure:
+  structure_id:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  structure_type:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  structure_name_en:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  structure_name_fr:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  creation_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  revision_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+
+toll_point:
+  toll_point_id:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
+  segment_id:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  toll_point_type:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  acquisition_technique:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  planimetric_accuracy:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  provider:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  creation_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  revision_date:
+    not null: True
+    unique: False
+    dtype: int
+    foreign keys:
+  geometry:
+    not null: True
+    unique: True
+    dtype: int
+    foreign keys:
