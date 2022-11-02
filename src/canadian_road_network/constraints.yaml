@@ -327,6 +327,8 @@ place_name_translation:
     unique: False
     dtype: text
     foreign keys:
+      language_code_lookup:
+        code: [n,1]
   creation_date:
     not null: True
     unique: False
@@ -705,6 +707,8 @@ street_name_translation:
     unique: False
     dtype: text
     foreign keys:
+      language_code_lookup:
+        code: [n,1]
   creation_date:
     not null: True
     unique: False

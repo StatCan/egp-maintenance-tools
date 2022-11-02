@@ -8,7 +8,12 @@ Data Model Validation
 Data Model
 ----------
 
-.. figure:: /source/_static/data_models/canadian_road_network/canadian_road_network.svg
-    :alt: Canadian Road Network data model.
+.. figure:: /source/_static/data_models/canadian_road_network/canadian_road_network_primary_datasets.svg
+    :alt: Canadian Road Network data model (primary datasets).
 
-    Figure: Canadian Road Network data model.
+    Figure: Canadian Road Network data model (primary datasets).
+
+.. figure:: /source/_static/data_models/canadian_road_network/canadian_road_network_lookup_datasets.svg
+    :alt: Canadian Road Network data model (lookup datasets).
+
+    Figure: Canadian Road Network data model (lookup datasets).
