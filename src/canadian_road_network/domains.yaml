@@ -1,0 +1,62 @@
+acquisition_technique_lookup:
+  N: [EN, FR]
+
+blocked_passage_type_lookup:
+  N: [EN, FR]
+
+closing_period_lookup:
+  N: [EN, FR]
+
+crossing_status_lookup:
+  N: [EN, FR]
+
+functional_road_class_lookup:
+  N: [EN, FR]
+
+house_number_structure_lookup:
+  N: [EN, FR]
+
+house_number_type_lookup:
+  N: [EN, FR]
+
+junction_type_lookup:
+  N: [EN, FR]
+
+language_code_lookup:
+  N: [EN, FR]
+
+place_type_lookup:
+  N: [EN, FR]
+
+provider_lookup:
+  N: [EN, FR]
+
+province_lookup:
+  N: [EN, FR]
+
+reference_system_indicator_lookup:
+  N: [EN, FR]
+
+road_surface_type_lookup:
+  N: [EN, FR]
+
+segment_type_lookup:
+  N: [EN, FR]
+
+street_article_lookup:
+  N: [EN, FR]
+
+street_direction_lookup:
+  N: [EN, FR]
+
+street_type_lookup:
+  N: [EN, FR]
+
+structure_type_lookup:
+  N: [EN, FR]
+
+toll_point_type_lookup:
+  N: [EN, FR]
+
+traffic_direction_lookup:
+  N: [EN, FR]
