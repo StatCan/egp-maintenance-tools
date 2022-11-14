@@ -402,114 +402,6 @@ language_code_lookup:
     dtype: text
     foreign keys:
 
-place_name:
-  place_name_id:
-    nullable: False
-    unique: True
-    dtype: uuid
-    foreign keys:
-      place_name_translation:
-        place_name_id: [0,n]
-      segment:
-        place_name_id_left: [1,n]
-        place_name_id_right: [1,n]
-  place_name:
-    nullable: False
-    unique: False
-    dtype: text
-    foreign keys:
-  place_type:
-    nullable: False
-    unique: False
-    dtype: text
-    foreign keys:
-      place_type_lookup:
-        code: [n,1]
-  province:
-    nullable: False
-    unique: False
-    dtype: int
-    foreign keys:
-      province_lookup:
-        code: [n,1]
-  acquisition_technique:
-    nullable: False
-    unique: False
-    dtype: int
-    foreign keys:
-      acquisition_technique_lookup:
-        code: [n,1]
-  provider:
-    nullable: False
-    unique: False
-    dtype: int
-    foreign keys:
-      provider_lookup:
-        code: [n,1]
-  creation_date:
-    nullable: False
-    unique: False
-    dtype: date
-    foreign keys:
-  revision_date:
-    nullable: False
-    unique: False
-    dtype: date
-    foreign keys:
-
-place_name_translation:
-  place_name_translation_id:
-    nullable: False
-    unique: True
-    dtype: uuid
-    foreign keys:
-  place_name_id:
-    nullable: False
-    unique: False
-    dtype: uuid
-    foreign keys:
-      place_name:
-        place_name_id: [1,1]
-  place_name:
-    nullable: False
-    unique: False
-    dtype: text
-    foreign keys:
-  language_code:
-    nullable: False
-    unique: False
-    dtype: text
-    foreign keys:
-      language_code_lookup:
-        code: [n,1]
-  creation_date:
-    nullable: False
-    unique: False
-    dtype: date
-    foreign keys:
-  revision_date:
-    nullable: False
-    unique: False
-    dtype: date
-    foreign keys:
-
-place_type_lookup:
-  code:
-    nullable: False
-    unique: True
-    dtype: int
-    foreign keys:
-  value_en:
-    nullable: False
-    unique: True
-    dtype: text
-    foreign keys:
-  value_fr:
-    nullable: False
-    unique: True
-    dtype: text
-    foreign keys:
-
 provider_lookup:
   code:
     nullable: False
@@ -793,20 +685,6 @@ segment:
     foreign keys:
       address_range:
         address_range_id: [1,1]
-  place_name_id_left:
-    nullable: False
-    unique: False
-    dtype: uuid
-    foreign keys:
-      place_name:
-        place_name_id: [1,1]
-  place_name_id_right:
-    nullable: False
-    unique: False
-    dtype: uuid
-    foreign keys:
-      place_name:
-        place_name_id: [1,1]
   bb_uid_l:
     nullable: False
     unique: False
