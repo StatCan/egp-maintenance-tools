@@ -1,3 +1,7 @@
+# TODO: data model validations may not be needed at all since all domains and constraints, including defaults can be managed by postgresql.
+#       Perhaps adding the contents of domains.yaml and constraints.yaml to the data model draw.io file (on separate tabs) is sufficient.
+#       Only dataset specific tools are required (e.g. validate_segment.py, validate_crossing.py, validate_basic_block.py).
+
 import click
 import geopandas as gpd
 import logging
@@ -38,7 +42,7 @@ class DataModelValidation:
         self.model = model
         self.db_url = db_url
         self.db_schema = db_schema
-        self.geom_col = "geom"
+        self.geom_col = "geometry"
 
         # Create database connection.
         self.db_con = helpers.create_db_connection(self.db_url)
@@ -61,12 +65,13 @@ class DataModelValidation:
 
         # Define validations.
         self.validations = {
-            101: self.existence_exists,
-            201: self.domains_domain,
-            301: self.constraints_nullable,
-            302: self.constraints_unique,
-            303: self.constraints_dtype,
-            304: self.constraints_foreign_keys,
+            110: self.existence_exists,
+            210: self.domains_domain,
+            310: self.constraints_nullable,
+            320: self.constraints_unique,
+            330: self.constraints_dtype,
+            340: self.constraints_default,
+            350: self.constraints_foreign_keys
         }
 
     def __call__(self) -> None:
@@ -110,20 +115,89 @@ class DataModelValidation:
     def _write_errors(self) -> None:
         ...
 
+    def constraints_default(self) -> set:
+        """
+        Validation: Data type.
+
+        \b
+        :return set: set containing unique identifiers of erroneous records.
+        """
+
+        errors = set()
+
+        # Placeholder validation. Constraint managed by PostgreSQL.
+
+        return errors
+
     def constraints_dtype(self) -> set:
-        ...
+        """
+        Validation: Data type.
+
+        \b
+        :return set: set containing unique identifiers of erroneous records.
+        """
+
+        errors = set()
+
+        # Placeholder validation. Constraint managed by PostgreSQL.
+
+        return errors
 
     def constraints_foreign_keys(self) -> set:
-        ...
+        """
+        Validation: Data type.
+
+        \b
+        :return set: set containing unique identifiers of erroneous records.
+        """
+
+        errors = set()
+
+        # Placeholder validation. Constraint managed by PostgreSQL.
+
+        return errors
 
     def constraints_nullable(self) -> set:
-        ...
+        """
+        Validation: Data type.
+
+        \b
+        :return set: set containing unique identifiers of erroneous records.
+        """
+
+        errors = set()
+
+        # Placeholder validation. Constraint managed by PostgreSQL.
+
+        return errors
 
     def constraints_unique(self) -> set:
-        ...
+        """
+        Validation: Data type.
+
+        \b
+        :return set: set containing unique identifiers of erroneous records.
+        """
+
+        errors = set()
+
+        # Placeholder validation. Constraint managed by PostgreSQL.
+
+        return errors
 
     def domains_domain(self) -> set:
-        ...
+        """
+        Validation: Data type.
+
+        \b
+        :return set: set containing unique identifiers of erroneous records.
+        """
+
+        errors = set()
+
+        # Placeholder validation. Constraint managed by PostgreSQL.
+
+        return errors
 
     def existence_exists(self) -> set:
         ...

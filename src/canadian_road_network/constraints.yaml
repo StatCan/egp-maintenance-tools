@@ -3,16 +3,22 @@ acquisition_technique_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 address_range:
@@ -20,6 +26,8 @@ address_range:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: True
     foreign keys:
       segment:
         address_range_id_left: [1,1]
@@ -28,16 +36,22 @@ address_range:
     nullable: False
     unique: False
     dtype: int
+    default: -1
+    primary key: False
     foreign keys:
   first_house_number_suffix:
     nullable: False
     unique: False
     dtype: text
+    default: ""
+    primary key: False
     foreign keys:
   first_house_number_type:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       house_number_type_lookup:
         code: [n,1]
@@ -45,16 +59,22 @@ address_range:
     nullable: False
     unique: False
     dtype: int
+    default: -1
+    primary key: False
     foreign keys:
   last_house_number_suffix:
     nullable: False
     unique: False
     dtype: text
+    default: ""
+    primary key: False
     foreign keys:
   last_house_number_type:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       house_number_type_lookup:
         code: [n,1]
@@ -62,6 +82,8 @@ address_range:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       house_number_structure_lookup:
         code: [n,1]
@@ -69,6 +91,8 @@ address_range:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       reference_system_indicator_lookup:
         code: [n,1]
@@ -76,6 +100,8 @@ address_range:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       acquisition_technique_lookup:
         code: [n,1]
@@ -83,6 +109,8 @@ address_range:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       provider_lookup:
         code: [n,1]
@@ -90,11 +118,15 @@ address_range:
     nullable: False
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
   revision_date:
-    nullable: False
+    nullable: True
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
 
 basic_block:
@@ -102,6 +134,8 @@ basic_block:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: True
     foreign keys:
       segment:
         bb_uid_l: [1,n]
@@ -110,11 +144,15 @@ basic_block:
     nullable: False
     unique: False
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
   geometry:
     nullable: False
     unique: True
     dtype: Polygon
+    default:
+    primary key: False
     foreign keys:
 
 blocked_passage:
@@ -122,11 +160,15 @@ blocked_passage:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: True
     foreign keys:
   segment_id:
     nullable: False
     unique: False
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
       segment:
         segment_id: [1,1]
@@ -134,6 +176,8 @@ blocked_passage:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       blocked_passage_type_lookup:
         code: [n,1]
@@ -141,6 +185,8 @@ blocked_passage:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       acquisition_technique_lookup:
         code: [n,1]
@@ -148,11 +194,15 @@ blocked_passage:
     nullable: False
     unique: False
     dtype: int
+    default: -1
+    primary key: False
     foreign keys:
   provider:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       provider_lookup:
         code: [n,1]
@@ -160,16 +210,22 @@ blocked_passage:
     nullable: False
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
   revision_date:
-    nullable: False
+    nullable: True
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
   geometry:
     nullable: False
     unique: True
     dtype: Point
+    default:
+    primary key: False
     foreign keys:
 
 blocked_passage_type_lookup:
@@ -177,16 +233,22 @@ blocked_passage_type_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 closing_period_lookup:
@@ -194,16 +256,22 @@ closing_period_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 crossing:
@@ -211,11 +279,15 @@ crossing:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: True
     foreign keys:
   crossing_status:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       crossing_status_lookup:
         code: [n,1]
@@ -223,21 +295,29 @@ crossing:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
   creation_date:
     nullable: False
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
   revision_date:
-    nullable: False
+    nullable: True
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
   geometry:
     nullable: False
     unique: True
     dtype: Point
+    default:
+    primary key: False
     foreign keys:
 
 crossing_status_lookup:
@@ -245,16 +325,22 @@ crossing_status_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 functional_road_class_lookup:
@@ -262,16 +348,22 @@ functional_road_class_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 house_number_structure_lookup:
@@ -279,16 +371,22 @@ house_number_structure_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 house_number_type_lookup:
@@ -296,16 +394,22 @@ house_number_type_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 junction:
@@ -313,11 +417,15 @@ junction:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: True
     foreign keys:
   junction_type:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       junction_type_lookup:
         code: [n,1]
@@ -325,11 +433,15 @@ junction:
     nullable: False
     unique: False
     dtype: text
+    default: ""
+    primary key: False
     foreign keys:
   province:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       province_lookup:
         code: [n,1]
@@ -337,6 +449,8 @@ junction:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       acquisition_technique_lookup:
         code: [n,1]
@@ -344,11 +458,15 @@ junction:
     nullable: False
     unique: False
     dtype: int
+    default: -1
+    primary key: False
     foreign keys:
   provider:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       provider_lookup:
         code: [n,1]
@@ -356,16 +474,22 @@ junction:
     nullable: False
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
   revision_date:
-    nullable: False
+    nullable: True
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
   geometry:
     nullable: False
     unique: False
     dtype: Point
+    default:
+    primary key: False
     foreign keys:
 
 junction_type_lookup:
@@ -373,16 +497,22 @@ junction_type_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 language_code_lookup:
@@ -390,16 +520,22 @@ language_code_lookup:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 provider_lookup:
@@ -407,16 +543,22 @@ provider_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 province_lookup:
@@ -424,16 +566,22 @@ province_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 reference_system_indicator_lookup:
@@ -441,16 +589,22 @@ reference_system_indicator_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 road_surface_type_lookup:
@@ -458,16 +612,22 @@ road_surface_type_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 route_name:
@@ -475,6 +635,8 @@ route_name:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: True
     foreign keys:
       route_name_link:
         route_name_id: [1,n]
@@ -482,21 +644,29 @@ route_name:
     nullable: False
     unique: False
     dtype: text
+    default: ""
+    primary key: False
     foreign keys:
   route_name_fr:
     nullable: False
     unique: False
     dtype: text
+    default: ""
+    primary key: False
     foreign keys:
   creation_date:
     nullable: False
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
   revision_date:
-    nullable: False
+    nullable: True
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
 
 route_name_link:
@@ -504,11 +674,15 @@ route_name_link:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: True
     foreign keys:
   segment_id:
     nullable: False
     unique: False
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
       segment:
         segment_id_left: [1,1]
@@ -517,6 +691,8 @@ route_name_link:
     nullable: False
     unique: False
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
       route_name:
         route_name_id: [1,1]
@@ -526,6 +702,8 @@ route_number:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: True
     foreign keys:
       route_number_link:
         route_number_id: [1,n]
@@ -533,16 +711,22 @@ route_number:
     nullable: False
     unique: False
     dtype: text
+    default: ""
+    primary key: False
     foreign keys:
   creation_date:
     nullable: False
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
   revision_date:
-    nullable: False
+    nullable: True
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
 
 route_number_link:
@@ -550,11 +734,15 @@ route_number_link:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: True
     foreign keys:
   segment_id:
     nullable: False
     unique: False
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
       segment:
         segment_id_left: [1,1]
@@ -563,6 +751,8 @@ route_number_link:
     nullable: False
     unique: False
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
       route_number:
         route_number_id: [1,1]
@@ -572,6 +762,8 @@ segment:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: True
     foreign keys:
       blocked_passage:
         segment_id: [0,n]
@@ -581,6 +773,8 @@ segment:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
       route_name_link:
         segment_id: [1,n]
@@ -592,6 +786,8 @@ segment:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
       route_name_link:
         segment_id: [1,n]
@@ -603,16 +799,22 @@ segment:
     nullable: False
     unique: False
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
   dissolve_id:
     nullable: False
     unique: False
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
   segment_type:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       segment_type_lookup:
         code: [n,1]
@@ -620,26 +822,36 @@ segment:
     nullable: False
     unique: False
     dtype: text
+    default: ""
+    primary key: False
     foreign keys:
   speed:
     nullable: False
     unique: False
     dtype: int
+    default: -1
+    primary key: False
     foreign keys:
   number_of_lanes:
     nullable: False
     unique: False
     dtype: int
+    default: -1
+    primary key: False
     foreign keys:
   road_jurisdiction:
     nullable: False
     unique: False
     dtype: text
+    default: ""
+    primary key: False
     foreign keys:
   closing_period:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       closing_period_lookup:
         code: [n,1]
@@ -647,6 +859,8 @@ segment:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       functional_road_class_lookup:
         code: [n,1]
@@ -654,6 +868,8 @@ segment:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       traffic_direction_lookup:
         code: [n,1]
@@ -661,6 +877,8 @@ segment:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       road_surface_type_lookup:
         code: [n,1]
@@ -668,6 +886,8 @@ segment:
     nullable: False
     unique: False
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
       structure:
         structure_id: [1,1]
@@ -675,6 +895,8 @@ segment:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
       address_range:
         address_range_id: [1,1]
@@ -682,6 +904,8 @@ segment:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
       address_range:
         address_range_id: [1,1]
@@ -689,6 +913,8 @@ segment:
     nullable: False
     unique: False
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
       basic_block:
         bb_uid: [1,1]
@@ -696,6 +922,8 @@ segment:
     nullable: False
     unique: False
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
       basic_block:
         bb_uid: [1,1]
@@ -703,6 +931,8 @@ segment:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       acquisition_technique_lookup:
         code: [n,1]
@@ -710,11 +940,15 @@ segment:
     nullable: False
     unique: False
     dtype: int
+    default: -1
+    primary key: False
     foreign keys:
   provider:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       provider_lookup:
         code: [n,1]
@@ -722,16 +956,22 @@ segment:
     nullable: False
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
   revision_date:
-    nullable: False
+    nullable: True
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
   geometry:
     nullable: False
     unique: True
     dtype: LineString
+    default:
+    primary key: False
     foreign keys:
 
 segment_type_lookup:
@@ -739,16 +979,22 @@ segment_type_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 street_article_lookup:
@@ -756,16 +1002,22 @@ street_article_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 street_direction_lookup:
@@ -773,16 +1025,22 @@ street_direction_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 street_name:
@@ -790,6 +1048,8 @@ street_name:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: True
     foreign keys:
       street_name_link:
         street_name_id: [1,n]
@@ -799,11 +1059,15 @@ street_name:
     nullable: False
     unique: False
     dtype: text
+    default: ""
+    primary key: False
     foreign keys:
   street_direction_prefix:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       street_direction_lookup:
         code: [n,1]
@@ -811,6 +1075,8 @@ street_name:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       street_type_lookup:
         code: [n,1]
@@ -818,6 +1084,8 @@ street_name:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       street_article_lookup:
         code: [n,1]
@@ -825,11 +1093,15 @@ street_name:
     nullable: False
     unique: False
     dtype: text
+    default: ""
+    primary key: False
     foreign keys:
   street_type_suffix:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       street_type_lookup:
         code: [n,1]
@@ -837,6 +1109,8 @@ street_name:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       street_direction_lookup:
         code: [n,1]
@@ -844,11 +1118,15 @@ street_name:
     nullable: False
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
   revision_date:
-    nullable: False
+    nullable: True
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
 
 street_name_link:
@@ -856,11 +1134,15 @@ street_name_link:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: True
     foreign keys:
   segment_id:
     nullable: False
     unique: False
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
       segment:
         segment_id_left: [1,1]
@@ -869,6 +1151,8 @@ street_name_link:
     nullable: False
     unique: False
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
       street_name:
         street_name_id: [1,1]
@@ -878,11 +1162,15 @@ street_name_translation:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: True
     foreign keys:
   street_name_id:
     nullable: False
     unique: False
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
       street_name:
         street_name_id: [1,1]
@@ -890,11 +1178,15 @@ street_name_translation:
     nullable: False
     unique: False
     dtype: text
+    default: ""
+    primary key: False
     foreign keys:
   language_code:
     nullable: False
     unique: False
     dtype: text
+    default:
+    primary key: False
     foreign keys:
       language_code_lookup:
         code: [n,1]
@@ -902,11 +1194,15 @@ street_name_translation:
     nullable: False
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
   revision_date:
-    nullable: False
+    nullable: True
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
 
 street_type_lookup:
@@ -914,16 +1210,22 @@ street_type_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 structure:
@@ -931,6 +1233,8 @@ structure:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: True
     foreign keys:
       segment:
         structure_id: [1,n]
@@ -938,6 +1242,8 @@ structure:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       structure_type_lookup:
         code: [n,1]
@@ -945,21 +1251,29 @@ structure:
     nullable: False
     unique: False
     dtype: text
+    default: ""
+    primary key: False
     foreign keys:
   structure_name_fr:
     nullable: False
     unique: False
     dtype: text
+    default: ""
+    primary key: False
     foreign keys:
   creation_date:
     nullable: False
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
   revision_date:
-    nullable: False
+    nullable: True
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
 
 structure_type_lookup:
@@ -967,16 +1281,22 @@ structure_type_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 toll_point:
@@ -984,11 +1304,15 @@ toll_point:
     nullable: False
     unique: True
     dtype: uuid
+    default:
+    primary key: True
     foreign keys:
   segment_id:
     nullable: False
     unique: False
     dtype: uuid
+    default:
+    primary key: False
     foreign keys:
       segment:
         segment_id: [1,1]
@@ -996,6 +1320,8 @@ toll_point:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       toll_point_type_lookup:
         code: [n,1]
@@ -1003,6 +1329,8 @@ toll_point:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       acquisition_technique_lookup:
         code: [n,1]
@@ -1010,11 +1338,15 @@ toll_point:
     nullable: False
     unique: False
     dtype: int
+    default: -1
+    primary key: False
     foreign keys:
   provider:
     nullable: False
     unique: False
     dtype: int
+    default:
+    primary key: False
     foreign keys:
       provider_lookup:
         code: [n,1]
@@ -1022,16 +1354,22 @@ toll_point:
     nullable: False
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
   revision_date:
-    nullable: False
+    nullable: True
     unique: False
     dtype: date
+    default:
+    primary key: False
     foreign keys:
   geometry:
     nullable: False
     unique: True
     dtype: Point
+    default:
+    primary key: False
     foreign keys:
 
 toll_point_type_lookup:
@@ -1039,16 +1377,22 @@ toll_point_type_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
 
 traffic_direction_lookup:
@@ -1056,14 +1400,20 @@ traffic_direction_lookup:
     nullable: False
     unique: True
     dtype: int
+    default:
+    primary key: True
     foreign keys:
   value_en:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
   value_fr:
     nullable: False
     unique: True
     dtype: text
+    default:
+    primary key: False
     foreign keys:
