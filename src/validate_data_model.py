@@ -3,13 +3,9 @@
 #       Only dataset specific tools are required (e.g. validate_segment.py, validate_crossing.py, validate_basic_block.py).
 
 import click
-import geopandas as gpd
 import logging
-import pandas as pd
 import sys
 from pathlib import Path
-from sqlalchemy import exc as sqlalchemy_exc, inspect
-from typing import Union
 
 filepath = Path(__file__).resolve()
 sys.path.insert(1, str(Path(__file__).resolve().parents[1]))
@@ -27,41 +23,33 @@ logger.addHandler(handler)
 class DataModelValidation:
     """Validates a data model."""
 
-    def __init__(self, model: str, db_url: str, db_schema: Union[str, None]) -> None:
+    def __init__(self, model: str, url: str, schema: str = "public", geom_col: str = "geometry") -> None:
         """
         Class initialization.
 
         \b
         :param str model: name of the data model to be validated.
-        :param str db_url: database connection URL.
-        :param Union[str, None] db_schema: database schema.
+        :param str url: database connection URL.
+        :param str schema: database schema, default=public.
+        :param str geom_col: geometry column for spatial datasets, default=geometry.
         """
 
         logger.info(f"Initializing data model validation for: {model}.")
 
         self.model = model
-        self.db_url = db_url
-        self.db_schema = db_schema
-        self.geom_col = "geometry"
+        self.url = url
+        self.schema = schema
+        self.geom_col = geom_col
+        self.dfs = dict()
 
         # Create database connection.
-        self.db_con = helpers.create_db_connection(self.db_url)
-
-        # Configure default schema.
-        self.db_inspection = inspect(self.db_con)
-        if not self.db_schema:
-            self.db_schema = self.db_inspection.default_schema_name
+        self.con = helpers.create_db_connection(self.url)
 
         # Compile configuration files.
         path_constraints = Path(self.model, "constraints.yaml").resolve()
         path_domains = Path(self.model, "domains.yaml").resolve()
         self.constraints = helpers.load_yaml(path_constraints) if path_constraints.exists() else dict()
         self.domains = helpers.load_yaml(path_domains) if path_domains.exists() else dict()
-
-        # Configure datasets in data model.
-        self.datasets = set(self.db_inspection.get_table_names()).intersection(set(self.constraints.keys())
-                                                                               .union(set(self.domains.keys())))
-        self.dfs = dict()
 
         # Define validations.
         self.validations = {
@@ -77,37 +65,11 @@ class DataModelValidation:
     def __call__(self) -> None:
         """Executes the class."""
 
-        self._load_datasets()
+        self.dfs = helpers.load_db_datasets(self.con,
+                                            subset=list(set(self.constraints.keys()).union(set(self.domains.keys()))),
+                                            schema=self.schema, geom_col=self.geom_col)
         self._validate()
         self._write_errors()
-
-    def _load_datasets(self) -> None:
-        """Loads all data model datasets."""
-
-        logger.info(f"Loading datasets.")
-
-        # Load datasets.
-        for dataset in self.datasets:
-
-            try:
-
-                logger.info(f"Loading dataset: {dataset}.")
-
-                # Define query.
-                query = f"select * from {self.db_schema}.{dataset}"
-
-                # Spatial.
-                if self.geom_col in self.db_con.execute(f"{query} limit 0").keys():
-                    self.dfs[dataset] = gpd.read_postgis(query, con=self.db_con).copy(deep=True)
-
-                # Tabular.
-                else:
-                    self.dfs[dataset] = pd.read_sql(query, con=self.db_con).copy(deep=True)
-
-                logger.info(f"Successfully loaded {len(self.dfs[dataset])} records from {self.db_schema}.{dataset}.")
-
-            except (sqlalchemy_exc.SQLAlchemyError, TypeError, ValueError):
-                logger.exception(f"Failed to load dataset: {self.db_schema}.{dataset}.")
 
     def _validate(self) -> None:
         ...
@@ -205,23 +167,26 @@ class DataModelValidation:
 
 @click.command()
 @click.argument("model", type=click.Choice(sorted(set(map(lambda f: f.parent.stem, Path().glob("**/*.yaml")))), False))
-@click.argument("db_url", type=click.STRING,
-                help="General format: postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]")
-@click.option("--db_schema", help="Database schema. Will detect and use the default schema if none is provided.")
-def main(model: str, db_url: str, db_schema: Union[str, None]) -> None:
+@click.argument("url", type=click.STRING,
+                help="General format: postgresql://[user[:password]@][netloc][:port][/dbname]")
+@click.option("--schema", default="public", show_default=True,
+              help="Database schema. Will detect and use the default schema if none is provided.")
+@click.option("--geom_col", default="geometry", show_default=True, help="Geometry column for spatial datasets.")
+def main(model: str, url: str, schema: str = "public", geom_col: str = "geometry") -> None:
     """
     Validates a data model.
 
     \b
     :param str model: name of the data model to be validated.
-    :param str db_url: database connection URL.
-    :param Union[str, None] db_schema: database schema.
+    :param str url: database connection URL.
+    :param str schema: database schema, default=public.
+    :param str geom_col: geometry column for spatial datasets, default=geometry.
     """
 
     try:
 
         with helpers.Timer():
-            validation = DataModelValidation(model, db_url, db_schema)
+            validation = DataModelValidation(model, url, schema, geom_col)
             validation()
 
     except KeyboardInterrupt:
