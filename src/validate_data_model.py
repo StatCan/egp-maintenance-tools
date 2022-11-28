@@ -1,6 +1,8 @@
 # TODO: data model validations may not be needed at all since all domains and constraints, including defaults can be managed by postgresql.
 #       Perhaps adding the contents of domains.yaml and constraints.yaml to the data model draw.io file (on separate tabs) is sufficient.
 #       Only dataset specific tools are required (e.g. validate_segment.py, validate_crossing.py, validate_basic_block.py).
+#       Modify this script to execute all individual validation scripts within data model directory.
+#       Modify this script to ensure AOI boundaries are not modified. If the user wants to modify boundaries, they must check out a larger AOI.
 
 import click
 import logging
@@ -162,6 +164,8 @@ class DataModelValidation:
         return errors
 
     def existence_exists(self) -> set:
+
+        # Placeholder validation. Builtin to each script and may not be needed.
         ...
 
 
