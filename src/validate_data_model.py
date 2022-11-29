@@ -47,12 +47,6 @@ class DataModelValidation:
         # Create database connection.
         self.con = helpers.create_db_connection(self.url)
 
-        # Compile configuration files.
-        path_constraints = Path(self.model, "constraints.yaml").resolve()
-        path_domains = Path(self.model, "domains.yaml").resolve()
-        self.constraints = helpers.load_yaml(path_constraints) if path_constraints.exists() else dict()
-        self.domains = helpers.load_yaml(path_domains) if path_domains.exists() else dict()
-
         # Define validations.
         self.validations = {
             110: self.existence_exists,
@@ -67,9 +61,7 @@ class DataModelValidation:
     def __call__(self) -> None:
         """Executes the class."""
 
-        self.dfs = helpers.load_db_datasets(self.con,
-                                            subset=list(set(self.constraints.keys()).union(set(self.domains.keys()))),
-                                            schema=self.schema, geom_col=self.geom_col)
+        self.dfs = helpers.load_db_datasets(self.con, schema=self.schema, geom_col=self.geom_col)
         self._validate()
         self._write_errors()
 
