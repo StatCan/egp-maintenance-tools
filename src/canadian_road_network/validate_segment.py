@@ -8,6 +8,7 @@ from itertools import tee
 from operator import attrgetter, itemgetter
 from pathlib import Path
 from shapely.geometry import MultiPoint
+from shapely.ops import polygonize, unary_union
 from typing import List, Tuple
 
 filepath = Path(__file__).resolve()
@@ -51,9 +52,6 @@ class SegmentValidation:
         # Create database connection.
         self.con = helpers.create_db_connection(self.url)
 
-        # Generate reusable geometry variables.
-        self._gen_reusable_variables()
-
         # Define validations.
         self.validations = {
             101: self.construction_zero_length,
@@ -63,19 +61,34 @@ class SegmentValidation:
             202: self.duplication_overlap,
             301: self.connectivity_node_intersection,
             302: self.connectivity_segmentation,
-            400: ...meshblock validations
+            401: self.meshblock_boundary,
+            402: self.meshblock_deadend,
         }
 
         # Define validation thresholds.
         self._min_vertex_dist = 0.01
 
+        # Load data, excluding ferries.
+        dfs = helpers.load_db_datasets(self.con, subset=[self.dataset], schema=self.schema, geom_col=self.geom_col)
+        self.df = dfs[self.dataset].loc[dfs[self.dataset]["segment_type"] != 2].copy(deep=True)
+        self.df.index = self.df[self.id]
+
+        # Generate reusable geometry variables.
+        self._gen_reusable_variables()
+
+        # Compile deadends (for validations).
+        nodes = pd.concat([self.df["pt_start"], self.df["pt_end"]])
+        deadend_ids = set(nodes.loc[~nodes.duplicated(keep=False)].index)
+        self.deadends = self.df.loc[self.df.index.isin(deadend_ids)].copy(deep=True)
+        self.non_deadends = self.df.loc[~self.df.index.isin(deadend_ids)].copy(deep=True)
+
+        # Generate meshblock (for validations).
+        self.meshblock = gpd.GeoDataFrame(
+            geometry=list(polygonize(unary_union(self.non_deadends["geometry"].to_list()))),
+            crs=self.df.crs)
+
     def __call__(self) -> None:
         """Executes the class."""
-
-        # Load data, exclude ferries.
-        self.df = helpers.load_db_datasets(self.con, subset=[self.dataset], schema=self.schema, geom_col=self.geom_col)
-        self.df.index = self.df[self.id]
-        self.df = self.df.loc[self.df["segment_type"] != 2].copy(deep=True)
 
         self._validate()
         self._write_errors()
@@ -281,6 +294,56 @@ class SegmentValidation:
         # Compile errors.
         if sum(flag):
             errors.update(set(overlaps.loc[flag].index))
+
+        return errors
+
+    def meshblock_boundary(self) -> set:
+        """
+        Validates: All boundary arcs must form a meshblock polygon.
+
+        \b
+        :return set: set containing identifiers of erroneous records.
+        """
+
+        errors = set()
+
+        # Extract meshblock polygon boundaries.
+        meshblock_boundaries = self.meshblock.boundary
+
+        # Filter arcs to boundaries.
+        df = self.df.loc[self.df["segment_type"] == 3]
+
+        # Query meshblock polygons which cover each arc.
+        covered_by = df["geometry"].map(lambda g: set(meshblock_boundaries.sindex.query(g, predicate="covered_by")))
+
+        # Flag arcs which do not form a meshblock polygon.
+        flag = covered_by.map(len) == 0
+
+        # Compile error logs.
+        if sum(flag):
+            errors.update(set(covered_by.loc[flag].index))
+
+        return errors
+
+    def meshblock_deadend(self) -> set:
+        """
+        Validates: All deadend arcs (excluding ferries) must be completely within 1 meshblock polygon.
+
+        \b
+        :return set: set containing identifiers of erroneous records.
+        """
+
+        errors = set()
+
+        # Query meshblock polygons which contain each deadend arc.
+        within = self.deadends["geometry"].map(lambda g: set(self.meshblock.sindex.query(g, predicate="within")))
+
+        # Flag arcs which are not completely within one meshblock polygon.
+        flag = within.map(len) != 1
+
+        # Compile errors.
+        if sum(flag):
+            errors.update(set(within.loc[flag].index))
 
         return errors
 
