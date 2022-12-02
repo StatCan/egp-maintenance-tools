@@ -4,11 +4,13 @@ import logging
 import math
 import pandas as pd
 import sys
+from copy import deepcopy
 from itertools import tee
 from operator import attrgetter, itemgetter
 from pathlib import Path
 from shapely.geometry import MultiPoint
 from shapely.ops import polygonize, unary_union
+from tabulate import tabulate
 from typing import List, Tuple
 
 filepath = Path(__file__).resolve()
@@ -32,7 +34,7 @@ class SegmentValidation:
         Class initialization.
 
         \b
-        :param str url: database connection URL.
+        :param str url: database URL.
         :param str schema: database schema, default=public.
         :param str geom_col: geometry column for spatial datasets, default=geometry.
         """
@@ -49,8 +51,8 @@ class SegmentValidation:
         self.errors = dict()
         self.export = dict()
 
-        # Create database connection.
-        self.con = helpers.create_db_connection(self.url)
+        # Create database engine.
+        self.engine = helpers.create_db_engine(self.url)
 
         # Define validations.
         self.validations = {
@@ -69,23 +71,12 @@ class SegmentValidation:
         self._min_vertex_dist = 0.01
 
         # Load data, excluding ferries.
-        dfs = helpers.load_db_datasets(self.con, subset=[self.dataset], schema=self.schema, geom_col=self.geom_col)
+        dfs = helpers.load_db_datasets(self.engine, subset=[self.dataset], schema=self.schema, geom_col=self.geom_col)
         self.df = dfs[self.dataset].loc[dfs[self.dataset]["segment_type"] != 2].copy(deep=True)
         self.df.index = self.df[self.id]
 
         # Generate reusable geometry variables.
         self._gen_reusable_variables()
-
-        # Compile deadends (for validations).
-        nodes = pd.concat([self.df["pt_start"], self.df["pt_end"]])
-        deadend_ids = set(nodes.loc[~nodes.duplicated(keep=False)].index)
-        self.deadends = self.df.loc[self.df.index.isin(deadend_ids)].copy(deep=True)
-        self.non_deadends = self.df.loc[~self.df.index.isin(deadend_ids)].copy(deep=True)
-
-        # Generate meshblock (for validations).
-        self.meshblock = gpd.GeoDataFrame(
-            geometry=list(polygonize(unary_union(self.non_deadends["geometry"].to_list()))),
-            crs=self.df.crs)
 
     def __call__(self) -> None:
         """Executes the class."""
@@ -94,15 +85,26 @@ class SegmentValidation:
         self._write_errors()
 
     def _gen_reusable_variables(self) -> None:
-        """Generates computationally intensive, reusable geometry attributes."""
+        """Generates reusable geometry attributes."""
 
         logger.info("Generating reusable geometry attributes.")
 
-        # Generate computationally intensive geometry attributes as new columns.
+        # Generate vertex attributes as new columns.
         self.df["pts_tuple"] = self.df["geometry"].map(attrgetter("coords")).map(tuple)
         self.df["pt_start"] = self.df["pts_tuple"].map(itemgetter(0))
         self.df["pt_end"] = self.df["pts_tuple"].map(itemgetter(-1))
         self.df["pts_ordered_pairs"] = self.df["pts_tuple"].map(self._ordered_pairs)
+
+        # Compile deadends.
+        nodes = pd.concat([self.df["pt_start"], self.df["pt_end"]])
+        deadend_ids = set(nodes.loc[~nodes.duplicated(keep=False)].index)
+        self.deadends = self.df.loc[self.df.index.isin(deadend_ids)].copy(deep=True)
+        self.non_deadends = self.df.loc[~self.df.index.isin(deadend_ids)].copy(deep=True)
+
+        # Generate meshblock.
+        self.meshblock = gpd.GeoDataFrame(
+            geometry=list(polygonize(unary_union(self.non_deadends["geometry"].to_list()))),
+            crs=self.df.crs)
 
     @staticmethod
     def _ordered_pairs(coords: Tuple[tuple, ...]) -> List[Tuple[tuple, tuple]]:
@@ -120,11 +122,53 @@ class SegmentValidation:
         return sorted(zip(coords_1, coords_2))
 
     def _validate(self) -> None:
-        ...
+        """Executes validations."""
+
+        logger.info("Applying validations.")
+
+        # Iterate validations.
+        for code, func in self.validations.items():
+            logger.info(f"Applying validation {code}: {func.__name__}.")
+
+            try:
+
+                # Execute validation and store results.
+                self.errors[code] = deepcopy(func())
+
+            except (KeyError, SyntaxError, ValueError) as e:
+                logger.exception(f"Unable to apply validation {code}: {func.__name__}.")
+                logger.exception(e)
+                sys.exit(1)
 
     def _write_errors(self) -> None:
-        # TODO: write errors and export required outputs to working schema.
-        # TODO: add logic to clear existing output datasets.
+        """Write validation error flags to DataFrame(s) as integer columns."""
+
+        logger.info(f"Writing error flags to dataset: {self.schema}.{self.dataset}.")
+
+        # Iterate validation results.
+        statements = list()
+        for code, vals in sorted(self.errors.items()):
+
+            # Create SQL statement to drop pre-existing column.
+            statements.append(f"ALTER TABLE {self.schema}.{self.dataset} DROP COLUMN IF EXISTS v{code};")
+
+            if len(vals):
+
+                # Create SQL statement to add and populate new column for invalid records.
+                statements.append(f"""
+                ALTER TABLE {self.schema}.{self.dataset} ADD COLUMN v{code} INTEGER DEFAULT 0;
+                UPDATE {self.schema}.{self.dataset} SET v{code} = 1 WHERE {self.id} IN {*vals,};
+                """.replace(",)", ")"))
+
+        # Execute statements.
+        helpers.execute_db_statements(engine=self.engine, statements=statements)
+
+        # Log validation results summary.
+        summary = tabulate(
+            [[f"{code} ({self.validations[code].__name__})", len(vals)] for code, vals in sorted(self.errors.items())],
+            headers=["Validation", "Invalid Count"], tablefmt="rst", colalign=("left", "right"))
+
+        logger.info("Validation results:\n" + summary)
 
     def connectivity_node_intersection(self) -> set:
         """
@@ -207,7 +251,7 @@ class SegmentValidation:
                 # Export invalid pairs as MultiPoint geometries.
                 pts = coord_pairs.loc[flag].map(MultiPoint)
                 pts_df = gpd.GeoDataFrame({self.id: pts.index.values}, geometry=[*pts], crs=self.df.crs)
-                self.export[f"validation_construction_cluster_tolerance"] = pts_df.copy(deep=True)
+                self.export[f"reference_cluster_tolerance"] = pts_df.copy(deep=True)
 
         return errors
 
@@ -359,7 +403,7 @@ def main(url: str, schema: str = "public", geom_col: str = "geometry") -> None:
     Validates dataset: segment.
 
     \b
-    :param str url: database connection URL.
+    :param str url: database URL.
     :param str schema: database schema, default=public.
     :param str geom_col: geometry column for spatial datasets, default=geometry.
     """

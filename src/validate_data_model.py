@@ -31,7 +31,7 @@ class DataModelValidation:
 
         \b
         :param str model: name of the data model to be validated.
-        :param str url: database connection URL.
+        :param str url: database URL.
         :param str schema: database schema, default=public.
         :param str geom_col: geometry column for spatial datasets, default=geometry.
         """
@@ -44,8 +44,8 @@ class DataModelValidation:
         self.geom_col = geom_col
         self.dfs = dict()
 
-        # Create database connection.
-        self.con = helpers.create_db_connection(self.url)
+        # Create database engine.
+        self.engine = helpers.create_db_engine(self.url)
 
         # Define validations.
         self.validations = {
@@ -61,7 +61,7 @@ class DataModelValidation:
     def __call__(self) -> None:
         """Executes the class."""
 
-        self.dfs = helpers.load_db_datasets(self.con, schema=self.schema, geom_col=self.geom_col)
+        self.dfs = helpers.load_db_datasets(self.engine, schema=self.schema, geom_col=self.geom_col)
         self._validate()
         self._write_errors()
 
@@ -174,7 +174,7 @@ def main(model: str, url: str, schema: str = "public", geom_col: str = "geometry
 
     \b
     :param str model: name of the data model to be validated.
-    :param str url: database connection URL.
+    :param str url: database URL.
     :param str schema: database schema, default=public.
     :param str geom_col: geometry column for spatial datasets, default=geometry.
     """

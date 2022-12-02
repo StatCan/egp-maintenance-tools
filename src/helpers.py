@@ -6,7 +6,7 @@ import sys
 import time
 import yaml
 from pathlib import Path
-from sqlalchemy import create_engine, exc as sqlalchemy_exc, inspect
+from sqlalchemy import create_engine, exc, inspect, text
 from sqlalchemy.engine.base import Engine
 from typing import Any, Dict, List, Union
 
@@ -49,37 +49,67 @@ class Timer:
         logger.info(f"Finished. Time elapsed: {delta}.")
 
 
-def create_db_connection(url: str) -> Engine:
+def create_db_engine(url: str) -> Engine:
     """
-    Connects to a database based on a connection URL.
+    Creates a database engine based on a database URL.
 
     \b
-    :param str url: database connection URL.
-    :return sqlalchemy.engine.base.Engine: database connection.
+    :param str url: database URL.
+    :return sqlalchemy.engine.base.Engine: database engine.
     """
 
-    logger.info(f"Creating database connection: {url}.")
+    logger.info(f"Creating database engine: {url}.")
 
     # Create database engine.
     try:
 
-        con = create_engine(url)
+        engine = create_engine(url)
 
-    except sqlalchemy_exc.SQLAlchemyError as e:
-        logger.exception(f"Unable to create database connection: {url}.")
+    except exc.SQLAlchemyError as e:
+        logger.exception(f"Unable to create database engine: {url}.")
         logger.exception(e)
         sys.exit(1)
 
-    return con
+    return engine
 
 
-def load_db_datasets(con: Engine, subset: List[str] = None, schema: str = "public", geom_col: str = "geometry") -> \
+def execute_db_statements(engine: Engine, statements: Union[str, List[str, ...]]) -> None:
+    """
+    Executes one or more SQL statements as a database transaction.
+
+    \b
+    :param sqlalchemy.engine.base.Engine engine: database engine.
+    :param Union[str, List[str, ...]] statements: SQl statement or list of statements to be executed.
+    """
+
+    logger.info("Executing SQL statements.")
+
+    # Resolve statement inputs.
+    if isinstance(statements, str):
+        statements = [statements]
+
+    # Run and commit transaction.
+    try:
+
+        with engine.begin() as con:
+
+            # Iterate statements.
+            for statement in statements:
+                _ = con.execute(text(statement))
+
+    except exc.SQLAlchemyError as e:
+        logger.exception(f"Unable to execute statement.")
+        logger.exception(e)
+        sys.exit(1)
+
+
+def load_db_datasets(engine: Engine, subset: List[str] = None, schema: str = "public", geom_col: str = "geometry") -> \
         Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]]:
     """
     Loads all or a specified subset of datasets from a given database.
 
     \b
-    :param sqlalchemy.engine.base.Engine con: database connection.
+    :param sqlalchemy.engine.base.Engine engine: database engine.
     :param List[str] subset: list of dataset names, default=None.
     :param str schema: database schema, default=public.
     :param str geom_col: geometry column for spatial datasets, default=geometry.
@@ -91,7 +121,7 @@ def load_db_datasets(con: Engine, subset: List[str] = None, schema: str = "publi
     dfs = dict()
 
     # Configure existing and requested datasets.
-    datasets = set(inspect(con).get_table_names())
+    datasets = set(inspect(engine).get_table_names())
     if subset:
         datasets = datasets.intersection(subset)
 
@@ -112,12 +142,12 @@ def load_db_datasets(con: Engine, subset: List[str] = None, schema: str = "publi
             query = f"select * from {schema}.{dataset}"
 
             # Spatial.
-            if geom_col in con.execute(f"{query} limit 0").keys():
-                dfs[dataset] = gpd.read_postgis(query, con=con).copy(deep=True)
+            if geom_col in engine.execute(f"{query} limit 0").keys():
+                dfs[dataset] = gpd.read_postgis(query, con=engine).copy(deep=True)
 
             # Tabular.
             else:
-                dfs[dataset] = pd.read_sql(query, con=con).copy(deep=True)
+                dfs[dataset] = pd.read_sql(query, con=engine).copy(deep=True)
 
             logger.info(f"Successfully loaded {len(dfs[dataset])} records from {schema}.{dataset}.")
 
