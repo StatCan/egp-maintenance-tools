@@ -94,7 +94,7 @@ Last House Number Type
 ^^^^^^^^^^^^^^^^^^^^^^
 Method used to populate the address range. A specific value is defined for the left and right sides of the Road Element.
 
-Refer to the attributes described in :ref:`First House Number Type`.
+Refer to the attributes described in :ref:`First House Number Type<First House Number Type>`.
 
 House Number Structure
 ^^^^^^^^^^^^^^^^^^^^^^
