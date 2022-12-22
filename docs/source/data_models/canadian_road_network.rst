@@ -104,6 +104,21 @@ value is defined for the left and right sides of the Road Element.
    :widths: auto
    :align: left
 
+   0, "None", "Absence of a house along the Road Element."
+   1, "Even", "The house numbers appear as even numbers in a sequentially sorted order (ascending or descending) when
+   moving from one end of the Road Element to the other. Numeric completeness of the series is not a requirement. An
+   even house number series that has missing numbers but is sequentially sorted is considered Even. An example is the
+   series (2, 4, 8, 18, 22)."
+   2, "Odd", "The house numbers appear as odd numbers in a sequentially sorted order (ascending or descending) when
+   moving from one end of the Road Element to the other. Numeric completeness of the series is not a requirement. An
+   odd house number series that has missing numbers but is sequentially sorted is considered Odd. An example is the
+   series (35, 39, 43, 69, 71, 73, 85)."
+   3, "Mixed", "The house numbers are odd and even on the same side of a Road Element in a sequentially sorted order
+   (ascending or descending) when moving from one end of the Road Element to the other. Numeric completeness of the
+   series is not a requirement. An odd and even house number series that has missing numbers but is sequentially sorted
+   is considered Mixed. Examples are the series (5, 6, 7, 9, 10, 13) and (24, 27, 30, 33, 34, 36)."
+   4, "Irregular", "The house numbers do not occur in any sorted order."
+
 Reference System Indicator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 An indication of whether the physical address of all or a portion of a Road Element is based on a particular addressing
@@ -123,6 +138,20 @@ The type of data source or technique used to populate (create or revise) the dat
    :widths: auto
    :align: left
 
+   0, "None", "No value applies."
+   1, "Other", "Other value."
+   2, "GPS", "Data collected using a GPS device."
+   3, "Orthoimage", "Satellite imagery orthorectified."
+   4, "Orthophoto", "Aerial photo orthorectified."
+   5, "Vector Data", "Vector digital data."
+   6, "Paper Map", "Conventional sources of information like maps or plans."
+   7, "Field Completion", "Information gathered from people directly on the field."
+   8, "Raster Data", "Data resulting from a scanning process."
+   9, "Digital Elevation Model", "Data coming from a Digital Elevation Model (DEM)."
+   10, "Aerial Photo", "Aerial photography not orthorectified."
+   11, "Raw Imagery Data", "Satellite imagery not orthorectified."
+   12, "Computed", "Geometric information that has been computed (not captured)."
+
 Provider
 ^^^^^^^^
 The affiliation of the organization that generated (created or revised) the object.
@@ -131,6 +160,12 @@ The affiliation of the organization that generated (created or revised) the obje
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
+
+   1, "Other", "Other value."
+   2, "Federal", "Federal departments or agencies."
+   3, "Provincial / Territorial", "Provincial / territorial departments or agencies."
+   4, "Municipal", "Municipal departments or agencies."
+
 
 Creation Date
 ^^^^^^^^^^^^^^
@@ -159,7 +194,7 @@ Blocked Passage id
 
 Segment id
 ^^^^^^^^^^
-**UNKNOWN**
+A unique identifier within a dataset assigned to each Segment.
 
 Blocked Passage Type
 ^^^^^^^^^^^^^^^^^^^^
@@ -258,8 +293,8 @@ The type of toll point.
    :widths: auto
    :align: left
 
-Acquisition Type
-^^^^^^^^^^^^^^^^^
+Acquisition Technique
+^^^^^^^^^^^^^^^^^^^^^
 
 Planimetric Accuracy
 ^^^^^^^^^^^^^^^^^^^^^
@@ -326,6 +361,7 @@ Route Name Link id
 
 Segment id
 ^^^^^^^^^^
+**same as above**
 
 Route Name id
 ^^^^^^^^^^^^^^
@@ -356,7 +392,7 @@ Route Number Link
 Route Number id
 ^^^^^^^^^^^^^^^
 
-route_number
+Route Number
 ^^^^^^^^^^^^
 **Duplicate**
 
@@ -370,9 +406,12 @@ Revision Date
 
 Segment
 ------
+A road is a linear section of the earth designed for or the result of vehicular movement. A Road Segment
+is the specific representation of a portion of a road with uniform characteristics.
 
 Segment id
 ^^^^^^^^^^^
+**same as above**
 
 Segment id (left)
 ^^^^^^^^^^^^^^^^
@@ -415,6 +454,12 @@ The period in which the road or ferry connection is not available to the public.
    :widths: auto
    :align: left
 
+   0, "None", "There is no closing period. The road or ferry connection is open year round."
+   1, "Summer", "Period of the year for which the absence of ice and snow prevent the access to the road or ferry
+   connection."
+   2, "Winter", "Period of the year for which ice and snow prevent the access to the road or ferry connection."
+
+
 Functional Road Class
 ^^^^^^^^^^^^^^^^^^^^^
 A classification based on the importance of the role that the Road Element or Ferry Connection performs in the
@@ -425,6 +470,28 @@ connectivity of the total road network.
    :widths: auto
    :align: left
 
+   1, "Freeway", "An unimpeded, high-speed controlled access thoroughfare for through traffic with typically no at-
+   grade intersections, usually with no property access or direct access, and which is accessed by a ramp. Pedestrians
+   are prohibited."
+   2, "Expressway / Highway", "A high-speed thoroughfare with a combination of controlled access intersections at any
+   grade."
+   3, "Arterial", "A major thoroughfare with medium to large traffic capacity."
+   4, "Collector", "A minor thoroughfare mainly used to access properties and to feed traffic with right of way."
+   5, "Local / Street", "A low-speed thoroughfare dedicated to provide full access to the front of properties."
+   6, "Local / Strata", "A low-speed thoroughfare dedicated to provide access to properties with potential public
+   restriction such as: trailer parks, First Nations, strata, private estates, seasonal residences."
+   7, "Local / Unknown", "A low-speed thoroughfare dedicated to provide access to the front of properties but for which
+   the access regulations are unknown."
+   8, "Alleyway / Lane", "A low-speed thoroughfare dedicated to provide access to the rear of properties."
+   9, "Ramp", "A system of interconnecting roadways providing for the controlled movement between two or more roadways."
+   10, "Resource / Recreation", "A narrow passage whose primary function is to provide access for resource extraction
+   and may also have serve in providing public access to the backcountry."
+   11, "Rapid Transit", "A thoroughfare restricted to public transit buses."
+   12, "Service Lane", "A stretch of road permitting vehicles to come to a stop along a freeway or highway. Scale,
+   service lane, emergency lane, lookout, and rest area."
+   13, "Winter", "A road that is only useable during the winter when conditions allow for passage over lakes, rivers,
+   and wetlands."
+
 Traffic Direction
 ^^^^^^^^^^^^^^^^^
 The direction(s) of traffic flow allowed on the road.
@@ -434,6 +501,13 @@ The direction(s) of traffic flow allowed on the road.
    :widths: auto
    :align: left
 
+   1, "Both directions", "Traffic flow is allowed in both directions."
+   2, "Same direction", "The direction of one way traffic flow is the same as the digitizing direction of the Road
+   Segment."
+   3, "Opposite direction", "The direction of one way traffic flow is opposite to the digitizing direction of the Road
+   Segment."
+
+
 Road Surface Type
 ^^^^^^^^^^^^^^
 The type of surface a road element has.
@@ -442,6 +516,16 @@ The type of surface a road element has.
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
+
+   0, "None", "No value applies."
+   1, "Rigid", "A paved road with a rigid surface such as concrete or steel decks."
+   2, "Flexible", "A paved road with a flexible surface such as asphalt or tar gravel."
+   3, "Blocks", "A paved road with a surface made of blocks such as cobblestones."
+   4, "Gravel", "A dirt road whose surface has been improved by grading with gravel."
+   5, "Dirt", "Roads whose surface is formed by the removal of vegetation and/or by the transportation movements over
+   that road which inhibit further growth of any vegetation."
+   6, "Paved Unknown", "A road with a surface made of hardened material such as concrete, asphalt, tar gravel, or steel decks."
+   7, "Unpaved Unknown", ""A road with a surface made of loose material such as gravel or dirt."
 
 Structure id
 ^^^^^^^^^^^^
@@ -492,6 +576,8 @@ Street Name
 
 Street Name id
 ^^^^^^^^^^^^^^
+The identifier used to link an address range to its street name. A specific value is defined for
+the left and right sides of the Road Element.
 
 Street Name Concatenated
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -502,7 +588,31 @@ Street Direction Prefix
 ^^^^^^^^^^^^^^^^^^^^^^^
 A geographic direction that is part of the street name and precedes the street name body or, if appropriate, the street
 type prefix.
-**table**
+
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
+
+   0, "None", "No value applies."
+   1, "North", ""
+   2, "Nord", ""
+   3, "South", ""
+   4, "Sud", ""
+   5, "East", ""
+   6, "Est", ""
+   7, "West", ""
+   8, "Ouest", ""
+   9, "Northwest", ""
+   10, "Nord-ouest", ""
+   11, "Northeast", ""
+   12, "Nord-est", ""
+   13, "Southwest", ""
+   14, "Sud-ouest", ""
+   15, "Southeast", ""
+   16, "Sud-est", ""
+   17, "Central", ""
+   18, "Centre", ""
 
 Street Type Prefix
 ^^^^^^^^^^^^^^^^^^
@@ -514,14 +624,316 @@ Road Element.
    :widths: auto
    :align: left
 
+   0, "None", "No value applies."
+   1, "Abbey", ""
+   2, "Access", ""
+   3, "Acres", ""
+   4, "Aire", ""
+   5, "Allée", ""
+   6, "Alley", ""
+   7, "Autoroute", ""
+   8, "Avenue", ""
+   9, "Barrage", ""
+   10, "Bay", ""
+   11, "Beach", ""
+   12, "Bend", ""
+   13, "Bloc", ""
+   14, "Block", ""
+   15, "Boulevard", ""
+   16, "Bourg", ""
+   17, "Brook", ""
+   18, "By-pass", ""
+   19, "Byway", ""
+   20, "Campus", ""
+   21, "Cape", ""
+   22, "Carre", ""
+   23, "Carrefour", ""
+   24, "Centre", ""
+   25, "Cercle", ""
+   26, "Chase", ""
+   27, "Chemin", ""
+   28, "Circle", ""
+   29, "Circuit", ""
+   30, "Close", ""
+   31, "Common", ""
+   32, "Concession", ""
+   33, "Corners", ""
+   34, "Côte", ""
+   35, "Cour", ""
+   36, "Court", ""
+   37, "Cove", ""
+   38, "Crescent", ""
+   39, "Croft", ""
+   40, "Croissant", ""
+   41, "Crossing", ""
+   42, "Crossroads", ""
+   43, "Cul-de-sac", ""
+   44, "Dale", ""
+   45, "Dell", ""
+   46, "Desserte", ""
+   47, "Diversion", ""
+   48, "Downs", ""
+   49, "Drive", ""
+   50, "Droit de passage", ""
+   51, "Échangeur", ""
+   52, "End", ""
+   53, "Esplanade", ""
+   54, "Estates", ""
+   55, "Expressway", ""
+   56, "Extension", ""
+   57, "Farm", ""
+   58, "Field", ""
+   59, "Forest", ""
+   60, "Freeway", ""
+   61, "Front", ""
+   62, "Gardens", ""
+   63, "Gate", ""
+   64, "Glade", ""
+   65, "Glen", ""
+   66, "Green", ""
+   67, "Grounds", ""
+   68, "Grove", ""
+   69, "Harbour", ""
+   70, "Haven", ""
+   71, "Heath", ""
+   72, "Heights", ""
+   73, "Highlands", ""
+   74, "Highway", ""
+   75, "Hill", ""
+   76, "Hollow", ""
+   77, "Île", ""
+   78, "Impasse", ""
+   79, "Island", ""
+   80, "Key", ""
+   81, "Knoll", ""
+   82, "Landing", ""
+   83, "Lane", ""
+   84, "Laneway", ""
+   85, "Limits", ""
+   86, "Line", ""
+   87, "Link", ""
+   88, "Lookout", ""
+   89, "Loop", ""
+   90, "Mall", ""
+   91, "Manor", ""
+   92, "Maze", ""
+   93, "Meadow", ""
+   94, "Mews", ""
+   95, "Montée", ""
+   96, "Moor", ""
+   97, "Mount", ""
+   98, "Mountain", ""
+   99, "Orchard", ""
+   100, "Parade", ""
+   101, "Parc", ""
+   102, "Park", ""
+   103, "Parkway", ""
+   104, "Passage", ""
+   105, "Path", ""
+   106, "Pathway", ""
+   107, "Peak", ""
+   108, "Pines", ""
+   109, "Place", ""
+   110, "Place", ""
+   111, "Plateau", ""
+   112, "Plaza", ""
+   113, "Point", ""
+   114, "Port", ""
+   115, "Private", ""
+   116, "Promenade", ""
+   117, "Quay", ""
+   118, "Rang", ""
+   119, "Range", ""
+   120, "Reach", ""
+   121, "Ridge", ""
+   122, "Right of Way", ""
+   123, "Rise", ""
+   124, "Road", ""
+   125, "Rond Point", ""
+   126, "Route", ""
+   127, "Row", ""
+   128, "Rue", ""
+   129, "Ruelle", ""
+   130, "Ruisseau", ""
+   131, "Run", ""
+   132, "Section", ""
+   133, "Sentier", ""
+   134, "Sideroad", ""
+   135, "Square", ""
+   136, "Street", ""
+   137, "Stroll", ""
+   138, "Subdivision", ""
+   139, "Terrace", ""
+   140, "Terrasse", ""
+   141, "Thicket", ""
+   142, "Towers", ""
+   143, "Townline", ""
+   144, "Trace", ""
+   145, "Trail", ""
+   146, "Trunk", ""
+   147, "Turnabout", ""
+   148, "Vale", ""
+   149, "Via", ""
+   150, "View", ""
+   151, "Village", ""
+   152, "Vista", ""
+   153, "Voie", ""
+   154, "Walk", ""
+   155, "Way", ""
+   156, "Wharf", ""
+   157, "Wood", ""
+   158, "Woods", ""
+   159, "Wynd", ""
+   160, "Driveway", ""
+   161, "Height", ""
+   162, "Roadway", ""
+   163, "Strip", ""
+   164, "Concession Road", ""
+   165, "Corner", ""
+   166, "County Road", ""
+   167, "Crossroad", ""
+   168, "Fire Route", ""
+   169, "Garden", ""
+   170, "Hills", ""
+   171, "Isle", ""
+   172, "Lanes", ""
+   173, "Pointe", ""
+   174, "Regional Road", ""
+   175, "Autoroute à péage", ""
+   176, "Baie", ""
+   177, "Bluff", ""
+   178, "Bocage", ""
+   179, "Bois", ""
+   180, "Boucle", ""
+   181, "Bretelle", ""
+   182, "Cap", ""
+   183, "Causeway", ""
+   184, "Chaussée", ""
+   185, "Contournement", ""
+   186, "Couloir", ""
+   187, "Crête", ""
+   188, "Croix", ""
+   189, "Cross", ""
+   190, "Dead End", ""
+   191, "Débarquement", ""
+   192, "Entrance", ""
+   193, "Entrée", ""
+   194, "Evergreen", ""
+   195, "Exit", ""
+   196, "Étang", ""
+   197, "Falaise", ""
+   198, "Jardin", ""
+   199, "Lawn", ""
+   200, "Lien", ""
+   201, "Ligne", ""
+   202, "Manoir", ""
+   203, "Pass", ""
+   204, "Pente", ""
+   205, "Pond", ""
+   206, "Quai", ""
+   207, "Ramp", ""
+   208, "Rampe", ""
+   209, "Rangée", ""
+   210, "Roundabout", ""
+   211, "Route de plaisance", ""
+   212, "Route sur élevée", ""
+   213, "Side", ""
+   214, "Sortie", ""
+   215, "Throughway", ""
+   216, "Took", ""
+   217, "Turn", ""
+   218, "Turnpike", ""
+   219, "Vallée", ""
+   220, "Villas", ""
+   221, "Virage", ""
+   222, "Voie oust", ""
+   223, "Voie rapide", ""
+   224, "Vue", ""
+   225, "Westway", ""
+   226, "Arm", ""
+   227, "Baseline", ""
+   228, "Bourne", ""
+   229, "Branch", ""
+   230, "Bridge", ""
+   231, "Burn", ""
+   232, "Bypass", ""
+   233, "Camp", ""
+   234, "Chart", ""
+   235, "Club", ""
+   236, "Copse", ""
+   237, "Creek", ""
+   238, "Crest", ""
+   239, "Curve", ""
+   240, "Cut", ""
+   241, "Fairway", ""
+   242, "Gateway", ""
+   243, "Greenway", ""
+   244, "Inamo", ""
+   245, "Inlet", ""
+   246, "Junction", ""
+   247, "Keep", ""
+   248, "Lake", ""
+   249, "Lakes", ""
+   250, "Lakeway", ""
+   251, "Market", ""
+   252, "Millway", ""
+   253, "Outlook", ""
+   254, "Oval", ""
+   255, "Overpass", ""
+   256, "Pier", ""
+   257, "River", ""
+   258, "Service", ""
+   259, "Shore", ""
+   260, "Shores", ""
+   261, "Sideline", ""
+   262, "Spur", ""
+   263, "Surf", ""
+   264, "Track", ""
+   265, "Valley", ""
+   266, "Walkway", ""
+   267, "Wold", ""
+   268, "Tili", ""
+   269, "Nook", ""
+   270, "Drung", ""
+   271, "Awti", ""
+   272, "Awti'j", ""
+   273, "Rest", ""
+   274, "Rotary", ""
+   275, "Connection", ""
+   276, "Estate", ""
+   277, "Crossover", ""
+   278, "Hideaway", ""
+   279, "Linkway", ""
+
 Street Article
 ^^^^^^^^^^^^^^
 Article(s) that is/are part of the street name and located at the beginning.
 
 .. csv-table::
-   :header: "Code", "Label", "Definition"
+   :header: "Label", "Definition"
    :widths: auto
    :align: left
+
+   "None", ""
+   "à", ""
+   "à l'", ""
+   "à la", ""
+   "au", ""
+   "aux", ""
+   "by the", ""
+   "chez", ""
+   "d'", ""
+   "de", ""
+   "de l'", ""
+   "de la", ""
+   "des", ""
+   "du", ""
+   "l'", ""
+   "la", ""
+   "le", ""
+   "les", ""
+   "of the", ""
+   "the", ""
 
 Street Name Body
 ^^^^^^^^^^^^^^^^
@@ -533,20 +945,14 @@ Street Type Suffix
 A part of the street name of a Road Element identifying the street type. A suffix follows the street name body of a
 Road Element.
 
-.. csv-table::
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
+**Same as street type Prefix**
 
 Street Direction Suffix
 ^^^^^^^^^^^^^^^^^^^^^^^
 A geographic direction that is part of the street name and succeeds the street name body or, if appropriate, the street
 type suffix.
 
-.. csv-table::
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
+**Same as street Direction Prefix**
 
 Creation Date
 ^^^^^^^^^^^^
@@ -564,9 +970,11 @@ Street Name Link id
 
 Segment id
 ^^^^^^^^^^
+**same as above**
 
 Street Name id
 ^^^^^^^^^^^^^^
+**Same as above**
 
 Street Name Translation
 -----------------------
@@ -576,6 +984,7 @@ Street Name Translation id
 
 Street Name id
 ^^^^^^^^^^^^^^
+**Same as above**
 
 Street Name Concatenated
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -611,6 +1020,22 @@ The classification of a structure.
    :header: "Code", "Label", "Definition"
    :widths: auto
    :align: left
+
+   0, "None", "No value applies."
+   1, "Bridge", "A manmade construction that supports a road on a raised structure and spans an obstacle, river,
+   another road, or railway."
+   2, "Bridge covered", "A manmade construction that supports a road on a covered raised structure and spans an
+   obstacle, river, another road, or railway."
+   3, "Bridge moveable", "A manmade construction that supports a road on a moveable raised structure and spans an
+   obstacle, river, another road, or railway."
+   4, "Bridge unknown", "A bridge for which it is currently impossible to determine whether its structure is covered,
+   moveable or other."
+   5, "Tunnel", "An enclosed manmade construction built to carry a road through or below a natural feature or other
+   obstructions."
+   6, "Snowshed", "A manmade roofed structure built over a road in mountainous areas to prevent snow slides from
+   blocking the road."
+   7, "Dam", "A manmade linear structure built across a waterway or floodway to control the flow of water and
+   supporting a road for motor vehicles."
 
 Structure Name (en)
 ^^^^^^^^^^^^^^^^^^
@@ -674,33 +1099,15 @@ Creation Date
 ^^^^^^^^^^^^^^
 **Duplicate**
 
-Creation Type
+Revision Date
 ^^^^^^^^^^^^^
+**Duplicate**
 
 Toll Point Type Lookup
 -----------------------
 
 Traffic Direction Lookup
 ------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
