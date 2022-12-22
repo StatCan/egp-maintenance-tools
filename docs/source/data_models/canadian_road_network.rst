@@ -37,7 +37,7 @@ Domains
 Data Dictionary
 ===============
 
-Acquisistion Technique Lookup
+Acquisition Technique Lookup
 -----------------------------
 **UNKNOWN**
 
@@ -63,7 +63,20 @@ First House Number Type
 ^^^^^^^^^^^^^^^^^^^^^^^
 Method used to populate the address range. A specific value is defined for the left and right sides of the Road Element.
 
-**table**
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
+
+   0, "None", "Absence of a house along the Road Element."
+   1, "Actual Located", "Qualifier indicating that the house number is located at its ""real world"" position along a
+   Road Element."
+   2, "Actual Unlocated", "Qualifier indicating that the house number is located at one end of the Road Element. This
+   may be or may not be its ""real world"" position."
+   3, "Projected", "Qualifier indicating that the house number is planned, figured or estimated for the future and is
+   located (at one end) at the beginning or the end of the Road Element."
+   4, "Interpolated", "Qualifier indicating that the house number is calculated from two known house numbers which are
+   located on either side. By convention, the house is positioned at one end of the Road Element."
 
 Last House Number
 ^^^^^^^^^^^^^^^^^
@@ -79,65 +92,76 @@ Last House Number Type
 ^^^^^^^^^^^^^^^^^^^^^^
 Method used to populate the address range. A specific value is defined for the left and right sides of the Road Element.
 
-**table**
+**Same as first house number type**
 
 House Number Structure
 ^^^^^^^^^^^^^^^^^^^^^^
 The type of house numbering (or address numbering) method applied to one side of a particular Road Element. A specific
 value is defined for the left and right sides of the Road Element.
 
-**table**
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
 
 Reference System Indicator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 An indication of whether the physical address of all or a portion of a Road Element is based on a particular addressing
 system. A specific value is defined for the left and right sides of the Road Element.
 
-**table**
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
 
 Acquisition Technique
 ^^^^^^^^^^^^^^^^^^^^^
 The type of data source or technique used to populate (create or revise) the dataset.
 
-.. _Acquisition Technique:
-**table**
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
 
 Provider
 ^^^^^^^^
 The affiliation of the organization that generated (created or revised) the object.
 
-**table**
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
 
 Creation Date
 ^^^^^^^^^^^^^^
+The date of data creation.
 
-revision_date
+Revision Date
 ^^^^^^^^^^^^^
-A date in the format YYYYMMDD. If the month or the day is unknown, corresponding characters are left blank. The value
-"0" is used when no value applies.
+The date of data revision.
 
-basic_block
+Basic Block
 -----------
 
-bb_uid
+bb uid
 ^^^^^^
 
-cb_uid
+cb uid
 ^^^^^^
 
-blocked_passage
+Blocked Passage
 ---------------
 Indication of a physical barrier on a Road Element built to prevent or control further access.
 
-blocked_passage_id
+Blocked Passage id
 ^^^^^^^^^^^^^^^^^^
 **UNKNOWN**
 
-segment_id
+Segment id
 ^^^^^^^^^^
 **UNKNOWN**
 
-blocked_passage_type
+Blocked Passage Type
 ^^^^^^^^^^^^^^^^^^^^
 The type of blocked passage as an indication of the fact whether it is removable.
 
@@ -146,17 +170,14 @@ The type of blocked passage as an indication of the fact whether it is removable
    :widths: auto
    :align: left
 
- 1, "Permanently Fixed", "The barrier cannot be removed without destroying it. Heavy equipment needed in order to
-   allow further access. Examples of permanently fixed blocked passage are concrete blocks or a mound of earth."
-   2, "Removable", "The barrier is designed to free the entrance to the (other side of the) Road Element that it is
-   blocking. Further access easily allowed when so desired."
+   1, "Permanently Fixed", "The barrier cannot be removed without destroying it. Heavy equipment needed in order to allow further access. Examples of permanently fixed blocked passage are concrete blocks or a mound of earth."
+   2, "Removable", "The barrier is designed to free the entrance to the (other side of the) Road Element that it is blocking. Further access easily allowed when so desired."
 
-acquisition_technique
+Acquisition Technique
 ^^^^^^^^^^^^^^^^^^^^
 **Duplicate**
 
-
-planimetric_accuracy
+Planimetric Accuracy
 ^^^^^^^^^^^^^^^^^^^^
 The planimetric accuracy expressed in meters as the circular map accuracy standard (CMAS)
 
@@ -168,29 +189,29 @@ Creation Date
 ^^^^^^^^^^^^^
 **Duplicate**
 
-revision_date
+Revision Date
 ^^^^^^^^^^^^^^
 **Duplicate**
 
-blocked_passage_type_lookup
+Blocked Passage Type Lookup
 ---------------------------
 
-closing_period_lookup
+Closing Period Lookup
 ---------------------
 
 crossing
 --------
 **UNKNOWN**
 
-crossing_id
+Crossing id
 ^^^^^^^^^^^
 **UNKNOWN**
 
-crossing_status
+Crossing Status
 ^^^^^^^^^^^^^^^
 **UNKNOWN**
 
-crossing_order
+Crossing Order
 ^^^^^^^^^^^^^^
 **UNKNOWN**
 
@@ -198,23 +219,23 @@ Creation Date
 ^^^^^^^^^^^^^
 **Duplicate**
 
-revision_date
+Revision Date
 ^^^^^^^^^^^^^
 **Duplicate**
 
-crossing_status_lookup
+Crossing Status Lookup
 ----------------------
 
-functional_road_class_lookup
+Functional Road Class lookup
 ----------------------------
 
-house_number_structure_lookup
+House Number Structure lookup
 -----------------------------
 
-house_number_type_lookup
+House Number Type Lookup
 ------------------------
 
-junction
+Junction
 --------
 A feature that bounds a Road Element or a Ferry Connection. A Road Element or Ferry Connection always forms a
 connection between two Junctions and, a Road Element or Ferry Connection is always bounded by exactly two Junctions. A
@@ -222,25 +243,29 @@ Junction Feature represents the physical connection between its adjoining Road E
 Junction is defined at the intersection of three or more roads, at the junction of a road and a ferry, at the end of a
 dead end road and at the junction of a road or ferry with a National, Provincial or Territorial Boundary.
 
-junction_id
+Junction id
 ^^^^^^^^^^^
 
-segment_id
+Segment id
 ^^^^^^^^^^
 
-toll_point_type
+Toll Point Type
 ^^^^^^^^^^^^^^^
 The type of toll point.
 
-acquisistion_type
-^^^^^^^^^^^^^^^^^
-**Duplicate**
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
 
-planimetric_accuracy
+Acquisition Type
+^^^^^^^^^^^^^^^^^
+
+Planimetric Accuracy
 ^^^^^^^^^^^^^^^^^^^^^
 **Duplicate**
 
-provider
+Provider
 ^^^^^^^^
 **Duplicate**
 
@@ -248,38 +273,38 @@ Creation Date
 ^^^^^^^^^^^^^
 **Duplicate**
 
-revision_date
+Revision Date
 ^^^^^^^^^^^^^^
 **Duplicate**
 
-junction_type_lookup
+Junction Type Lookup
 --------------------
 
-language_code_lookup
+Language Code Lookup
 --------------------
 
-provider_lookup
+Provider Lookup
 ---------------
 
-province_lookup
+Province Lookup
 ---------------
 
-reference_system_indicator_lookup
+Reference System Indicator lookup
 ---------------------------------
 
-route_name
+Route Name
 --------
 
-route_name_id
+route Name id
 ^^^^^^^^^^^^^
 
-route_name_en
+Route Name (en)
 ^^^^^^^^^^^^^
 The English version of a name of a particular route in a given road network as attributed by a national or subnational
 agency. A particular Road Segment or Ferry Connection Segment can belong to more than one named route. In such cases,
 it has multiple route name attributes.
 
-route_name_fr
+Route Name (fr)
 ^^^^^^^^^^^^^
 The French version of a name of a particular route in a given road network as attributed by a national or subnational
 agency. A particular Road Segment or Ferry Connection Segment can belong to more than one named route. In such cases,
@@ -289,46 +314,46 @@ Creation Date
 ^^^^^^^^^^^^^
 **Duplicate**
 
-revision_date
+Revision Date
 ^^^^^^^^^^^^^
 **Duplicate**
 
-route_name_link
+Route Name Link
 ---------------
 
-route_name_link_id
+Route Name Link id
 ^^^^^^^^^^^^^^^^^^
 
-segment_id
+Segment id
 ^^^^^^^^^^
 
-route_name_id
+Route Name id
 ^^^^^^^^^^^^^^
 
-route_number
+Route Number
 ------------
 
-route_number_id
+Route Number id
 ^^^^^^^^^^^^^^^
 
-route_number
+Route Number
 ^^^^^^^^^^^^
 The ID number of a particular route in a given road network as attributed by a national or subnational agency. A
 particular Road Segment or Ferry Connection Segment can belong to more than one numbered route. In such cases, it has
 multiple route number attributes.
 
-creation_date
+Creation Date
 ^^^^^^^^^^^^^
 **Duplicate**
 
-revision_date
+Revision Date
 ^^^^^^^^^^^^^
 **Duplicate**
 
-route_number_link
+Route Number Link
 -----------------
 
-route_number_id
+Route Number id
 ^^^^^^^^^^^^^^^
 
 route_number
@@ -339,264 +364,309 @@ Creation Date
 ^^^^^^^^^^^^^^
 **Duplicate**
 
-revision_date
+Revision Date
 ^^^^^^^^^^^^^
 **Duplicate**
 
 Segment
 ------
 
-segment_id
+Segment id
 ^^^^^^^^^^^
 
-segment_id_left
+Segment id (left)
 ^^^^^^^^^^^^^^^^
 
-segment_id_right
+Segment id (right)
 ^^^^^^^^^^^^^^^^
 
-element_id
+Element id
 ^^^^^^^^^^^
 
-routable_element_id
+Routable Element id
 ^^^^^^^^^^^^^^^^^^^
 
-segment_type
+Segment Type
 ^^^^^^^^^^^
 
-exit_number
+Exit Number
 ^^^^^^^^^^^
 The ID number of an exit on a controlled access thoroughfare that has been assigned by an administrating body.
 
-speed
+Speed
 ^^^^^
 The maximum speed allowed on the road. The value is expressed in kilometers per hour.
 
-number_of_lanes
+Number of Lanes
 ^^^^^^^^^^^^^^^
 The number of lanes existing on a Road Element.
 
-road_jurisdiction
+Road Jurisdiction
 ^^^^^^^^^^^^^^^^
 The agency with the responsibility/authority to ensure maintenance occurs but is not necessarily the one who undertakes
 the maintenance directly.
 
-closing_period
+Closing Period
 ^^^^^^^^^^^^^^
 The period in which the road or ferry connection is not available to the public.
-**table**
 
-functional_road_class
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
+
+Functional Road Class
 ^^^^^^^^^^^^^^^^^^^^^
 A classification based on the importance of the role that the Road Element or Ferry Connection performs in the
 connectivity of the total road network.
-**table**
 
-traffic_direction
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
+
+Traffic Direction
 ^^^^^^^^^^^^^^^^^
 The direction(s) of traffic flow allowed on the road.
-**table**
 
-road_surface_type
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
+
+Road Surface Type
 ^^^^^^^^^^^^^^
 The type of surface a road element has.
-**table**
 
-structure_id
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
+
+Structure id
 ^^^^^^^^^^^^
 
-address_range_id_left
+Address Range id (left)
 ^^^^^^^^^^^^^^^^^^^^^^
 
-address_range_id_right
+Address Range id (right)
 ^^^^^^^^^^^^^^^^^^^^^^
 
-bb_uid_l
+bb uid (l)
 ^^^^^^^^
 
-bb_uid_r
+bb uid (r)
 ^^^^^^^^
 
-acquisition_technique
+Acquisition Technique
 ^^^^^^^^^^^^^^^^^^^^^
 **Duplicate**
 
-
-planimetric_accuracy
+Planimetric Accuracy
 ^^^^^^^^^^^^^^^^^^^^
 **Duplicate**
 
-provider
+Provider
 ^^^^^^^^
 **Duplicate**
-
 
 Creation Date
 ^^^^^^^^^^^^^
 **Duplicate**
 
-revision_date
+Revision Date
 ^^^^^^^^^^^^^
 **Duplicate**
 
-segment_type_lookup
+Segment Type Lookup
 --------------------
 
-street_article_lookup
+Street Article Lookup
 --------------------
 
-street_direction_lookup
+Street Direction Lookup
 -----------------------
 
-street_name
+Street Name
 -----------
 
-street_name_id
+Street Name id
 ^^^^^^^^^^^^^^
 
-street_name_concatenated
+Street Name Concatenated
 ^^^^^^^^^^^^^^^^^^^^^^^^
 A concatenation of the officially recognized Directional prefix, Street type prefix, Street name article, Street name
 body, Street type suffix, Directional suffix and Muni quadrant values.
 
-street_direction_prefix
+Street Direction Prefix
 ^^^^^^^^^^^^^^^^^^^^^^^
 A geographic direction that is part of the street name and precedes the street name body or, if appropriate, the street
 type prefix.
 **table**
 
-street_type_prefix
+Street Type Prefix
 ^^^^^^^^^^^^^^^^^^
 A part of the street name of a Road Element identifying the street type. A prefix precedes the street name body of a
 Road Element.
-**table**
 
-street_article
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
+
+Street Article
 ^^^^^^^^^^^^^^
 Article(s) that is/are part of the street name and located at the beginning.
-**table**
 
-street_name_body
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
+
+Street Name Body
 ^^^^^^^^^^^^^^^^
 The portion of the street name (either official or alternate) that has the most identifying power excluding street type
 and directional prefixes or suffixes and street name articles.
 
-street_type_suffix
+Street Type Suffix
 ^^^^^^^^^^^^^^^^^^
 A part of the street name of a Road Element identifying the street type. A suffix follows the street name body of a
 Road Element.
-**table**
 
-street_direction_suffix
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
+
+Street Direction Suffix
 ^^^^^^^^^^^^^^^^^^^^^^^
 A geographic direction that is part of the street name and succeeds the street name body or, if appropriate, the street
 type suffix.
 
-**table**
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
 
 Creation Date
 ^^^^^^^^^^^^
 **Duplicate**
 
-revision_date
+Revision Date
 ^^^^^^^^^^^^^
 **Duplicate**
 
-street_name_link
+Street Name Link
 ----------------
 
-street_name_link_id
+Street Name Link id
 ^^^^^^^^^^^^^^^^^^^
 
-segment_id
+Segment id
 ^^^^^^^^^^
 
-street_name_id
+Street Name id
 ^^^^^^^^^^^^^^
 
-street_name_translation
+Street Name Translation
 -----------------------
 
-street_name_translation_id
+Street Name Translation id
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-street_name_id
+Street Name id
 ^^^^^^^^^^^^^^
 
-street_name_concatenated
+Street Name Concatenated
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 **Duplicate**
 
-language_code
+Language Code
 ^^^^^^^^^^^^^
 
 Creation Date
 ^^^^^^^^^^^^^
 **Duplicate**
 
-revision_date
+Revision Date
 ^^^^^^^^^^^^^
 **Duplicate**
 
-street type lookup
+Street Type Lookup
 ------------------
 
 Structure
 ---------
 
-structure_id
+Structure id
 ^^^^^^^^^^^^^
 A national unique identifier assigned to the Road Segment or the set of adjoining Road Segments forming a structure.
 This identifier allows for the reconstitution of a structure that is fragmented by Junctions.
 
-structure_type
+Structure Type
 ^^^^^^^^^^^^^^^
 The classification of a structure.
-**table**
 
-structure_name_en
-^^^^^^^^^^^^^^^^^
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
+
+Structure Name (en)
+^^^^^^^^^^^^^^^^^^
 The English version of the name of a road structure as assigned by a national or subnational agency.
 
-structure_name_fr
+Structure Name (fr)
 ^^^^^^^^^^^^^^^^^
 The French version of the name of a road structure as assigned by a national or subnational agency.
 
-creation_date
+Creation Date
 ^^^^^^^^^^^^^
 **Duplicate**
 
-revision_date
+Revision Date
 ^^^^^^^^^^^^^
 **Duplicate**
 
-structure type lookup
+Structure Type Lookup
 ---------------------
 
-toll point
+Toll Point
 ----------
 Place where right-of-way is charged to gain access to a motorway, a bridge, etc.
 
-toll point id
+Toll Point id
 ^^^^^^^^^^^^^
 
-segment id
+Segment id
 -----------
 
-toll point type
+Toll Point Type
 ^^^^^^^^^^^^^^^
 The type of toll point.
-**table**
 
-acquistion_technique
+.. csv-table::
+   :header: "Code", "Label", "Definition"
+   :widths: auto
+   :align: left
+
+   1, "Physical Toll Booth", "A toll booth is a construction along or across the road where toll can be paid to
+   employees of the organization in charge of collecting the toll, to machines capable of automatically recognizing
+   coins or bills or to machines involving electronic methods of payment like credit cards or bank cards."
+   2, "Virtual Toll Booth", "At a virtual point of toll payment, toll will be charged via automatic registration of the
+   passing vehicle by subscription or invoice."
+   3, "Hybrid", "Hybrid signifies a toll booth which is both physical and virtual."
+
+
+Acquisition Technique
 ^^^^^^^^^^^^^^^^^^^^
 **Duplicate**
 
-planimetric_accuracy
+Planimetric Accuracy
 ^^^^^^^^^^^^^^^^^^^^
 **Duplicate**
 
-provider
+Provider
 ^^^^^^^^^
 **Duplicate**
 
@@ -604,14 +674,13 @@ Creation Date
 ^^^^^^^^^^^^^^
 **Duplicate**
 
-creation_type
+Creation Type
 ^^^^^^^^^^^^^
-**Duplicate**
 
-toll_point_type_lookup
+Toll Point Type Lookup
 -----------------------
 
-traffic_direction_lookup
+Traffic Direction Lookup
 ------------------------
 
 
