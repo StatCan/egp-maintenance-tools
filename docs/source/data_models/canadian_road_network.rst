@@ -39,7 +39,7 @@ Data Dictionary
 
 Acquisition Technique Lookup
 -----------------------------
-**UNKNOWN**
+
 
 Address Range
 -------------
@@ -78,6 +78,8 @@ Method used to populate the address range. A specific value is defined for the l
    4, "Interpolated", "Qualifier indicating that the house number is calculated from two known house numbers which are
    located on either side. By convention, the house is positioned at one end of the Road Element."
 
+.. _First House Number Type:
+
 Last House Number
 ^^^^^^^^^^^^^^^^^
 The last house number address value along a particular side (left or right) of a Road Element. A specific value is
@@ -92,7 +94,7 @@ Last House Number Type
 ^^^^^^^^^^^^^^^^^^^^^^
 Method used to populate the address range. A specific value is defined for the left and right sides of the Road Element.
 
-**Same as first house number type**
+Refer to the domain described in :ref:'First House Number Type'
 
 House Number Structure
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -190,7 +192,7 @@ Indication of a physical barrier on a Road Element built to prevent or control f
 
 Blocked Passage id
 ^^^^^^^^^^^^^^^^^^
-**UNKNOWN**
+
 
 Segment id
 ^^^^^^^^^^
@@ -210,7 +212,7 @@ The type of blocked passage as an indication of the fact whether it is removable
 
 Acquisition Technique
 ^^^^^^^^^^^^^^^^^^^^
-**Duplicate**
+
 
 Planimetric Accuracy
 ^^^^^^^^^^^^^^^^^^^^
@@ -218,57 +220,62 @@ The planimetric accuracy expressed in meters as the circular map accuracy standa
 
 Provider
 ^^^^^^^^
-**Duplicate**
+
 
 Creation Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Revision Date
 ^^^^^^^^^^^^^^
-**Duplicate**
+
 
 Blocked Passage Type Lookup
 ---------------------------
 
+
 Closing Period Lookup
 ---------------------
 
+
 crossing
 --------
-**UNKNOWN**
+
 
 Crossing id
 ^^^^^^^^^^^
-**UNKNOWN**
 
 Crossing Status
 ^^^^^^^^^^^^^^^
-**UNKNOWN**
+
 
 Crossing Order
 ^^^^^^^^^^^^^^
-**UNKNOWN**
+
 
 Creation Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Revision Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Crossing Status Lookup
 ----------------------
 
+
 Functional Road Class lookup
 ----------------------------
+
 
 House Number Structure lookup
 -----------------------------
 
+
 House Number Type Lookup
 ------------------------
+
 
 Junction
 --------
@@ -281,8 +288,10 @@ dead end road and at the junction of a road or ferry with a National, Provincial
 Junction id
 ^^^^^^^^^^^
 
+
 Segment id
 ^^^^^^^^^^
+
 
 Toll Point Type
 ^^^^^^^^^^^^^^^
@@ -296,21 +305,22 @@ The type of toll point.
 Acquisition Technique
 ^^^^^^^^^^^^^^^^^^^^^
 
+
 Planimetric Accuracy
 ^^^^^^^^^^^^^^^^^^^^^
-**Duplicate**
+
 
 Provider
 ^^^^^^^^
-**Duplicate**
+
 
 Creation Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Revision Date
 ^^^^^^^^^^^^^^
-**Duplicate**
+
 
 Junction Type Lookup
 --------------------
@@ -347,30 +357,34 @@ it has multiple route name attributes.
 
 Creation Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Revision Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Route Name Link
 ---------------
+
 
 Route Name Link id
 ^^^^^^^^^^^^^^^^^^
 
 Segment id
 ^^^^^^^^^^
-**same as above**
+
 
 Route Name id
 ^^^^^^^^^^^^^^
 
+
 Route Number
 ------------
 
+
 Route Number id
 ^^^^^^^^^^^^^^^
+
 
 Route Number
 ^^^^^^^^^^^^
@@ -380,29 +394,30 @@ multiple route number attributes.
 
 Creation Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Revision Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Route Number Link
 -----------------
+
 
 Route Number id
 ^^^^^^^^^^^^^^^
 
 Route Number
 ^^^^^^^^^^^^
-**Duplicate**
+
 
 Creation Date
 ^^^^^^^^^^^^^^
-**Duplicate**
+
 
 Revision Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Segment
 ------
@@ -411,22 +426,27 @@ is the specific representation of a portion of a road with uniform characteristi
 
 Segment id
 ^^^^^^^^^^^
-**same as above**
+
 
 Segment id (left)
 ^^^^^^^^^^^^^^^^
 
+
 Segment id (right)
 ^^^^^^^^^^^^^^^^
+
 
 Element id
 ^^^^^^^^^^^
 
+
 Routable Element id
 ^^^^^^^^^^^^^^^^^^^
 
+
 Segment Type
 ^^^^^^^^^^^
+
 
 Exit Number
 ^^^^^^^^^^^
@@ -530,49 +550,58 @@ The type of surface a road element has.
 Structure id
 ^^^^^^^^^^^^
 
+
 Address Range id (left)
 ^^^^^^^^^^^^^^^^^^^^^^
+
 
 Address Range id (right)
 ^^^^^^^^^^^^^^^^^^^^^^
 
+
 bb uid (l)
 ^^^^^^^^
+
 
 bb uid (r)
 ^^^^^^^^
 
+
 Acquisition Technique
 ^^^^^^^^^^^^^^^^^^^^^
-**Duplicate**
+
 
 Planimetric Accuracy
 ^^^^^^^^^^^^^^^^^^^^
-**Duplicate**
+
 
 Provider
 ^^^^^^^^
-**Duplicate**
+
 
 Creation Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Revision Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Segment Type Lookup
 --------------------
 
+
 Street Article Lookup
 --------------------
+
 
 Street Direction Lookup
 -----------------------
 
+
 Street Name
 -----------
+
 
 Street Name id
 ^^^^^^^^^^^^^^
@@ -945,67 +974,74 @@ Street Type Suffix
 A part of the street name of a Road Element identifying the street type. A suffix follows the street name body of a
 Road Element.
 
-**Same as street type Prefix**
+*Same as street type Prefix*
 
 Street Direction Suffix
 ^^^^^^^^^^^^^^^^^^^^^^^
 A geographic direction that is part of the street name and succeeds the street name body or, if appropriate, the street
 type suffix.
 
-**Same as street Direction Prefix**
+*Same as street Direction Prefix*
 
 Creation Date
 ^^^^^^^^^^^^
-**Duplicate**
+
 
 Revision Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Street Name Link
 ----------------
 
+
 Street Name Link id
 ^^^^^^^^^^^^^^^^^^^
 
+
 Segment id
 ^^^^^^^^^^
-**same as above**
+
 
 Street Name id
 ^^^^^^^^^^^^^^
-**Same as above**
+
 
 Street Name Translation
 -----------------------
 
+
 Street Name Translation id
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+
 Street Name id
 ^^^^^^^^^^^^^^
-**Same as above**
+
 
 Street Name Concatenated
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-**Duplicate**
+
 
 Language Code
 ^^^^^^^^^^^^^
 
+
 Creation Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Revision Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Street Type Lookup
 ------------------
 
+
 Structure
 ---------
+
 
 Structure id
 ^^^^^^^^^^^^^
@@ -1047,11 +1083,11 @@ The French version of the name of a road structure as assigned by a national or 
 
 Creation Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Revision Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Structure Type Lookup
 ---------------------
@@ -1085,23 +1121,23 @@ The type of toll point.
 
 Acquisition Technique
 ^^^^^^^^^^^^^^^^^^^^
-**Duplicate**
+
 
 Planimetric Accuracy
 ^^^^^^^^^^^^^^^^^^^^
-**Duplicate**
+
 
 Provider
 ^^^^^^^^^
-**Duplicate**
+
 
 Creation Date
 ^^^^^^^^^^^^^^
-**Duplicate**
+
 
 Revision Date
 ^^^^^^^^^^^^^
-**Duplicate**
+
 
 Toll Point Type Lookup
 -----------------------
@@ -1109,8 +1145,7 @@ Toll Point Type Lookup
 Traffic Direction Lookup
 ------------------------
 
-
-
+|
 Attribute Name
 ^^^^^^^^^^^^^^
 
