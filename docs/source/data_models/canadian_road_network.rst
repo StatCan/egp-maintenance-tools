@@ -37,6 +37,7 @@ Domains
 Data Dictionary
 ===============
 
+
 Acquisition Technique Lookup
 -----------------------------
 
@@ -48,6 +49,7 @@ Element or a portion of it.
 
 Address Range ID
 ^^^^^^^^^^^^^^^^
+
 
 First House Number (left, right)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -78,7 +80,6 @@ Method used to populate the address range. A specific value is defined for the l
    4, "Interpolated", "Qualifier indicating that the house number is calculated from two known house numbers which are
    located on either side. By convention, the house is positioned at one end of the Road Element."
 
-.. _First House Number Type:
 
 Last House Number
 ^^^^^^^^^^^^^^^^^
@@ -94,7 +95,6 @@ Last House Number Type
 ^^^^^^^^^^^^^^^^^^^^^^
 Method used to populate the address range. A specific value is defined for the left and right sides of the Road Element.
 
-Refer to the attributes described in :ref:`First House Number Type<First House Number Type>`.
 
 House Number Structure
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -238,12 +238,13 @@ Closing Period Lookup
 ---------------------
 
 
-crossing
+Crossing
 --------
 
 
 Crossing id
 ^^^^^^^^^^^
+
 
 Crossing Status
 ^^^^^^^^^^^^^^^
@@ -289,18 +290,35 @@ Junction id
 ^^^^^^^^^^^
 
 
-Segment id
+Junction Type
 ^^^^^^^^^^
 
 
-Toll Point Type
-^^^^^^^^^^^^^^^
-The type of toll point.
+Exit Number
+^^^^^^^^^^^
+
+Province
+^^^^^^^^
+Province or Territory covered by the dataset.
 
 .. csv-table::
-   :header: "Code", "Label", "Definition"
+   :header: "Code", "Label"
    :widths: auto
    :align: left
+
+   1, "Newfoundland and Labrador"
+   2, "Nova Scotia"
+   3, "Prince Edward Island"
+   4, "New Brunswick"
+   5, "Quebec"
+   6, "Ontario"
+   7, "Manitoba"
+   8, "Saskatchewan"
+   9, "Alberta"
+   10, "British Columbia"
+   11, "Yukon"
+   12, "Northwest Territories"
+   13, "Nunavut"
 
 Acquisition Technique
 ^^^^^^^^^^^^^^^^^^^^^
@@ -312,7 +330,7 @@ Planimetric Accuracy
 
 Provider
 ^^^^^^^^
-
+Refer to the description and domains provided in :ref:`Provider`.
 
 Creation Date
 ^^^^^^^^^^^^^
@@ -325,23 +343,30 @@ Revision Date
 Junction Type Lookup
 --------------------
 
+
 Language Code Lookup
 --------------------
+
 
 Provider Lookup
 ---------------
 
+
 Province Lookup
 ---------------
+
 
 Reference System Indicator lookup
 ---------------------------------
 
+
 Route Name
 --------
 
+
 route Name id
 ^^^^^^^^^^^^^
+
 
 Route Name (en)
 ^^^^^^^^^^^^^
@@ -369,6 +394,7 @@ Route Name Link
 
 Route Name Link id
 ^^^^^^^^^^^^^^^^^^
+
 
 Segment id
 ^^^^^^^^^^
@@ -406,6 +432,7 @@ Route Number Link
 
 Route Number id
 ^^^^^^^^^^^^^^^
+
 
 Route Number
 ^^^^^^^^^^^^
@@ -479,7 +506,6 @@ The period in which the road or ferry connection is not available to the public.
    connection."
    2, "Winter", "Period of the year for which ice and snow prevent the access to the road or ferry connection."
 
-
 Functional Road Class
 ^^^^^^^^^^^^^^^^^^^^^
 A classification based on the importance of the role that the Road Element or Ferry Connection performs in the
@@ -526,7 +552,6 @@ The direction(s) of traffic flow allowed on the road.
    Segment."
    3, "Opposite direction", "The direction of one way traffic flow is opposite to the digitizing direction of the Road
    Segment."
-
 
 Road Surface Type
 ^^^^^^^^^^^^^^
@@ -577,7 +602,7 @@ Planimetric Accuracy
 
 Provider
 ^^^^^^^^
-
+Refer to the description and domains provided in :ref:`Provider`.
 
 Creation Date
 ^^^^^^^^^^^^^
@@ -642,6 +667,8 @@ type prefix.
    16, "Sud-est", ""
    17, "Central", ""
    18, "Centre", ""
+
+.. _Street Direction Prefix:
 
 Street Type Prefix
 ^^^^^^^^^^^^^^^^^^
@@ -934,6 +961,8 @@ Road Element.
    278, "Hideaway", ""
    279, "Linkway", ""
 
+.. _Street Type Prefix:
+
 Street Article
 ^^^^^^^^^^^^^^
 Article(s) that is/are part of the street name and located at the beginning.
@@ -974,14 +1003,14 @@ Street Type Suffix
 A part of the street name of a Road Element identifying the street type. A suffix follows the street name body of a
 Road Element.
 
-*Same as street type Prefix*
+Refer to the description and domains provided in :ref:`Street Type Prefix`.
 
 Street Direction Suffix
 ^^^^^^^^^^^^^^^^^^^^^^^
 A geographic direction that is part of the street name and succeeds the street name body or, if appropriate, the street
 type suffix.
 
-*Same as street Direction Prefix*
+Refer to the description and domains provided in :ref:`Street Direction Prefix`.
 
 Creation Date
 ^^^^^^^^^^^^
@@ -1092,6 +1121,7 @@ Revision Date
 Structure Type Lookup
 ---------------------
 
+
 Toll Point
 ----------
 Place where right-of-way is charged to gain access to a motorway, a bridge, etc.
@@ -1129,7 +1159,7 @@ Planimetric Accuracy
 
 Provider
 ^^^^^^^^^
-
+Refer to the description and domains provided in :ref:`Provider`.
 
 Creation Date
 ^^^^^^^^^^^^^^
@@ -1141,6 +1171,7 @@ Revision Date
 
 Toll Point Type Lookup
 -----------------------
+
 
 Traffic Direction Lookup
 ------------------------
