@@ -220,15 +220,15 @@ The planimetric accuracy expressed in meters as the circular map accuracy standa
 
 Provider
 ^^^^^^^^
-
+*Reference Required*
 
 Creation Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Revision Date
 ^^^^^^^^^^^^^^
-
+*Reference Required*
 
 Blocked Passage Type Lookup
 ---------------------------
@@ -256,11 +256,11 @@ Crossing Order
 
 Creation Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Revision Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Crossing Status Lookup
 ----------------------
@@ -296,6 +296,7 @@ Junction Type
 
 Exit Number
 ^^^^^^^^^^^
+The ID number of an exit on a controlled access thoroughfare that has been assigned by an administrating body.
 
 Province
 ^^^^^^^^
@@ -322,23 +323,23 @@ Province or Territory covered by the dataset.
 
 Acquisition Technique
 ^^^^^^^^^^^^^^^^^^^^^
-
+*Reference Required*
 
 Planimetric Accuracy
 ^^^^^^^^^^^^^^^^^^^^^
-
+*Reference Required*
 
 Provider
 ^^^^^^^^
-Refer to the description and domains provided in :ref:`Provider`.
+*Reference Required*
 
 Creation Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Revision Date
 ^^^^^^^^^^^^^^
-
+*Reference Required*
 
 Junction Type Lookup
 --------------------
@@ -382,11 +383,11 @@ it has multiple route name attributes.
 
 Creation Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Revision Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Route Name Link
 ---------------
@@ -420,11 +421,11 @@ multiple route number attributes.
 
 Creation Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Revision Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Route Number Link
 -----------------
@@ -440,11 +441,11 @@ Route Number
 
 Creation Date
 ^^^^^^^^^^^^^^
-
+*Reference Required*
 
 Revision Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Segment
 ------
@@ -594,23 +595,23 @@ bb uid (r)
 
 Acquisition Technique
 ^^^^^^^^^^^^^^^^^^^^^
-
+*Reference Required*
 
 Planimetric Accuracy
 ^^^^^^^^^^^^^^^^^^^^
-
+*Reference Required*
 
 Provider
 ^^^^^^^^
-Refer to the description and domains provided in :ref:`Provider`.
+*Reference Required*
 
 Creation Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Revision Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Segment Type Lookup
 --------------------
@@ -668,7 +669,6 @@ type prefix.
    17, "Central", ""
    18, "Centre", ""
 
-.. _Street Direction Prefix:
 
 Street Type Prefix
 ^^^^^^^^^^^^^^^^^^
@@ -961,7 +961,6 @@ Road Element.
    278, "Hideaway", ""
    279, "Linkway", ""
 
-.. _Street Type Prefix:
 
 Street Article
 ^^^^^^^^^^^^^^
@@ -1003,22 +1002,22 @@ Street Type Suffix
 A part of the street name of a Road Element identifying the street type. A suffix follows the street name body of a
 Road Element.
 
-Refer to the description and domains provided in :ref:`Street Type Prefix`.
+*Reference Required*
 
 Street Direction Suffix
 ^^^^^^^^^^^^^^^^^^^^^^^
 A geographic direction that is part of the street name and succeeds the street name body or, if appropriate, the street
 type suffix.
 
-Refer to the description and domains provided in :ref:`Street Direction Prefix`.
+*Reference Required*
 
 Creation Date
 ^^^^^^^^^^^^
-
+*Reference Required*
 
 Revision Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Street Name Link
 ----------------
@@ -1058,11 +1057,11 @@ Language Code
 
 Creation Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Revision Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Street Type Lookup
 ------------------
@@ -1112,11 +1111,11 @@ The French version of the name of a road structure as assigned by a national or 
 
 Creation Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Revision Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Structure Type Lookup
 ---------------------
@@ -1151,23 +1150,23 @@ The type of toll point.
 
 Acquisition Technique
 ^^^^^^^^^^^^^^^^^^^^
-
+*Reference Required*
 
 Planimetric Accuracy
 ^^^^^^^^^^^^^^^^^^^^
-
+*Reference Required*
 
 Provider
 ^^^^^^^^^
-Refer to the description and domains provided in :ref:`Provider`.
+*Reference Required*
 
 Creation Date
 ^^^^^^^^^^^^^^
-
+*Reference Required*
 
 Revision Date
 ^^^^^^^^^^^^^
-
+*Reference Required*
 
 Toll Point Type Lookup
 -----------------------
