@@ -151,7 +151,7 @@ def load_db_datasets(engine: Engine, subset: List[str] = None, schema: str = "pu
 
             logger.info(f"Successfully loaded {len(dfs[dataset])} records from {schema}.{dataset}.")
 
-        except (sqlalchemy_exc.SQLAlchemyError, TypeError, ValueError):
+        except (exc.SQLAlchemyError, TypeError, ValueError):
             logger.exception(f"Failed to load dataset: {schema}.{dataset}.")
             sys.exit(1)
 
