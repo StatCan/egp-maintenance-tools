@@ -41,6 +41,8 @@ class SegmentValidation:
 
         self.dataset = "segment"
         self.id = "segment_id"
+        self.dataset_meshblock = "basic_block"
+        self.id_meshblock = "bb_uid"
         logger.info(f"Initializing dataset validation for: {self.dataset}.")
 
         self.url = url
@@ -71,11 +73,14 @@ class SegmentValidation:
         self._min_vertex_dist = 0.01
 
         # Load data, excluding ferries.
-        dfs = helpers.load_db_datasets(self.engine, subset=[self.dataset], schema=self.schema, geom_col=self.geom_col)
+        dfs = helpers.load_db_datasets(self.engine, subset=[self.dataset, self.dataset_meshblock], schema=self.schema,
+                                       geom_col=self.geom_col)
         self.df = dfs[self.dataset].loc[dfs[self.dataset]["segment_type"] != 2].copy(deep=True)
         self.df.index = self.df[self.id]
 
         # Generate reusable geometry variables.
+        self.meshblock_new = None
+        self.meshblock_current = dfs[self.dataset_meshblock].copy(deep=True)
         self._gen_reusable_variables()
 
     def __call__(self) -> None:
@@ -102,7 +107,7 @@ class SegmentValidation:
         self.non_deadends = self.df.loc[~self.df.index.isin(deadend_ids)].copy(deep=True)
 
         # Generate meshblock.
-        self.meshblock = gpd.GeoDataFrame(
+        self.meshblock_new = gpd.GeoDataFrame(
             geometry=list(polygonize(unary_union(self.non_deadends["geometry"].to_list()))),
             crs=self.df.crs)
 
@@ -352,7 +357,7 @@ class SegmentValidation:
         errors = set()
 
         # Extract meshblock polygon boundaries.
-        meshblock_boundaries = self.meshblock.boundary
+        meshblock_boundaries = self.meshblock_new.boundary
 
         # Filter arcs to boundaries.
         df = self.df.loc[self.df["segment_type"] == 3]
@@ -380,7 +385,7 @@ class SegmentValidation:
         errors = set()
 
         # Query meshblock polygons which contain each deadend arc.
-        within = self.deadends["geometry"].map(lambda g: set(self.meshblock.sindex.query(g, predicate="within")))
+        within = self.deadends["geometry"].map(lambda g: set(self.meshblock_new.sindex.query(g, predicate="within")))
 
         # Flag arcs which are not completely within one meshblock polygon.
         flag = within.map(len) != 1
