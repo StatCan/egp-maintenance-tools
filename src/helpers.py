@@ -103,7 +103,7 @@ def execute_db_statements(engine: Engine, statements: Union[str, List[str, ...]]
         sys.exit(1)
 
 
-def load_db_datasets(engine: Engine, subset: List[str] = None, schema: str = "public", geom_col: str = "geometry") -> \
+def load_db_datasets(engine: Engine, subset: List[str] = None, schema: str = "public", geom_col: str = "geom") -> \
         Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]]:
     """
     Loads all or a specified subset of datasets from a given database.
@@ -112,7 +112,7 @@ def load_db_datasets(engine: Engine, subset: List[str] = None, schema: str = "pu
     :param sqlalchemy.engine.base.Engine engine: database engine.
     :param List[str] subset: list of dataset names, default=None.
     :param str schema: database schema, default=public.
-    :param str geom_col: geometry column for spatial datasets, default=geometry.
+    :param str geom_col: geometry column for spatial datasets, default=geom.
     :return Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]]: dictionary of dataset names and (Geo)DataFrames.
     """
 

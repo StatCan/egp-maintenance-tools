@@ -29,14 +29,14 @@ logger.addHandler(handler)
 class SegmentValidation:
     """Validates dataset: segment."""
 
-    def __init__(self, url: str, schema: str = "public", geom_col: str = "geometry") -> None:
+    def __init__(self, url: str, schema: str = "public", geom_col: str = "geom") -> None:
         """
         Class initialization.
 
         \b
         :param str url: database URL.
         :param str schema: database schema, default=public.
-        :param str geom_col: geometry column for spatial datasets, default=geometry.
+        :param str geom_col: geometry column for spatial datasets, default=geom.
         """
 
         self.dataset = "segment"
@@ -65,28 +65,28 @@ class SegmentValidation:
             202: self.duplication_overlap,
             301: self.connectivity_node_intersection,
             302: self.connectivity_segmentation,
-            401: self.meshblock_boundary,
-            402: self.meshblock_deadend,
+            401: self.meshblock_count,
+            402: self.meshblock_boundary,
+            403: self.meshblock_deadend,
         }
 
         # Define validation thresholds.
         self._min_vertex_dist = 0.01
 
         # Load data, excluding ferries.
-        dfs = helpers.load_db_datasets(self.engine, subset=[self.dataset, self.dataset_meshblock], schema=self.schema,
-                                       geom_col=self.geom_col)
+        dfs = helpers.load_db_datasets(self.engine, subset=[self.dataset], schema=self.schema, geom_col=self.geom_col)
         self.df = dfs[self.dataset].loc[dfs[self.dataset]["segment_type"] != 2].copy(deep=True)
         self.df.index = self.df[self.id]
 
         # Generate reusable geometry variables.
-        self.meshblock_new = None
-        self.meshblock_current = dfs[self.dataset_meshblock].copy(deep=True)
+        self.meshblock = None
         self._gen_reusable_variables()
 
     def __call__(self) -> None:
         """Executes the class."""
 
         self._validate()
+        self._update_meshblock()
         self._write_errors()
 
     def _gen_reusable_variables(self) -> None:
@@ -95,7 +95,7 @@ class SegmentValidation:
         logger.info("Generating reusable geometry attributes.")
 
         # Generate vertex attributes as new columns.
-        self.df["pts_tuple"] = self.df["geometry"].map(attrgetter("coords")).map(tuple)
+        self.df["pts_tuple"] = self.df[self.geom_col].map(attrgetter("coords")).map(tuple)
         self.df["pt_start"] = self.df["pts_tuple"].map(itemgetter(0))
         self.df["pt_end"] = self.df["pts_tuple"].map(itemgetter(-1))
         self.df["pts_ordered_pairs"] = self.df["pts_tuple"].map(self._ordered_pairs)
@@ -107,9 +107,14 @@ class SegmentValidation:
         self.non_deadends = self.df.loc[~self.df.index.isin(deadend_ids)].copy(deep=True)
 
         # Generate meshblock.
-        self.meshblock_new = gpd.GeoDataFrame(
-            geometry=list(polygonize(unary_union(self.non_deadends["geometry"].to_list()))),
+        self.meshblock = gpd.GeoDataFrame(
+            geometry=list(polygonize(unary_union(self.non_deadends[self.geom_col].to_list()))),
             crs=self.df.crs)
+
+        # Generate meshblock attributes as new columns.
+        meshblock_boundaries = self.meshblock.boundary
+        self.df["meshblock_covered_by"] = self.df[self.geom_col].map(
+            lambda g: set(meshblock_boundaries.sindex.query(g, predicate="covered_by")))
 
     @staticmethod
     def _ordered_pairs(coords: Tuple[tuple, ...]) -> List[Tuple[tuple, tuple]]:
@@ -125,6 +130,13 @@ class SegmentValidation:
         next(coords_2, None)
 
         return sorted(zip(coords_1, coords_2))
+
+    def _update_meshblock(self) -> None:
+        f"""Exports an updated meshblock dataset ({self.dataset_meshblock}) based on dataset {self.dataset}."""
+
+        logger.info(f"Updating meshblock dataset: {self.dataset_meshblock}.")
+
+        # ...
 
     def _validate(self) -> None:
         """Executes validations."""
@@ -217,7 +229,7 @@ class SegmentValidation:
         errors = set()
 
         # Query arcs which cross each arc.
-        crosses = self.df["geometry"].map(lambda g: set(self.df.sindex.query(g, predicate="crosses")))
+        crosses = self.df[self.geom_col].map(lambda g: set(self.df.sindex.query(g, predicate="crosses")))
 
         # Flag arcs which have one or more crossing arcs.
         flag = crosses.map(len) > 0
@@ -316,7 +328,8 @@ class SegmentValidation:
             df = df.loc[df[["pt_start", "pt_end"]].agg(set, axis=1).map(tuple).duplicated(keep=False)]
 
             # Flag duplicated geometries.
-            duplicates = df.loc[df["geometry"].map(lambda g1: df["geometry"].map(lambda g2: g1.equals(g2)).sum() > 1)]
+            duplicates = df.loc[
+                df[self.geom_col].map(lambda g1: df[self.geom_col].map(lambda g2: g1.equals(g2)).sum() > 1)]
 
             # Compile errors.
             if len(duplicates):
@@ -335,7 +348,7 @@ class SegmentValidation:
         errors = set()
 
         # Query arcs which overlap each arc.
-        overlaps = self.df["geometry"].map(lambda g: set(self.df.sindex.query(g, predicate="overlaps")))
+        overlaps = self.df[self.geom_col].map(lambda g: set(self.df.sindex.query(g, predicate="overlaps")))
 
         # Flag arcs which have one or more overlapping arcs.
         flag = overlaps.map(len) > 0
@@ -356,21 +369,31 @@ class SegmentValidation:
 
         errors = set()
 
-        # Extract meshblock polygon boundaries.
-        meshblock_boundaries = self.meshblock_new.boundary
-
-        # Filter arcs to boundaries.
-        df = self.df.loc[self.df["segment_type"] == 3]
-
-        # Query meshblock polygons which cover each arc.
-        covered_by = df["geometry"].map(lambda g: set(meshblock_boundaries.sindex.query(g, predicate="covered_by")))
-
-        # Flag arcs which do not form a meshblock polygon.
-        flag = covered_by.map(len) == 0
+        # Flag boundary arcs which do not form a meshblock polygon.
+        flag = (self.df["segment_type"] == 3) & (self.df["meshblock_covered_by"].map(len) == 0)
 
         # Compile error logs.
         if sum(flag):
-            errors.update(set(covered_by.loc[flag].index))
+            errors.update(set(self.df.loc[flag].index))
+
+        return errors
+
+    def meshblock_count(self) -> set:
+        """
+        Validates: Arcs must form a maximum of 2 meshblock polygons.
+
+        \b
+        :return set: set containing identifiers of erroneous records.
+        """
+
+        errors = set()
+
+        # Flag arcs which form more than 2 meshblock polygons.
+        flag = self.df["meshblock_covered_by"].map(len) > 2
+
+        # Compile error logs.
+        if sum(flag):
+            errors.update(set(self.df.loc[flag].index))
 
         return errors
 
@@ -385,7 +408,7 @@ class SegmentValidation:
         errors = set()
 
         # Query meshblock polygons which contain each deadend arc.
-        within = self.deadends["geometry"].map(lambda g: set(self.meshblock_new.sindex.query(g, predicate="within")))
+        within = self.deadends[self.geom_col].map(lambda g: set(self.meshblock.sindex.query(g, predicate="within")))
 
         # Flag arcs which are not completely within one meshblock polygon.
         flag = within.map(len) != 1
@@ -402,15 +425,15 @@ class SegmentValidation:
                 help="General format: postgresql://[user[:password]@][netloc][:port][/dbname]")
 @click.option("--schema", default="public", show_default=True,
               help="Database schema. Will detect and use the default schema if none is provided.")
-@click.option("--geom_col", default="geometry", show_default=True, help="Geometry column for spatial datasets.")
-def main(url: str, schema: str = "public", geom_col: str = "geometry") -> None:
+@click.option("--geom_col", default="geom", show_default=True, help="Geometry column for spatial datasets.")
+def main(url: str, schema: str = "public", geom_col: str = "geom") -> None:
     """
     Validates dataset: segment.
 
     \b
     :param str url: database URL.
     :param str schema: database schema, default=public.
-    :param str geom_col: geometry column for spatial datasets, default=geometry.
+    :param str geom_col: geometry column for spatial datasets, default=geom.
     """
 
     try:
