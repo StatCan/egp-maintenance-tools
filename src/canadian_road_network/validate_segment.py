@@ -43,6 +43,7 @@ class SegmentValidation:
         self.id = "segment_id"
         self.dataset_meshblock = "basic_block"
         self.id_meshblock = "bb_uid"
+
         logger.info(f"Initializing dataset validation for: {self.dataset}.")
 
         self.url = url
@@ -67,19 +68,22 @@ class SegmentValidation:
             302: self.connectivity_segmentation,
             401: self.meshblock_count,
             402: self.meshblock_boundary,
-            403: self.meshblock_deadend,
         }
 
         # Define validation thresholds.
         self._min_vertex_dist = 0.01
 
-        # Load data, excluding ferries.
-        dfs = helpers.load_db_datasets(self.engine, subset=[self.dataset], schema=self.schema, geom_col=self.geom_col)
+        # Load datasets.
+        # Note: exclude ferries from processing dataset.
+        dfs = helpers.load_db_datasets(self.engine, subset=[self.dataset, self.dataset_meshblock], schema=self.schema,
+                                       geom_col=self.geom_col)
         self.df = dfs[self.dataset].loc[dfs[self.dataset]["segment_type"] != 2].copy(deep=True)
         self.df.index = self.df[self.id]
 
+        self.meshblock_existing = dfs[self.dataset_meshblock].copy(deep=True)
+        self.meshblock_existing.index = self.meshblock_existing[self.id_meshblock]
+
         # Generate reusable geometry variables.
-        self.meshblock = None
         self._gen_reusable_variables()
 
     def __call__(self) -> None:
@@ -100,20 +104,15 @@ class SegmentValidation:
         self.df["pt_end"] = self.df["pts_tuple"].map(itemgetter(-1))
         self.df["pts_ordered_pairs"] = self.df["pts_tuple"].map(self._ordered_pairs)
 
-        # Compile deadends.
-        nodes = pd.concat([self.df["pt_start"], self.df["pt_end"]])
-        deadend_ids = set(nodes.loc[~nodes.duplicated(keep=False)].index)
-        self.deadends = self.df.loc[self.df.index.isin(deadend_ids)].copy(deep=True)
-        self.non_deadends = self.df.loc[~self.df.index.isin(deadend_ids)].copy(deep=True)
-
         # Generate meshblock.
-        self.meshblock = gpd.GeoDataFrame(
-            geometry=list(polygonize(unary_union(self.non_deadends[self.geom_col].to_list()))),
-            crs=self.df.crs)
+        self.meshblock = gpd.GeoDataFrame(geometry=list(polygonize(unary_union(self.df[self.geom_col].to_list()))),
+                                          crs=self.df.crs)
 
         # Generate meshblock attributes as new columns.
-        meshblock_boundaries = self.meshblock.boundary
         self.df["meshblock_covered_by"] = self.df[self.geom_col].map(
+            lambda g: set(self.meshblock.sindex.query(g, predicate="covered_by")))
+        meshblock_boundaries = self.meshblock.boundary
+        self.df["meshblock_boundary_covered_by"] = self.df[self.geom_col].map(
             lambda g: set(meshblock_boundaries.sindex.query(g, predicate="covered_by")))
 
     @staticmethod
@@ -132,9 +131,17 @@ class SegmentValidation:
         return sorted(zip(coords_1, coords_2))
 
     def _update_meshblock(self) -> None:
-        f"""Exports an updated meshblock dataset ({self.dataset_meshblock}) based on dataset {self.dataset}."""
+        f"""
+        Updates meshblock dataset ({self.dataset_meshblock}) based on dataset {self.dataset} and their attribute 
+        linkages.
+        """
 
         logger.info(f"Updating meshblock dataset: {self.dataset_meshblock}.")
+
+        # TODO - for self.meshblock:
+        #  bb_uid: restore existing bb_uids where unchanged and gen new ones for mods.
+        #  cb_uid: restore existing cb_uids where unchanged by comparing cb_uid-dissolved new and existing meshblocks, assign nil_uuid for mods.
+        # TODO - for self.df (segment, make sure to load dataset with ferries), assign bb_uid_l and bb_uid_r based on self.meshblock.
 
         # ...
 
@@ -361,7 +368,7 @@ class SegmentValidation:
 
     def meshblock_boundary(self) -> set:
         """
-        Validates: All boundary arcs must form a meshblock polygon.
+        Validates: Boundary arcs must form a meshblock polygon.
 
         \b
         :return set: set containing identifiers of erroneous records.
@@ -370,7 +377,7 @@ class SegmentValidation:
         errors = set()
 
         # Flag boundary arcs which do not form a meshblock polygon.
-        flag = (self.df["segment_type"] == 3) & (self.df["meshblock_covered_by"].map(len) == 0)
+        flag = (self.df["segment_type"] == 3) & (self.df["meshblock_boundary_covered_by"].map(len) == 0)
 
         # Compile error logs.
         if sum(flag):
@@ -380,7 +387,7 @@ class SegmentValidation:
 
     def meshblock_count(self) -> set:
         """
-        Validates: Arcs must form a maximum of 2 meshblock polygons.
+        Validates: Arcs (excluding ferries) must be covered by only 1 or 2 meshblock polygons.
 
         \b
         :return set: set containing identifiers of erroneous records.
@@ -388,34 +395,12 @@ class SegmentValidation:
 
         errors = set()
 
-        # Flag arcs which form more than 2 meshblock polygons.
-        flag = self.df["meshblock_covered_by"].map(len) > 2
+        # Flag arcs which form an invalid amount of meshblock polygons.
+        flag = ~self.df["meshblock_covered_by"].map(len).between(1, 2, inclusive=True)
 
         # Compile error logs.
         if sum(flag):
             errors.update(set(self.df.loc[flag].index))
-
-        return errors
-
-    def meshblock_deadend(self) -> set:
-        """
-        Validates: All deadend arcs (excluding ferries) must be completely within 1 meshblock polygon.
-
-        \b
-        :return set: set containing identifiers of erroneous records.
-        """
-
-        errors = set()
-
-        # Query meshblock polygons which contain each deadend arc.
-        within = self.deadends[self.geom_col].map(lambda g: set(self.meshblock.sindex.query(g, predicate="within")))
-
-        # Flag arcs which are not completely within one meshblock polygon.
-        flag = within.map(len) != 1
-
-        # Compile errors.
-        if sum(flag):
-            errors.update(set(within.loc[flag].index))
 
         return errors
 
