@@ -6,6 +6,7 @@
 - closing_period_lookup
 - crossing
 - crossing_status_lookup
+- ferry
 - functional_road_class_lookup
 - house_number_structure_lookup
 - house_number_type_lookup

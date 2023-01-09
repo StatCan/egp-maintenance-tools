@@ -74,10 +74,9 @@ class SegmentValidation:
         self._min_vertex_dist = 0.01
 
         # Load datasets.
-        # Note: exclude ferries from processing dataset.
         dfs = helpers.load_db_datasets(self.engine, subset=[self.dataset, self.dataset_meshblock], schema=self.schema,
                                        geom_col=self.geom_col)
-        self.df = dfs[self.dataset].loc[dfs[self.dataset]["segment_type"] != 2].copy(deep=True)
+        self.df = dfs[self.dataset].copy(deep=True)
         self.df.index = self.df[self.id]
 
         self.meshblock_existing = dfs[self.dataset_meshblock].copy(deep=True)
@@ -141,7 +140,7 @@ class SegmentValidation:
         # TODO - for self.meshblock:
         #  bb_uid: restore existing bb_uids where unchanged and gen new ones for mods.
         #  cb_uid: restore existing cb_uids where unchanged by comparing cb_uid-dissolved new and existing meshblocks, assign nil_uuid for mods.
-        # TODO - for self.df (segment, make sure to load dataset with ferries), assign bb_uid_l and bb_uid_r based on self.meshblock.
+        # TODO - for self.df, assign bb_uid_l and bb_uid_r based on self.meshblock.
 
         # ...
 
@@ -377,7 +376,7 @@ class SegmentValidation:
         errors = set()
 
         # Flag boundary arcs which do not form a meshblock polygon.
-        flag = (self.df["segment_type"] == 3) & (self.df["meshblock_boundary_covered_by"].map(len) == 0)
+        flag = (self.df["segment_type"] == 2) & (self.df["meshblock_boundary_covered_by"].map(len) == 0)
 
         # Compile error logs.
         if sum(flag):
@@ -387,7 +386,7 @@ class SegmentValidation:
 
     def meshblock_count(self) -> set:
         """
-        Validates: Arcs (excluding ferries) must be covered by only 1 or 2 meshblock polygons.
+        Validates: Arcs must be covered by only 1 or 2 meshblock polygons.
 
         \b
         :return set: set containing identifiers of erroneous records.
