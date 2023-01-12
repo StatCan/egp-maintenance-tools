@@ -37,50 +37,50 @@ Domains
 Data Dictionary
 ===============
 
-Acquisition Technique Lookup
+acquisition_technique_lookup
 ----------------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Address Range
+address_range
 -------------
 
 A set of attributes representing the address of the first and last building located along the side of the entire Road
 Element or a portion of it.
 
-Address Range ID
+address_range_id
 ^^^^^^^^^^^^^^^^
 
 TODO
 
-First House Number
+first_house_number
 ^^^^^^^^^^^^^^^^^^
 
 The first house number address value along a particular side (left or right) of a Road Element. A specific value is
 defined for the left and right sides of the Road Element.
 
-First House Number Suffix
+first_house_number_suffix
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A non-integer value, such as a fraction or a character that sometimes follows the house number address value.
 A specific value is defined for the left and right sides of the Road Element.
 
-First House Number Type
+first_house_number_type
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 Method used to populate the address range. A specific value is defined for the left and right sides of the Road Element.
@@ -100,24 +100,24 @@ Method used to populate the address range. A specific value is defined for the l
    4, "Interpolated", "Qualifier indicating that the house number is calculated from two known house numbers which are
    located on either side. By convention, the house is positioned at one end of the Road Element."
 
-Last House Number
+last_house_number
 ^^^^^^^^^^^^^^^^^
 
 The last house number address value along a particular side (left or right) of a Road Element. A specific value is
 defined for the left and right sides of the Road Element.
 
-Last House Number Suffix
+last_house_number_suffix
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 A non-integer value, such as a fraction or a character that sometimes follows the house number address value.
 A specific value is defined for the left and right sides of the Road Element.
 
-Last House Number Type
+last_house_number_type
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Method used to populate the address range. A specific value is defined for the left and right sides of the Road Element.
 
-House Number Structure
+house_number_structure
 ^^^^^^^^^^^^^^^^^^^^^^
 
 The type of house numbering (or address numbering) method applied to one side of a particular Road Element. A specific
@@ -143,7 +143,7 @@ value is defined for the left and right sides of the Road Element.
    is considered Mixed. Examples are the series (5, 6, 7, 9, 10, 13) and (24, 27, 30, 33, 34, 36)."
    4, "Irregular", "The house numbers do not occur in any sorted order."
 
-Reference System Indicator
+reference_system_indicator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 An indication of whether the physical address of all or a portion of a Road Element is based on a particular addressing
@@ -154,7 +154,7 @@ system. A specific value is defined for the left and right sides of the Road Ele
    :widths: auto
    :align: left
 
-Acquisition Technique
+acquisition_technique
 ^^^^^^^^^^^^^^^^^^^^^
 
 The type of data source or technique used to populate (create or revise) the dataset.
@@ -178,7 +178,7 @@ The type of data source or technique used to populate (create or revise) the dat
    11, "Raw Imagery Data", "Satellite imagery not orthorectified."
    12, "Computed", "Geometric information that has been computed (not captured)."
 
-Provider
+provider
 ^^^^^^^^
 
 The affiliation of the organization that generated (created or revised) the object.
@@ -193,47 +193,47 @@ The affiliation of the organization that generated (created or revised) the obje
    3, "Provincial / Territorial", "Provincial / territorial departments or agencies."
    4, "Municipal", "Municipal departments or agencies."
 
-Creation Date
+creation_date
 ^^^^^^^^^^^^^
 
 The date of data creation.
 
-Revision Date
+revision_date
 ^^^^^^^^^^^^^
 
 The date of data revision.
 
-Basic Block
+basic_block
 -----------
 
 TODO
 
-BB UID
+bb_uid
 ^^^^^^
 
 TODO
 
-CB UID
+cb_uid
 ^^^^^^
 
 TODO
 
-Blocked Passage
+blocked_passage
 ---------------
 
 Indication of a physical barrier on a Road Element built to prevent or control further access.
 
-Blocked Passage ID
+blocked_passage_id
 ^^^^^^^^^^^^^^^^^^
 
 TODO
 
-Segment ID
+segment_id
 ^^^^^^^^^^
 
 A unique identifier within a dataset assigned to each Segment.
 
-Blocked Passage Type
+blocked_passage_type
 ^^^^^^^^^^^^^^^^^^^^
 
 The type of blocked passage as an indication of the fact whether it is removable.
@@ -246,232 +246,232 @@ The type of blocked passage as an indication of the fact whether it is removable
    1, "Permanently Fixed", "The barrier cannot be removed without destroying it. Heavy equipment needed in order to allow further access. Examples of permanently fixed blocked passage are concrete blocks or a mound of earth."
    2, "Removable", "The barrier is designed to free the entrance to the (other side of the) Road Element that it is blocking. Further access easily allowed when so desired."
 
-Acquisition Technique
+acquisition_technique
 ^^^^^^^^^^^^^^^^^^^^^
 
 TODO
 
-Planimetric Accuracy
+planimetric_accuracy
 ^^^^^^^^^^^^^^^^^^^^
 
 The planimetric accuracy expressed in meters as the circular map accuracy standard (CMAS)
 
-Provider
+provider
 ^^^^^^^^
 
 TODO
 
-Creation Date
+creation_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Revision Date
+revision_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Blocked Passage Type Lookup
+blocked_passage_type_lookup
 ---------------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Closing Period Lookup
+closing_period_lookup
 ---------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Crossing
+crossing
 --------
 
 TODO
 
-Crossing ID
+crossing_id
 ^^^^^^^^^^^
 
 TODO
 
-Crossing Status
+crossing_status
 ^^^^^^^^^^^^^^^
 
 TODO
 
-Crossing Order
+crossing_order
 ^^^^^^^^^^^^^^
 
 TODO
 
-Creation Date
+creation_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Revision Date
+revision_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Crossing Status Lookup
+crossing_status_lookup
 ----------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Ferry
+ferry
 -----
 
 TODO
 
-Ferry ID
+ferry_id
 ^^^^^^^^
 
 TODO
 
-Closing Period
+closing_period
 ^^^^^^^^^^^^^^
 
 TODO
 
-Functional Road Class
+functional_road_class
 ^^^^^^^^^^^^^^^^^^^^^
 
 TODO
 
-Province
+province
 ^^^^^^^^
 
 TODO
 
-Acquisition Technique
+acquisition_technique
 ^^^^^^^^^^^^^^^^^^^^^
 
 TODO
 
-Planimetric Accuracy
+planimetric_accuracy
 ^^^^^^^^^^^^^^^^^^^^
 
 TODO
 
-Provider
+provider
 ^^^^^^^^
 
 TODO
 
-Creation Date
+creation_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Revision Date
+revision_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Functional Road Class Lookup
+functional_road_class_lookup
 ----------------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-House Number Structure Lookup
+house_number_structure_lookup
 -----------------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-House Number Type Lookup
+house_number_type_lookup
 ------------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Junction
+junction
 --------
 
 A feature that bounds a Road Element or a Ferry Connection. A Road Element or Ferry Connection always forms a
@@ -480,22 +480,22 @@ Junction Feature represents the physical connection between its adjoining Road E
 Junction is defined at the intersection of three or more roads, at the junction of a road and a ferry, at the end of a
 dead end road and at the junction of a road or ferry with a National, Provincial or Territorial Boundary.
 
-Junction ID
+junction_id
 ^^^^^^^^^^^
 
 TODO
 
-Junction Type
+junction_type
 ^^^^^^^^^^^^^
 
 TODO
 
-Exit Number
+exit_number
 ^^^^^^^^^^^
 
 The ID number of an exit on a controlled access thoroughfare that has been assigned by an administrating body.
 
-Province
+province
 ^^^^^^^^
 
 Province or Territory covered by the dataset.
@@ -519,310 +519,310 @@ Province or Territory covered by the dataset.
    12, "Northwest Territories"
    13, "Nunavut"
 
-Acquisition Technique
+acquisition_technique
 ^^^^^^^^^^^^^^^^^^^^^
 
 TODO
 
-Planimetric Accuracy
+planimetric_accuracy
 ^^^^^^^^^^^^^^^^^^^^
 
 TODO
 
-Provider
+provider
 ^^^^^^^^
 
 TODO
 
-Creation Date
+creation_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Revision Date
+revision_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Junction Type Lookup
+junction_type_lookup
 --------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Language Code Lookup
+language_code_lookup
 --------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Provider Lookup
+provider_lookup
 ---------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Province Lookup
+province_lookup
 ---------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Reference System Indicator Lookup
+reference_system_indicator_lookup
 ---------------------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Road Surface Type Lookup
+road_surface_type_lookup
 ------------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Route Name
+route_name
 ----------
 
 TODO
 
-Route Name ID
+route_name_id
 ^^^^^^^^^^^^^
 
 TODO
 
-Route Name English
-^^^^^^^^^^^^^^^^^^
+route_name_en
+^^^^^^^^^^^^^
 
 The English version of a name of a particular route in a given road network as attributed by a national or subnational
 agency. A particular Road Segment or Ferry Connection Segment can belong to more than one named route. In such cases,
 it has multiple route name attributes.
 
-Route Name French
-^^^^^^^^^^^^^^^^^
+route_name_fr
+^^^^^^^^^^^^^
 
 The French version of a name of a particular route in a given road network as attributed by a national or subnational
 agency. A particular Road Segment or Ferry Connection Segment can belong to more than one named route. In such cases,
 it has multiple route name attributes.
 
-Creation Date
+creation_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Revision Date
+revision_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Route Name Link
+route_name_link
 ---------------
 
 TODO
 
-Route Name Link ID
+route_name_link_id
 ^^^^^^^^^^^^^^^^^^
 
 TODO
 
-Segment ID
+segment_id
 ^^^^^^^^^^
 
 TODO
 
-Route Name ID
+route_name_id
 ^^^^^^^^^^^^^
 
 TODO
 
-Route Number
+route_number
 ------------
 
 TODO
 
-Route Number ID
+route_number_id
 ^^^^^^^^^^^^^^^
 
 TODO
 
-Route Number
+route_number
 ^^^^^^^^^^^^
 
 The ID number of a particular route in a given road network as attributed by a national or subnational agency. A
 particular Road Segment or Ferry Connection Segment can belong to more than one numbered route. In such cases, it has
 multiple route number attributes.
 
-Creation Date
+creation_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Revision Date
+revision_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Route Number Link
+route_number_link
 -----------------
 
 TODO
 
-Route Number Link ID
+route_number_link_id
 ^^^^^^^^^^^^^^^^^^^^
 
 TODO
 
-Segment ID
+segment_id
 ^^^^^^^^^^
 
 TODO
 
-Route Number ID
+route_number_id
 ^^^^^^^^^^^^^^^
 
 TODO
 
-Segment
+segment
 -------
 
 A road is a linear section of the earth designed for or the result of vehicular movement. A Road Segment
 is the specific representation of a portion of a road with uniform characteristics.
 
-Segment ID
+segment_id
 ^^^^^^^^^^
 
 TODO
 
-Segment ID Left
+segment_id_left
 ^^^^^^^^^^^^^^^
 
 TODO
 
-Segment ID Right
+segment_id_right
 ^^^^^^^^^^^^^^^^
 
 TODO
 
-Element ID
+element_id
 ^^^^^^^^^^
 
 TODO
 
-Routable Element ID
+routable_element_id
 ^^^^^^^^^^^^^^^^^^^
 
 TODO
 
-Segment Type
+segment_type
 ^^^^^^^^^^^^
 
 TODO
 
-Exit Number
+exit_number
 ^^^^^^^^^^^
 
 The ID number of an exit on a controlled access thoroughfare that has been assigned by an administrating body.
 
-Speed
+speed
 ^^^^^
 
 The maximum speed allowed on the road. The value is expressed in kilometers per hour.
 
-Number of Lanes
+number_of_lanes
 ^^^^^^^^^^^^^^^
 
 The number of lanes existing on a Road Element.
 
-Road Jurisdiction
+road_jurisdiction
 ^^^^^^^^^^^^^^^^^
 
 The agency with the responsibility/authority to ensure maintenance occurs but is not necessarily the one who undertakes
 the maintenance directly.
 
-Closing Period
+closing_period
 ^^^^^^^^^^^^^^
 
 The period in which the road or ferry connection is not available to the public.
@@ -837,7 +837,7 @@ The period in which the road or ferry connection is not available to the public.
    connection."
    2, "Winter", "Period of the year for which ice and snow prevent the access to the road or ferry connection."
 
-Functional Road Class
+functional_road_class
 ^^^^^^^^^^^^^^^^^^^^^
 
 A classification based on the importance of the role that the Road Element or Ferry Connection performs in the
@@ -870,7 +870,7 @@ connectivity of the total road network.
    13, "Winter", "A road that is only useable during the winter when conditions allow for passage over lakes, rivers,
    and wetlands."
 
-Traffic Direction
+traffic_direction
 ^^^^^^^^^^^^^^^^^
 
 The direction(s) of traffic flow allowed on the road.
@@ -886,7 +886,7 @@ The direction(s) of traffic flow allowed on the road.
    3, "Opposite direction", "The direction of one way traffic flow is opposite to the digitizing direction of the Road
    Segment."
 
-Road Surface Type
+road_surface_type
 ^^^^^^^^^^^^^^^^^
 
 The type of surface a road element has.
@@ -906,124 +906,124 @@ The type of surface a road element has.
    6, "Paved Unknown", "A road with a surface made of hardened material such as concrete, asphalt, tar gravel, or steel decks."
    7, "Unpaved Unknown", ""A road with a surface made of loose material such as gravel or dirt."
 
-Structure ID
+structure_id
 ^^^^^^^^^^^^
 
 TODO
 
-BB UID Left
-^^^^^^^^^^^
-
-TODO
-
-BB UID Right
-^^^^^^^^^^^^
-
-TODO
-
-Acquisition Technique
-^^^^^^^^^^^^^^^^^^^^^
-
-TODO
-
-Planimetric Accuracy
-^^^^^^^^^^^^^^^^^^^^
-
-TODO
-
-Provider
+bb_uid_l
 ^^^^^^^^
 
 TODO
 
-Creation Date
+bb_uid_r
+^^^^^^^^
+
+TODO
+
+acquisition_technique
+^^^^^^^^^^^^^^^^^^^^^
+
+TODO
+
+planimetric_accuracy
+^^^^^^^^^^^^^^^^^^^^
+
+TODO
+
+provider
+^^^^^^^^
+
+TODO
+
+creation_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Revision Date
+revision_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Segment Type Lookup
+segment_type_lookup
 -------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Street Article Lookup
+street_article_lookup
 ---------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Street Direction Lookup
+street_direction_lookup
 -----------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Street Name
+street_name
 -----------
 
 TODO
 
-Street Name ID
+street_name_id
 ^^^^^^^^^^^^^^
 
 The identifier used to link an address range to its street name. A specific value is defined for
 the left and right sides of the Road Element.
 
-Street Name Concatenated
+street_name_concatenated
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 A concatenation of the officially recognized Directional prefix, Street type prefix, Street name article, Street name
 body, Street type suffix, Directional suffix and Muni quadrant values.
 
-Street Direction Prefix
+street_direction_prefix
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 A geographic direction that is part of the street name and precedes the street name body or, if appropriate, the street
@@ -1054,7 +1054,7 @@ type prefix.
    17, "Central", ""
    18, "Centre", ""
 
-Street Type Prefix
+street_type_prefix
 ^^^^^^^^^^^^^^^^^^
 
 A part of the street name of a Road Element identifying the street type. A prefix precedes the street name body of a
@@ -1346,7 +1346,7 @@ Road Element.
    278, "Hideaway", ""
    279, "Linkway", ""
 
-Street Article
+street_article
 ^^^^^^^^^^^^^^
 
 Article(s) that is/are part of the street name and located at the beginning.
@@ -1377,121 +1377,121 @@ Article(s) that is/are part of the street name and located at the beginning.
    "of the", ""
    "the", ""
 
-Street Name Body
+street_name_body
 ^^^^^^^^^^^^^^^^
 
 The portion of the street name (either official or alternate) that has the most identifying power excluding street type
 and directional prefixes or suffixes and street name articles.
 
-Street Type Suffix
+street_type_suffix
 ^^^^^^^^^^^^^^^^^^
 
 A part of the street name of a Road Element identifying the street type. A suffix follows the street name body of a
 Road Element.
 
-Street Direction Suffix
+street_direction_suffix
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 A geographic direction that is part of the street name and succeeds the street name body or, if appropriate, the street
 type suffix.
 
-Creation Date
+creation_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Revision Date
+revision_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Street Name Link
+street_name_link
 ----------------
 
 TODO
 
-Street Name Link ID
+street_name_link_id
 ^^^^^^^^^^^^^^^^^^^
 
 TODO
 
-Segment ID
+segment_id
 ^^^^^^^^^^
 
 TODO
 
-Street Name ID
+street_name_id
 ^^^^^^^^^^^^^^
 
 TODO
 
-Street Name Translation
+street_name_translation
 -----------------------
 
 TODO
 
-Street Name Translation ID
+street_name_translation_id
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 TODO
 
-Street Name ID
+street_name_id
 ^^^^^^^^^^^^^^
 
 TODO
 
-Street Name Concatenated
+street_name_concatenated
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 TODO
 
-Language Code
+language_code
 ^^^^^^^^^^^^^
 
 TODO
 
-Creation Date
+creation_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Revision Date
+revision_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Street Type Lookup
+street_type_lookup
 ------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Structure
+structure
 ---------
 
 TODO
 
-Structure ID
+structure_id
 ^^^^^^^^^^^^
 
 A national unique identifier assigned to the Road Segment or the set of adjoining Road Segments forming a structure.
 This identifier allows for the reconstitution of a structure that is fragmented by Junctions.
 
-Structure Type
+structure_type
 ^^^^^^^^^^^^^^
 
 The classification of a structure.
@@ -1517,62 +1517,62 @@ The classification of a structure.
    7, "Dam", "A manmade linear structure built across a waterway or floodway to control the flow of water and
    supporting a road for motor vehicles."
 
-Structure Name English
-^^^^^^^^^^^^^^^^^^^^^^
+structure_name_en
+^^^^^^^^^^^^^^^^^
 
 The English version of the name of a road structure as assigned by a national or subnational agency.
 
-Structure Name French
-^^^^^^^^^^^^^^^^^^^^^
+structure_name_fr
+^^^^^^^^^^^^^^^^^
 
 The French version of the name of a road structure as assigned by a national or subnational agency.
 
-Creation Date
+creation_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Revision Date
+revision_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Structure Type Lookup
+structure_type_lookup
 ---------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Toll Point
+toll_point
 ----------
 
 Place where right-of-way is charged to gain access to a motorway, a bridge, etc.
 
-Toll Point ID
+toll_point_id
 ^^^^^^^^^^^^^
 
 TODO
 
-Segment ID
+segment_id
 ^^^^^^^^^^
 
 TODO
 
-Toll Point Type
+toll_point_type
 ^^^^^^^^^^^^^^^
 
 The type of toll point.
@@ -1589,67 +1589,67 @@ The type of toll point.
    passing vehicle by subscription or invoice."
    3, "Hybrid", "Hybrid signifies a toll booth which is both physical and virtual."
 
-Acquisition Technique
+acquisition_technique
 ^^^^^^^^^^^^^^^^^^^^^
 
 TODO
 
-Planimetric Accuracy
+planimetric_accuracy
 ^^^^^^^^^^^^^^^^^^^^
 
 TODO
 
-Provider
+provider
 ^^^^^^^^
 
 TODO
 
-Creation Date
+creation_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Revision Date
+revision_date
 ^^^^^^^^^^^^^
 
 TODO
 
-Toll Point Type Lookup
+toll_point_type_lookup
 ----------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
 
-Traffic Direction Lookup
+traffic_direction_lookup
 ------------------------
 
 TODO
 
-Code
+code
 ^^^^
 
 TODO
 
-Value (English)
-^^^^^^^^^^^^^^^
+value_en
+^^^^^^^^
 
 TODO
 
-Value (French)
-^^^^^^^^^^^^^^
+value_fr
+^^^^^^^^
 
 TODO
