@@ -40,158 +40,83 @@ Data Dictionary
 acquisition_technique_lookup
 ----------------------------
 
-TODO
+Code-value lookup dataset for acquisition technique.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 address_range
 -------------
 
-A set of attributes representing the address of the first and last building located along the side of the entire Road
-Element or a portion of it.
+A set of attributes representing the address of the first and last building located along the side of the entire road
+or a portion of it.
 
 address_range_id
 ^^^^^^^^^^^^^^^^
 
-TODO
+Unique identifier of each record.
 
 first_house_number
 ^^^^^^^^^^^^^^^^^^
 
-The first house number address value along a particular side (left or right) of a Road Element. A specific value is
-defined for the left and right sides of the Road Element.
+The first house number address.
 
 first_house_number_suffix
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A non-integer value, such as a fraction or a character that sometimes follows the house number address value.
-A specific value is defined for the left and right sides of the Road Element.
+A non-integer value, such as a fraction or a character that follows the first house number address.
 
 first_house_number_type
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Method used to populate the address range. A specific value is defined for the left and right sides of the Road Element.
-
-.. csv-table::
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
-
-   0, "None", "Absence of a house along the Road Element."
-   1, "Actual Located", "Qualifier indicating that the house number is located at its ""real world"" position along a
-   Road Element."
-   2, "Actual Unlocated", "Qualifier indicating that the house number is located at one end of the Road Element. This
-   may be or may not be its ""real world"" position."
-   3, "Projected", "Qualifier indicating that the house number is planned, figured or estimated for the future and is
-   located (at one end) at the beginning or the end of the Road Element."
-   4, "Interpolated", "Qualifier indicating that the house number is calculated from two known house numbers which are
-   located on either side. By convention, the house is positioned at one end of the Road Element."
+The method used to populate the first house number address.
 
 last_house_number
 ^^^^^^^^^^^^^^^^^
 
-The last house number address value along a particular side (left or right) of a Road Element. A specific value is
-defined for the left and right sides of the Road Element.
+The last house number address.
 
 last_house_number_suffix
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-A non-integer value, such as a fraction or a character that sometimes follows the house number address value.
-A specific value is defined for the left and right sides of the Road Element.
+A non-integer value, such as a fraction or a character that follows the last house number address.
 
 last_house_number_type
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Method used to populate the address range. A specific value is defined for the left and right sides of the Road Element.
+The method used to populate the last house number address.
 
 house_number_structure
 ^^^^^^^^^^^^^^^^^^^^^^
 
-The type of house numbering (or address numbering) method applied to one side of a particular Road Element. A specific
-value is defined for the left and right sides of the Road Element.
-
-.. csv-table::
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
-
-   0, "None", "Absence of a house along the Road Element."
-   1, "Even", "The house numbers appear as even numbers in a sequentially sorted order (ascending or descending) when
-   moving from one end of the Road Element to the other. Numeric completeness of the series is not a requirement. An
-   even house number series that has missing numbers but is sequentially sorted is considered Even. An example is the
-   series (2, 4, 8, 18, 22)."
-   2, "Odd", "The house numbers appear as odd numbers in a sequentially sorted order (ascending or descending) when
-   moving from one end of the Road Element to the other. Numeric completeness of the series is not a requirement. An
-   odd house number series that has missing numbers but is sequentially sorted is considered Odd. An example is the
-   series (35, 39, 43, 69, 71, 73, 85)."
-   3, "Mixed", "The house numbers are odd and even on the same side of a Road Element in a sequentially sorted order
-   (ascending or descending) when moving from one end of the Road Element to the other. Numeric completeness of the
-   series is not a requirement. An odd and even house number series that has missing numbers but is sequentially sorted
-   is considered Mixed. Examples are the series (5, 6, 7, 9, 10, 13) and (24, 27, 30, 33, 34, 36)."
-   4, "Irregular", "The house numbers do not occur in any sorted order."
+The numbering structure of the address range.
 
 reference_system_indicator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-An indication of whether the physical address of all or a portion of a Road Element is based on a particular addressing
-system. A specific value is defined for the left and right sides of the Road Element.
-
-.. csv-table::
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
+The particular addressing system of the address range.
 
 acquisition_technique
 ^^^^^^^^^^^^^^^^^^^^^
 
 The type of data source or technique used to populate (create or revise) the dataset.
 
-.. csv-table::
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
-
-   0, "None", "No value applies."
-   1, "Other", "Other value."
-   2, "GPS", "Data collected using a GPS device."
-   3, "Orthoimage", "Satellite imagery orthorectified."
-   4, "Orthophoto", "Aerial photo orthorectified."
-   5, "Vector Data", "Vector digital data."
-   6, "Paper Map", "Conventional sources of information like maps or plans."
-   7, "Field Completion", "Information gathered from people directly on the field."
-   8, "Raster Data", "Data resulting from a scanning process."
-   9, "Digital Elevation Model", "Data coming from a Digital Elevation Model (DEM)."
-   10, "Aerial Photo", "Aerial photography not orthorectified."
-   11, "Raw Imagery Data", "Satellite imagery not orthorectified."
-   12, "Computed", "Geometric information that has been computed (not captured)."
-
 provider
 ^^^^^^^^
 
-The affiliation of the organization that generated (created or revised) the object.
-
-.. csv-table::
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
-
-   1, "Other", "Other value."
-   2, "Federal", "Federal departments or agencies."
-   3, "Provincial / Territorial", "Provincial / territorial departments or agencies."
-   4, "Municipal", "Municipal departments or agencies."
+The affiliation of the organization that provided the original or revised dataset contents.
 
 creation_date
 ^^^^^^^^^^^^^
@@ -206,1450 +131,992 @@ The date of data revision.
 basic_block
 -----------
 
-TODO
+Geographic areas formed by all roads and boundaries in :ref:`segment`.
 
 bb_uid
 ^^^^^^
 
-TODO
+Unique identifier of each record.
 
 cb_uid
 ^^^^^^
 
-TODO
+Unique identifier of the corresponding census block.
 
 blocked_passage
 ---------------
 
-Indication of a physical barrier on a Road Element built to prevent or control further access.
+Indication of a physical barrier on a road built to prevent or control further access.
 
 blocked_passage_id
 ^^^^^^^^^^^^^^^^^^
 
-TODO
+Unique identifier of each record.
 
 segment_id
 ^^^^^^^^^^
 
-A unique identifier within a dataset assigned to each Segment.
+Unique identifier of the corresponding road.
 
 blocked_passage_type
 ^^^^^^^^^^^^^^^^^^^^
 
-The type of blocked passage as an indication of the fact whether it is removable.
-
-.. csv-table::
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
-
-   1, "Permanently Fixed", "The barrier cannot be removed without destroying it. Heavy equipment needed in order to allow further access. Examples of permanently fixed blocked passage are concrete blocks or a mound of earth."
-   2, "Removable", "The barrier is designed to free the entrance to the (other side of the) Road Element that it is blocking. Further access easily allowed when so desired."
+The type of blocked passage.
 
 acquisition_technique
 ^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+The type of data source or technique used to populate (create or revise) the dataset.
 
 planimetric_accuracy
 ^^^^^^^^^^^^^^^^^^^^
 
-The planimetric accuracy expressed in meters as the circular map accuracy standard (CMAS)
+The planimetric accuracy expressed in meters as the circular map accuracy standard (CMAS).
 
 provider
 ^^^^^^^^
 
-TODO
+The affiliation of the organization that provided the original or revised dataset contents.
 
 creation_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data creation.
 
 revision_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data revision.
 
 blocked_passage_type_lookup
 ---------------------------
 
-TODO
+Code-value lookup dataset for blocked passage type.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 closing_period_lookup
 ---------------------
 
-TODO
+Code-value lookup dataset for closing period.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 crossing
 --------
 
-TODO
+All intersection points involving 4 or more roads, used for the identification of grade separated intersections
+(overpasses). This dataset exists for the maintenance of a routable road network whereby roads in the completely
+segmented :ref:`segment` dataset can be dissolved into single features if, in reality, they are contiguous and
+intersect at-grade.
 
 crossing_id
 ^^^^^^^^^^^
 
-TODO
+Unique identifier of each record.
 
 crossing_status
 ^^^^^^^^^^^^^^^
 
-TODO
+The type of crossing.
 
 crossing_order
 ^^^^^^^^^^^^^^
 
-TODO
+The number of roads connected to the crossing point.
 
 creation_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data creation.
 
 revision_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data revision.
 
 crossing_status_lookup
 ----------------------
 
-TODO
+Code-value lookup dataset for crossing status.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 ferry
 -----
 
-TODO
+The average route of a ferryboat which transports vehicles.
 
 ferry_id
 ^^^^^^^^
 
-TODO
+Unique identifier of each record.
 
 closing_period
 ^^^^^^^^^^^^^^
 
-TODO
+The period in which the road or ferry is not available to the public.
 
 functional_road_class
 ^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+A classification based on the role that the road or ferry performs in the connectivity of the road network.
 
 province
 ^^^^^^^^
 
-TODO
+Province or Territory where the feature is located.
 
 acquisition_technique
 ^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+The type of data source or technique used to populate (create or revise) the dataset.
 
 planimetric_accuracy
 ^^^^^^^^^^^^^^^^^^^^
 
-TODO
+The planimetric accuracy expressed in meters as the circular map accuracy standard (CMAS).
 
 provider
 ^^^^^^^^
 
-TODO
+The affiliation of the organization that provided the original or revised dataset contents.
 
 creation_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data creation.
 
 revision_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data revision.
 
 functional_road_class_lookup
 ----------------------------
 
-TODO
+Code-value lookup dataset for functional road class.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 house_number_structure_lookup
 -----------------------------
 
-TODO
+Code-value lookup dataset for house number structure.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 house_number_type_lookup
 ------------------------
 
-TODO
+Code-value lookup dataset for house number type.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 junction
 --------
 
-A feature that bounds a Road Element or a Ferry Connection. A Road Element or Ferry Connection always forms a
-connection between two Junctions and, a Road Element or Ferry Connection is always bounded by exactly two Junctions. A
-Junction Feature represents the physical connection between its adjoining Road Elements or Ferry Connections. A
-Junction is defined at the intersection of three or more roads, at the junction of a road and a ferry, at the end of a
-dead end road and at the junction of a road or ferry with a National, Provincial or Territorial Boundary.
+A feature bounding one or more roads or ferries. A junction is defined at the intersection of three or more roads, at
+the junction of a road and a ferry, at the end of a dead end road, and at the junction of a road or ferry with a
+National, Provincial or Territorial Boundary.
 
 junction_id
 ^^^^^^^^^^^
 
-TODO
+Unique identifier of each record.
 
 junction_type
 ^^^^^^^^^^^^^
 
-TODO
+The classification of the junction.
 
 exit_number
 ^^^^^^^^^^^
 
-The ID number of an exit on a controlled access thoroughfare that has been assigned by an administrating body.
+The identifying number of an exit on a controlled access thoroughfare.
 
 province
 ^^^^^^^^
 
-Province or Territory covered by the dataset.
-
-.. csv-table::
-   :header: "Code", "Label"
-   :widths: auto
-   :align: left
-
-   1, "Newfoundland and Labrador"
-   2, "Nova Scotia"
-   3, "Prince Edward Island"
-   4, "New Brunswick"
-   5, "Quebec"
-   6, "Ontario"
-   7, "Manitoba"
-   8, "Saskatchewan"
-   9, "Alberta"
-   10, "British Columbia"
-   11, "Yukon"
-   12, "Northwest Territories"
-   13, "Nunavut"
+Province or Territory where the feature is located.
 
 acquisition_technique
 ^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+The type of data source or technique used to populate (create or revise) the dataset.
 
 planimetric_accuracy
 ^^^^^^^^^^^^^^^^^^^^
 
-TODO
+The planimetric accuracy expressed in meters as the circular map accuracy standard (CMAS).
 
 provider
 ^^^^^^^^
 
-TODO
+The affiliation of the organization that provided the original or revised dataset contents.
 
 creation_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data creation.
 
 revision_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data revision.
 
 junction_type_lookup
 --------------------
 
-TODO
+Code-value lookup dataset for junction type.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 language_code_lookup
 --------------------
 
-TODO
+Code-value lookup dataset for language code.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 provider_lookup
 ---------------
 
-TODO
+Code-value lookup dataset for provider.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 province_lookup
 ---------------
 
-TODO
+Code-value lookup dataset for province.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 reference_system_indicator_lookup
 ---------------------------------
 
-TODO
+Code-value lookup dataset for reference system indicator.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 road_surface_type_lookup
 ------------------------
 
-TODO
+Code-value lookup dataset for road surface type.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 route_name
 ----------
 
-TODO
+A set of attributes representing a particular route name in the road network.
 
 route_name_id
 ^^^^^^^^^^^^^
 
-TODO
+Unique identifier of each record.
 
 route_name_en
 ^^^^^^^^^^^^^
 
-The English version of a name of a particular route in a given road network as attributed by a national or subnational
-agency. A particular Road Segment or Ferry Connection Segment can belong to more than one named route. In such cases,
-it has multiple route name attributes.
+The official English version of the route name.
 
 route_name_fr
 ^^^^^^^^^^^^^
 
-The French version of a name of a particular route in a given road network as attributed by a national or subnational
-agency. A particular Road Segment or Ferry Connection Segment can belong to more than one named route. In such cases,
-it has multiple route name attributes.
+The official French version of the route name.
 
 creation_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data creation.
 
 revision_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data revision.
 
 route_name_link
 ---------------
 
-TODO
+A dataset facilitating plural linkages of roads and ferries with a particular route name in the road network.
 
 route_name_link_id
 ^^^^^^^^^^^^^^^^^^
 
-TODO
+Unique identifier of each record.
 
 segment_id
 ^^^^^^^^^^
 
-TODO
+Unique identifier of the corresponding road or ferry.
 
 route_name_id
 ^^^^^^^^^^^^^
 
-TODO
+Unique identifier of the corresponding route name.
 
 route_number
 ------------
 
-TODO
+A set of attributes representing a particular route number in the road network.
 
 route_number_id
 ^^^^^^^^^^^^^^^
 
-TODO
+Unique identifier of each record.
 
 route_number
 ^^^^^^^^^^^^
 
-The ID number of a particular route in a given road network as attributed by a national or subnational agency. A
-particular Road Segment or Ferry Connection Segment can belong to more than one numbered route. In such cases, it has
-multiple route number attributes.
+The official route number.
 
 creation_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data creation.
 
 revision_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data revision.
 
 route_number_link
 -----------------
 
-TODO
+A dataset facilitating plural linkages of roads and ferries with a particular route number in the road network.
 
 route_number_link_id
 ^^^^^^^^^^^^^^^^^^^^
 
-TODO
+Unique identifier of each record.
 
 segment_id
 ^^^^^^^^^^
 
-TODO
+Unique identifier of the corresponding road or ferry.
 
 route_number_id
 ^^^^^^^^^^^^^^^
 
-TODO
+Unique identifier of the corresponding route number.
+
+.. _segment:
 
 segment
 -------
 
-A road is a linear section of the earth designed for or the result of vehicular movement. A Road Segment
-is the specific representation of a portion of a road with uniform characteristics.
+A road or boundary feature with uniform characteristics. A road is a linear section of the earth designed for or the
+result of vehicular movement. A boundary is a non-road forming an administrative, statistical, or non-standard
+geographic area.
 
 segment_id
 ^^^^^^^^^^
 
-TODO
+Unique identifier of each record.
 
 segment_id_left
 ^^^^^^^^^^^^^^^
 
-TODO
+Unique identifier of the left side of each feature.
 
 segment_id_right
 ^^^^^^^^^^^^^^^^
 
-TODO
+Unique identifier of the right side of each feature.
 
 element_id
 ^^^^^^^^^^
 
-TODO
+Non-unique identifier used to identify contiguous road features which share an official street name and municipality.
 
 routable_element_id
 ^^^^^^^^^^^^^^^^^^^
 
-TODO
+Non-unique identifier used to identify contiguous road features which intersect at-grade via :ref:`crossing` points.
 
 segment_type
 ^^^^^^^^^^^^
 
-TODO
+The classification of the feature.
 
 exit_number
 ^^^^^^^^^^^
 
-The ID number of an exit on a controlled access thoroughfare that has been assigned by an administrating body.
+The identifying number of an exit on a controlled access thoroughfare.
 
-speed
-^^^^^
+speed_restriction
+^^^^^^^^^^^^^^^^^
 
-The maximum speed allowed on the road. The value is expressed in kilometers per hour.
+The maximum speed allowed on the road, expressed in kilometers per hour.
 
 number_of_lanes
 ^^^^^^^^^^^^^^^
 
-The number of lanes existing on a Road Element.
+The number of lanes existing on the road (combined total from each direction).
 
 road_jurisdiction
 ^^^^^^^^^^^^^^^^^
 
-The agency with the responsibility/authority to ensure maintenance occurs but is not necessarily the one who undertakes
-the maintenance directly.
+The agency with the responsibility / authority to ensure maintenance occurs but is not necessarily the one who
+undertakes the maintenance directly.
 
 closing_period
 ^^^^^^^^^^^^^^
 
-The period in which the road or ferry connection is not available to the public.
-
-.. csv-table::
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
-
-   0, "None", "There is no closing period. The road or ferry connection is open year round."
-   1, "Summer", "Period of the year for which the absence of ice and snow prevent the access to the road or ferry
-   connection."
-   2, "Winter", "Period of the year for which ice and snow prevent the access to the road or ferry connection."
+The period in which the road or ferry is not available to the public.
 
 functional_road_class
 ^^^^^^^^^^^^^^^^^^^^^
 
-A classification based on the importance of the role that the Road Element or Ferry Connection performs in the
-connectivity of the total road network.
-
-.. csv-table::
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
-
-   1, "Freeway", "An unimpeded, high-speed controlled access thoroughfare for through traffic with typically no at-
-   grade intersections, usually with no property access or direct access, and which is accessed by a ramp. Pedestrians
-   are prohibited."
-   2, "Expressway / Highway", "A high-speed thoroughfare with a combination of controlled access intersections at any
-   grade."
-   3, "Arterial", "A major thoroughfare with medium to large traffic capacity."
-   4, "Collector", "A minor thoroughfare mainly used to access properties and to feed traffic with right of way."
-   5, "Local / Street", "A low-speed thoroughfare dedicated to provide full access to the front of properties."
-   6, "Local / Strata", "A low-speed thoroughfare dedicated to provide access to properties with potential public
-   restriction such as: trailer parks, First Nations, strata, private estates, seasonal residences."
-   7, "Local / Unknown", "A low-speed thoroughfare dedicated to provide access to the front of properties but for which
-   the access regulations are unknown."
-   8, "Alleyway / Lane", "A low-speed thoroughfare dedicated to provide access to the rear of properties."
-   9, "Ramp", "A system of interconnecting roadways providing for the controlled movement between two or more roadways."
-   10, "Resource / Recreation", "A narrow passage whose primary function is to provide access for resource extraction
-   and may also have serve in providing public access to the backcountry."
-   11, "Rapid Transit", "A thoroughfare restricted to public transit buses."
-   12, "Service Lane", "A stretch of road permitting vehicles to come to a stop along a freeway or highway. Scale,
-   service lane, emergency lane, lookout, and rest area."
-   13, "Winter", "A road that is only useable during the winter when conditions allow for passage over lakes, rivers,
-   and wetlands."
+A classification based on the role that the road or ferry performs in the connectivity of the road network.
 
 traffic_direction
 ^^^^^^^^^^^^^^^^^
 
 The direction(s) of traffic flow allowed on the road.
 
-.. csv-table::
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
-
-   1, "Both directions", "Traffic flow is allowed in both directions."
-   2, "Same direction", "The direction of one way traffic flow is the same as the digitizing direction of the Road
-   Segment."
-   3, "Opposite direction", "The direction of one way traffic flow is opposite to the digitizing direction of the Road
-   Segment."
-
 road_surface_type
 ^^^^^^^^^^^^^^^^^
 
-The type of surface a road element has.
-
-.. csv-table::
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
-
-   0, "None", "No value applies."
-   1, "Rigid", "A paved road with a rigid surface such as concrete or steel decks."
-   2, "Flexible", "A paved road with a flexible surface such as asphalt or tar gravel."
-   3, "Blocks", "A paved road with a surface made of blocks such as cobblestones."
-   4, "Gravel", "A dirt road whose surface has been improved by grading with gravel."
-   5, "Dirt", "Roads whose surface is formed by the removal of vegetation and/or by the transportation movements over
-   that road which inhibit further growth of any vegetation."
-   6, "Paved Unknown", "A road with a surface made of hardened material such as concrete, asphalt, tar gravel, or steel decks."
-   7, "Unpaved Unknown", ""A road with a surface made of loose material such as gravel or dirt."
+The type of surface covering a road.
 
 structure_id
 ^^^^^^^^^^^^
 
-TODO
+Unique identifier of the corresponding structure.
 
 bb_uid_l
 ^^^^^^^^
 
-TODO
+Unique identifier of the corresponding basic block on the left side of each feature.
 
 bb_uid_r
 ^^^^^^^^
 
-TODO
+Unique identifier of the corresponding basic block on the right side of each feature.
 
 acquisition_technique
 ^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+The type of data source or technique used to populate (create or revise) the dataset.
 
 planimetric_accuracy
 ^^^^^^^^^^^^^^^^^^^^
 
-TODO
+The planimetric accuracy expressed in meters as the circular map accuracy standard (CMAS).
 
 provider
 ^^^^^^^^
 
-TODO
+The affiliation of the organization that provided the original or revised dataset contents.
 
 creation_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data creation.
 
 revision_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data revision.
 
 segment_type_lookup
 -------------------
 
-TODO
+Code-value lookup dataset for segment type.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 street_article_lookup
 ---------------------
 
-TODO
+Code-value lookup dataset for street article.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 street_direction_lookup
 -----------------------
 
-TODO
+Code-value lookup dataset for street direction.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 street_name
 -----------
 
-TODO
+A set of attributes representing a particular street name in the road network.
 
 street_name_id
 ^^^^^^^^^^^^^^
 
-The identifier used to link an address range to its street name. A specific value is defined for
-the left and right sides of the Road Element.
+Unique identifier of each record.
 
 street_name_concatenated
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-A concatenation of the officially recognized Directional prefix, Street type prefix, Street name article, Street name
-body, Street type suffix, Directional suffix and Muni quadrant values.
+The official concatenation of all components of the street name.
+
+.. _street_direction_prefix:
 
 street_direction_prefix
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-A geographic direction that is part of the street name and precedes the street name body or, if appropriate, the street
-type prefix.
+A geographic direction that is part of the street name and precedes the :ref:`street_name_body`.
 
-.. csv-table::
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
-
-   0, "None", "No value applies."
-   1, "North", ""
-   2, "Nord", ""
-   3, "South", ""
-   4, "Sud", ""
-   5, "East", ""
-   6, "Est", ""
-   7, "West", ""
-   8, "Ouest", ""
-   9, "Northwest", ""
-   10, "Nord-ouest", ""
-   11, "Northeast", ""
-   12, "Nord-est", ""
-   13, "Southwest", ""
-   14, "Sud-ouest", ""
-   15, "Southeast", ""
-   16, "Sud-est", ""
-   17, "Central", ""
-   18, "Centre", ""
+.. _street_type_prefix:
 
 street_type_prefix
 ^^^^^^^^^^^^^^^^^^
 
-A part of the street name of a Road Element identifying the street type. A prefix precedes the street name body of a
-Road Element.
+The portion of the street name identifying the street type and precedes the :ref:`street_name_body`.
 
-.. csv-table::
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
-
-   0, "None", "No value applies."
-   1, "Abbey", ""
-   2, "Access", ""
-   3, "Acres", ""
-   4, "Aire", ""
-   5, "Allée", ""
-   6, "Alley", ""
-   7, "Autoroute", ""
-   8, "Avenue", ""
-   9, "Barrage", ""
-   10, "Bay", ""
-   11, "Beach", ""
-   12, "Bend", ""
-   13, "Bloc", ""
-   14, "Block", ""
-   15, "Boulevard", ""
-   16, "Bourg", ""
-   17, "Brook", ""
-   18, "By-pass", ""
-   19, "Byway", ""
-   20, "Campus", ""
-   21, "Cape", ""
-   22, "Carre", ""
-   23, "Carrefour", ""
-   24, "Centre", ""
-   25, "Cercle", ""
-   26, "Chase", ""
-   27, "Chemin", ""
-   28, "Circle", ""
-   29, "Circuit", ""
-   30, "Close", ""
-   31, "Common", ""
-   32, "Concession", ""
-   33, "Corners", ""
-   34, "Côte", ""
-   35, "Cour", ""
-   36, "Court", ""
-   37, "Cove", ""
-   38, "Crescent", ""
-   39, "Croft", ""
-   40, "Croissant", ""
-   41, "Crossing", ""
-   42, "Crossroads", ""
-   43, "Cul-de-sac", ""
-   44, "Dale", ""
-   45, "Dell", ""
-   46, "Desserte", ""
-   47, "Diversion", ""
-   48, "Downs", ""
-   49, "Drive", ""
-   50, "Droit de passage", ""
-   51, "Échangeur", ""
-   52, "End", ""
-   53, "Esplanade", ""
-   54, "Estates", ""
-   55, "Expressway", ""
-   56, "Extension", ""
-   57, "Farm", ""
-   58, "Field", ""
-   59, "Forest", ""
-   60, "Freeway", ""
-   61, "Front", ""
-   62, "Gardens", ""
-   63, "Gate", ""
-   64, "Glade", ""
-   65, "Glen", ""
-   66, "Green", ""
-   67, "Grounds", ""
-   68, "Grove", ""
-   69, "Harbour", ""
-   70, "Haven", ""
-   71, "Heath", ""
-   72, "Heights", ""
-   73, "Highlands", ""
-   74, "Highway", ""
-   75, "Hill", ""
-   76, "Hollow", ""
-   77, "Île", ""
-   78, "Impasse", ""
-   79, "Island", ""
-   80, "Key", ""
-   81, "Knoll", ""
-   82, "Landing", ""
-   83, "Lane", ""
-   84, "Laneway", ""
-   85, "Limits", ""
-   86, "Line", ""
-   87, "Link", ""
-   88, "Lookout", ""
-   89, "Loop", ""
-   90, "Mall", ""
-   91, "Manor", ""
-   92, "Maze", ""
-   93, "Meadow", ""
-   94, "Mews", ""
-   95, "Montée", ""
-   96, "Moor", ""
-   97, "Mount", ""
-   98, "Mountain", ""
-   99, "Orchard", ""
-   100, "Parade", ""
-   101, "Parc", ""
-   102, "Park", ""
-   103, "Parkway", ""
-   104, "Passage", ""
-   105, "Path", ""
-   106, "Pathway", ""
-   107, "Peak", ""
-   108, "Pines", ""
-   109, "Place", ""
-   110, "Place", ""
-   111, "Plateau", ""
-   112, "Plaza", ""
-   113, "Point", ""
-   114, "Port", ""
-   115, "Private", ""
-   116, "Promenade", ""
-   117, "Quay", ""
-   118, "Rang", ""
-   119, "Range", ""
-   120, "Reach", ""
-   121, "Ridge", ""
-   122, "Right of Way", ""
-   123, "Rise", ""
-   124, "Road", ""
-   125, "Rond Point", ""
-   126, "Route", ""
-   127, "Row", ""
-   128, "Rue", ""
-   129, "Ruelle", ""
-   130, "Ruisseau", ""
-   131, "Run", ""
-   132, "Section", ""
-   133, "Sentier", ""
-   134, "Sideroad", ""
-   135, "Square", ""
-   136, "Street", ""
-   137, "Stroll", ""
-   138, "Subdivision", ""
-   139, "Terrace", ""
-   140, "Terrasse", ""
-   141, "Thicket", ""
-   142, "Towers", ""
-   143, "Townline", ""
-   144, "Trace", ""
-   145, "Trail", ""
-   146, "Trunk", ""
-   147, "Turnabout", ""
-   148, "Vale", ""
-   149, "Via", ""
-   150, "View", ""
-   151, "Village", ""
-   152, "Vista", ""
-   153, "Voie", ""
-   154, "Walk", ""
-   155, "Way", ""
-   156, "Wharf", ""
-   157, "Wood", ""
-   158, "Woods", ""
-   159, "Wynd", ""
-   160, "Driveway", ""
-   161, "Height", ""
-   162, "Roadway", ""
-   163, "Strip", ""
-   164, "Concession Road", ""
-   165, "Corner", ""
-   166, "County Road", ""
-   167, "Crossroad", ""
-   168, "Fire Route", ""
-   169, "Garden", ""
-   170, "Hills", ""
-   171, "Isle", ""
-   172, "Lanes", ""
-   173, "Pointe", ""
-   174, "Regional Road", ""
-   175, "Autoroute à péage", ""
-   176, "Baie", ""
-   177, "Bluff", ""
-   178, "Bocage", ""
-   179, "Bois", ""
-   180, "Boucle", ""
-   181, "Bretelle", ""
-   182, "Cap", ""
-   183, "Causeway", ""
-   184, "Chaussée", ""
-   185, "Contournement", ""
-   186, "Couloir", ""
-   187, "Crête", ""
-   188, "Croix", ""
-   189, "Cross", ""
-   190, "Dead End", ""
-   191, "Débarquement", ""
-   192, "Entrance", ""
-   193, "Entrée", ""
-   194, "Evergreen", ""
-   195, "Exit", ""
-   196, "Étang", ""
-   197, "Falaise", ""
-   198, "Jardin", ""
-   199, "Lawn", ""
-   200, "Lien", ""
-   201, "Ligne", ""
-   202, "Manoir", ""
-   203, "Pass", ""
-   204, "Pente", ""
-   205, "Pond", ""
-   206, "Quai", ""
-   207, "Ramp", ""
-   208, "Rampe", ""
-   209, "Rangée", ""
-   210, "Roundabout", ""
-   211, "Route de plaisance", ""
-   212, "Route sur élevée", ""
-   213, "Side", ""
-   214, "Sortie", ""
-   215, "Throughway", ""
-   216, "Took", ""
-   217, "Turn", ""
-   218, "Turnpike", ""
-   219, "Vallée", ""
-   220, "Villas", ""
-   221, "Virage", ""
-   222, "Voie oust", ""
-   223, "Voie rapide", ""
-   224, "Vue", ""
-   225, "Westway", ""
-   226, "Arm", ""
-   227, "Baseline", ""
-   228, "Bourne", ""
-   229, "Branch", ""
-   230, "Bridge", ""
-   231, "Burn", ""
-   232, "Bypass", ""
-   233, "Camp", ""
-   234, "Chart", ""
-   235, "Club", ""
-   236, "Copse", ""
-   237, "Creek", ""
-   238, "Crest", ""
-   239, "Curve", ""
-   240, "Cut", ""
-   241, "Fairway", ""
-   242, "Gateway", ""
-   243, "Greenway", ""
-   244, "Inamo", ""
-   245, "Inlet", ""
-   246, "Junction", ""
-   247, "Keep", ""
-   248, "Lake", ""
-   249, "Lakes", ""
-   250, "Lakeway", ""
-   251, "Market", ""
-   252, "Millway", ""
-   253, "Outlook", ""
-   254, "Oval", ""
-   255, "Overpass", ""
-   256, "Pier", ""
-   257, "River", ""
-   258, "Service", ""
-   259, "Shore", ""
-   260, "Shores", ""
-   261, "Sideline", ""
-   262, "Spur", ""
-   263, "Surf", ""
-   264, "Track", ""
-   265, "Valley", ""
-   266, "Walkway", ""
-   267, "Wold", ""
-   268, "Tili", ""
-   269, "Nook", ""
-   270, "Drung", ""
-   271, "Awti", ""
-   272, "Awti'j", ""
-   273, "Rest", ""
-   274, "Rotary", ""
-   275, "Connection", ""
-   276, "Estate", ""
-   277, "Crossover", ""
-   278, "Hideaway", ""
-   279, "Linkway", ""
+.. _street_article:
 
 street_article
 ^^^^^^^^^^^^^^
 
-Article(s) that is/are part of the street name and located at the beginning.
+An article that is part of the street name and precedes the :ref:`street_name_body`.
 
-.. csv-table::
-   :header: "Label", "Definition"
-   :widths: auto
-   :align: left
-
-   "None", ""
-   "à", ""
-   "à l'", ""
-   "à la", ""
-   "au", ""
-   "aux", ""
-   "by the", ""
-   "chez", ""
-   "d'", ""
-   "de", ""
-   "de l'", ""
-   "de la", ""
-   "des", ""
-   "du", ""
-   "l'", ""
-   "la", ""
-   "le", ""
-   "les", ""
-   "of the", ""
-   "the", ""
+.. _street_name_body:
 
 street_name_body
 ^^^^^^^^^^^^^^^^
 
-The portion of the street name (either official or alternate) that has the most identifying power excluding street type
-and directional prefixes or suffixes and street name articles.
+The portion of the street name that has the most identifying power, excluding the :ref:`street_direction_prefix`,
+:ref:`street_direction_suffix`, :ref:`street_type_prefix`, :ref:`street_type_suffix`, and :ref:`street_article`.
+
+.. _street_type_suffix:
 
 street_type_suffix
 ^^^^^^^^^^^^^^^^^^
 
-A part of the street name of a Road Element identifying the street type. A suffix follows the street name body of a
-Road Element.
+The portion of the street name identifying the street type and succeeds the :ref:`street_name_body`.
+
+.. _street_direction_suffix:
 
 street_direction_suffix
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-A geographic direction that is part of the street name and succeeds the street name body or, if appropriate, the street
-type suffix.
+A geographic direction that is part of the street name and succeeds the :ref:`street_name_body`.
 
 creation_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data creation.
 
 revision_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data revision.
 
 street_name_link
 ----------------
 
-TODO
+A dataset facilitating plural linkages of roads with a particular street name in the road network.
 
 street_name_link_id
 ^^^^^^^^^^^^^^^^^^^
 
-TODO
+Unique identifier of each record.
 
 segment_id
 ^^^^^^^^^^
 
-TODO
+Unique identifier of the corresponding road.
 
 street_name_id
 ^^^^^^^^^^^^^^
 
-TODO
+Unique identifier of the corresponding street name.
 
 street_name_translation
 -----------------------
 
-TODO
+A set of attributes representing a recognized translation of a particular street name in the road network.
 
 street_name_translation_id
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+Unique identifier of each record.
 
 street_name_id
 ^^^^^^^^^^^^^^
 
-TODO
+Unique identifier of the corresponding street name.
 
 street_name_concatenated
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+The official concatenation of all components of the street name.
 
 language_code
 ^^^^^^^^^^^^^
 
-TODO
+Three-letter code identifying the language of the street name translation in accordance with ISO 639-3.
 
 creation_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data creation.
 
 revision_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data revision.
 
 street_type_lookup
 ------------------
 
-TODO
+Code-value lookup dataset for street type.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 structure
 ---------
 
-TODO
+A set of attributes representing a particular structure in the road network.
 
 structure_id
 ^^^^^^^^^^^^
 
-A national unique identifier assigned to the Road Segment or the set of adjoining Road Segments forming a structure.
-This identifier allows for the reconstitution of a structure that is fragmented by Junctions.
+Unique identifier of each record.
 
 structure_type
 ^^^^^^^^^^^^^^
 
 The classification of a structure.
 
-.. csv-table::
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
-
-   0, "None", "No value applies."
-   1, "Bridge", "A manmade construction that supports a road on a raised structure and spans an obstacle, river,
-   another road, or railway."
-   2, "Bridge covered", "A manmade construction that supports a road on a covered raised structure and spans an
-   obstacle, river, another road, or railway."
-   3, "Bridge moveable", "A manmade construction that supports a road on a moveable raised structure and spans an
-   obstacle, river, another road, or railway."
-   4, "Bridge unknown", "A bridge for which it is currently impossible to determine whether its structure is covered,
-   moveable or other."
-   5, "Tunnel", "An enclosed manmade construction built to carry a road through or below a natural feature or other
-   obstructions."
-   6, "Snowshed", "A manmade roofed structure built over a road in mountainous areas to prevent snow slides from
-   blocking the road."
-   7, "Dam", "A manmade linear structure built across a waterway or floodway to control the flow of water and
-   supporting a road for motor vehicles."
-
 structure_name_en
 ^^^^^^^^^^^^^^^^^
 
-The English version of the name of a road structure as assigned by a national or subnational agency.
+The official English version of the structure name.
 
 structure_name_fr
 ^^^^^^^^^^^^^^^^^
 
-The French version of the name of a road structure as assigned by a national or subnational agency.
+The official French version of the structure name.
 
 creation_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data creation.
 
 revision_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data revision.
 
 structure_type_lookup
 ---------------------
 
-TODO
+Code-value lookup dataset for structure type.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 toll_point
 ----------
 
-Place where right-of-way is charged to gain access to a motorway, a bridge, etc.
+Place where a right-of-way is charged to gain access to a road.
 
 toll_point_id
 ^^^^^^^^^^^^^
 
-TODO
+Unique identifier of each record.
 
 segment_id
 ^^^^^^^^^^
 
-TODO
+Unique identifier of the corresponding road.
 
 toll_point_type
 ^^^^^^^^^^^^^^^
 
 The type of toll point.
 
-.. csv-table::
-   :header: "Code", "Label", "Definition"
-   :widths: auto
-   :align: left
-
-   1, "Physical Toll Booth", "A toll booth is a construction along or across the road where toll can be paid to
-   employees of the organization in charge of collecting the toll, to machines capable of automatically recognizing
-   coins or bills or to machines involving electronic methods of payment like credit cards or bank cards."
-   2, "Virtual Toll Booth", "At a virtual point of toll payment, toll will be charged via automatic registration of the
-   passing vehicle by subscription or invoice."
-   3, "Hybrid", "Hybrid signifies a toll booth which is both physical and virtual."
-
 acquisition_technique
 ^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+The type of data source or technique used to populate (create or revise) the dataset.
 
 planimetric_accuracy
 ^^^^^^^^^^^^^^^^^^^^
 
-TODO
+The planimetric accuracy expressed in meters as the circular map accuracy standard (CMAS).
 
 provider
 ^^^^^^^^
 
-TODO
+The affiliation of the organization that provided the original or revised dataset contents.
 
 creation_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data creation.
 
 revision_date
 ^^^^^^^^^^^^^
 
-TODO
+The date of data revision.
 
 toll_point_type_lookup
 ----------------------
 
-TODO
+Code-value lookup dataset for toll point type.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
 
 traffic_direction_lookup
 ------------------------
 
-TODO
+Code-value lookup dataset for traffic direction.
 
 code
 ^^^^
 
-TODO
+Concise code used in place of a more descriptive value.
 
 value_en
 ^^^^^^^^
 
-TODO
+English version of the descriptive value.
 
 value_fr
 ^^^^^^^^
 
-TODO
+French version of the descriptive value.
