@@ -42,26 +42,47 @@ acquisition_technique_lookup
 
 Code-value lookup dataset for acquisition technique.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   -1, "Unknown", "Inconnu", "Value is unknown."
+   0, "None", "Aucun", "No value applies."
+   1, "Other", "Autre", "Other value."
+   2, "GPS", "GPS", "Data collected using a GPS device."
+   3, "Orthoimage", "Ortho-image", "Satellite imagery orthorectified."
+   4, "Orthophoto", "Ortho-photo", "Aerial photo orthorectified."
+   5, "Vector Data", "Données vectorielles", "Vector digital data."
+   6, "Paper Map", "Carte papier", "Conventional sources of information like maps or plans."
+   7, "Field Completion", "Complètement terrain", "Information gathered from people directly on the field."
+   8, "Raster Data", "Données matricielles", "Data resulting from a scanning process."
+   9, "Digital Elevation Model", "Modèle numérique d'élévation", "Data coming from a Digital Elevation Model (DEM)."
+   10, "Aerial Photo", "Photographie aérienne", "Aerial photography not orthorectified."
+   11, "Raw Imagery Data", "Image satellite brute", "Satellite imagery not orthorectified."
+   12, "Computed", "Calculé", "Geometric information that has been computed (not captured)."
 
 address_range
 -------------
 
 A set of attributes representing the address of the first and last building located along the side of the entire road
 or a portion of it.
+
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   TODO - add content from constraints and below attribute descriptions, then delete individual attribute sections.
 
 address_range_id
 ^^^^^^^^^^^^^^^^
@@ -133,6 +154,13 @@ basic_block
 
 Geographic areas formed by all roads and boundaries in :ref:`segment`.
 
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   TODO - add content from constraints and below attribute descriptions, then delete individual attribute sections.
+
 bb_uid
 ^^^^^^
 
@@ -147,6 +175,13 @@ blocked_passage
 ---------------
 
 Indication of a physical barrier on a road built to prevent or control further access.
+
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   TODO - add content from constraints and below attribute descriptions, then delete individual attribute sections.
 
 blocked_passage_id
 ^^^^^^^^^^^^^^^^^^
@@ -193,40 +228,42 @@ blocked_passage_type_lookup
 
 Code-value lookup dataset for blocked passage type.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 closing_period_lookup
 ---------------------
 
 Code-value lookup dataset for closing period.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 crossing
 --------
@@ -235,6 +272,13 @@ All intersection points involving 4 or more roads, used for the identification o
 (overpasses). This dataset exists for the maintenance of a routable road network whereby roads in the completely
 segmented :ref:`segment` dataset can be dissolved into single features if, in reality, they are contiguous and
 intersect at-grade.
+
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   TODO - add content from constraints and below attribute descriptions, then delete individual attribute sections.
 
 crossing_id
 ^^^^^^^^^^^
@@ -266,25 +310,33 @@ crossing_status_lookup
 
 Code-value lookup dataset for crossing status.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 ferry
 -----
 
 The average route of a ferryboat which transports vehicles.
+
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   TODO - add content from constraints and below attribute descriptions, then delete individual attribute sections.
 
 ferry_id
 ^^^^^^^^
@@ -336,60 +388,63 @@ functional_road_class_lookup
 
 Code-value lookup dataset for functional road class.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 house_number_structure_lookup
 -----------------------------
 
 Code-value lookup dataset for house number structure.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 house_number_type_lookup
 ------------------------
 
 Code-value lookup dataset for house number type.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 junction
 --------
@@ -397,6 +452,13 @@ junction
 A feature bounding one or more roads or ferries. A junction is defined at the intersection of three or more roads, at
 the junction of a road and a ferry, at the end of a dead end road, and at the junction of a road or ferry with a
 National, Provincial or Territorial Boundary.
+
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   TODO - add content from constraints and below attribute descriptions, then delete individual attribute sections.
 
 junction_id
 ^^^^^^^^^^^
@@ -448,125 +510,138 @@ junction_type_lookup
 
 Code-value lookup dataset for junction type.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 language_code_lookup
 --------------------
 
 Code-value lookup dataset for language code.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 provider_lookup
 ---------------
 
 Code-value lookup dataset for provider.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 province_lookup
 ---------------
 
 Code-value lookup dataset for province.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 reference_system_indicator_lookup
 ---------------------------------
 
 Code-value lookup dataset for reference system indicator.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 road_surface_type_lookup
 ------------------------
 
 Code-value lookup dataset for road surface type.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 route_name
 ----------
 
 A set of attributes representing a particular route name in the road network.
+
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   TODO - add content from constraints and below attribute descriptions, then delete individual attribute sections.
 
 route_name_id
 ^^^^^^^^^^^^^
@@ -598,6 +673,13 @@ route_name_link
 
 A dataset facilitating plural linkages of roads and ferries with a particular route name in the road network.
 
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   TODO - add content from constraints and below attribute descriptions, then delete individual attribute sections.
+
 route_name_link_id
 ^^^^^^^^^^^^^^^^^^
 
@@ -617,6 +699,13 @@ route_number
 ------------
 
 A set of attributes representing a particular route number in the road network.
+
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   TODO - add content from constraints and below attribute descriptions, then delete individual attribute sections.
 
 route_number_id
 ^^^^^^^^^^^^^^^
@@ -643,6 +732,13 @@ route_number_link
 
 A dataset facilitating plural linkages of roads and ferries with a particular route number in the road network.
 
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   TODO - add content from constraints and below attribute descriptions, then delete individual attribute sections.
+
 route_number_link_id
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -666,6 +762,13 @@ segment
 A road or boundary feature with uniform characteristics. A road is a linear section of the earth designed for or the
 result of vehicular movement. A boundary is a non-road forming an administrative, statistical, or non-standard
 geographic area.
+
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   TODO - add content from constraints and below attribute descriptions, then delete individual attribute sections.
 
 segment_id
 ^^^^^^^^^^
@@ -783,65 +886,75 @@ segment_type_lookup
 
 Code-value lookup dataset for segment type.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 street_article_lookup
 ---------------------
 
 Code-value lookup dataset for street article.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 street_direction_lookup
 -----------------------
 
 Code-value lookup dataset for street direction.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 street_name
 -----------
 
 A set of attributes representing a particular street name in the road network.
+
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   TODO - add content from constraints and below attribute descriptions, then delete individual attribute sections.
 
 street_name_id
 ^^^^^^^^^^^^^^
@@ -911,6 +1024,13 @@ street_name_link
 
 A dataset facilitating plural linkages of roads with a particular street name in the road network.
 
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   TODO - add content from constraints and below attribute descriptions, then delete individual attribute sections.
+
 street_name_link_id
 ^^^^^^^^^^^^^^^^^^^
 
@@ -930,6 +1050,13 @@ street_name_translation
 -----------------------
 
 A set of attributes representing a recognized translation of a particular street name in the road network.
+
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   TODO - add content from constraints and below attribute descriptions, then delete individual attribute sections.
 
 street_name_translation_id
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -966,25 +1093,33 @@ street_type_lookup
 
 Code-value lookup dataset for street type.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 structure
 ---------
 
 A set of attributes representing a particular structure in the road network.
+
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   TODO - add content from constraints and below attribute descriptions, then delete individual attribute sections.
 
 structure_id
 ^^^^^^^^^^^^
@@ -1021,25 +1156,33 @@ structure_type_lookup
 
 Code-value lookup dataset for structure type.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 toll_point
 ----------
 
 Place where a right-of-way is charged to gain access to a road.
+
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   TODO - add content from constraints and below attribute descriptions, then delete individual attribute sections.
 
 toll_point_id
 ^^^^^^^^^^^^^
@@ -1086,37 +1229,39 @@ toll_point_type_lookup
 
 Code-value lookup dataset for toll point type.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
 
 traffic_direction_lookup
 ------------------------
 
 Code-value lookup dataset for traffic direction.
 
-code
-^^^^
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
 
-Concise code used in place of a more descriptive value.
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
 
-value_en
-^^^^^^^^
+.. csv-table:: Domains
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
 
-English version of the descriptive value.
-
-value_fr
-^^^^^^^^
-
-French version of the descriptive value.
+   TODO
