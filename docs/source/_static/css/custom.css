@@ -35,3 +35,14 @@
 i.fa-github:before {
     color: black;
 }
+
+/* tables */
+table {
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}
+
+.table thead th {
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}

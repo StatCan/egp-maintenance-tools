@@ -3,7 +3,7 @@ Canadian Road Network
 *********************
 
 .. contents:: Contents:
-   :depth: 2
+   :depth: 3
 
 Diagram
 =======
@@ -24,7 +24,9 @@ Data Dictionary
 acquisition_technique_lookup
 ----------------------------
 
-Code-value lookup dataset for acquisition technique.
+**Description:** Codeset lookup dataset for acquisition technique.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -35,7 +37,10 @@ Code-value lookup dataset for acquisition technique.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -57,8 +62,10 @@ Code-value lookup dataset for acquisition technique.
 address_range
 -------------
 
-A set of attributes representing the address of the first and last building located along the side of the entire road
-or a portion of it.
+**Description:** A set of attributes representing the address of the first and last building located along the side of
+the entire road or a portion of it.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -67,11 +74,11 @@ or a portion of it.
 
    "address_range_id", False, True, ``gen_random_uuid()``, "Unique identifier of each record."
    "first_house_number", False, False, -1, "The first house number address."
-   "first_house_number_suffix", False, False, "\"\"", "A non-integer value, such as a fraction or a character that
+   "first_house_number_suffix", False, False, "Unknown", "A non-integer value, such as a fraction or a character that
    follows the first house number address."
    "first_house_number_type", False, False, "", "The method used to populate the first house number address."
    "last_house_number", False, False, -1, "The last house number address."
-   "last_house_number_suffix", False, False, "\"\"", "A non-integer value, such as a fraction or a character that
+   "last_house_number_suffix", False, False, "Unknown", "A non-integer value, such as a fraction or a character that
    follows the last house number address."
    "last_house_number_type", False, False, "", "The method used to populate the last house number address."
    "house_number_structure", False, False, "", "The numbering structure of the address range."
@@ -86,7 +93,11 @@ or a portion of it.
 basic_block
 -----------
 
-Geographic areas formed by all roads and boundaries in :ref:`segment`.
+| **Description:** Geographic areas formed by all roads and boundaries in :ref:`segment`.
+| **Coordinate reference system:** EPSG:3347
+| **Coordinate decimal precision:** 5
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -100,7 +111,11 @@ Geographic areas formed by all roads and boundaries in :ref:`segment`.
 blocked_passage
 ---------------
 
-Indication of a physical barrier on a road built to prevent or control further access.
+| **Description:** Indication of a physical barrier on a road built to prevent or control further access.
+| **Coordinate reference system:** EPSG:3347
+| **Coordinate decimal precision:** 5
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -123,7 +138,9 @@ Indication of a physical barrier on a road built to prevent or control further a
 blocked_passage_type_lookup
 ---------------------------
 
-Code-value lookup dataset for blocked passage type.
+**Description:** Codeset lookup dataset for blocked passage type.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -134,7 +151,10 @@ Code-value lookup dataset for blocked passage type.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -148,7 +168,9 @@ Code-value lookup dataset for blocked passage type.
 closing_period_lookup
 ---------------------
 
-Code-value lookup dataset for closing period.
+**Description:** Codeset lookup dataset for closing period.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -159,7 +181,10 @@ Code-value lookup dataset for closing period.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -174,10 +199,14 @@ Code-value lookup dataset for closing period.
 crossing
 --------
 
-All intersection points involving 4 or more roads, used for the identification of grade separated intersections
-(overpasses). This dataset exists for the maintenance of a routable road network whereby roads in the completely
-segmented :ref:`segment` dataset can be dissolved into single features if, in reality, they are contiguous and
-intersect at-grade.
+| **Description:** All intersection points involving 4 or more roads, used for the identification of grade separated
+  intersections (overpasses). This dataset exists for the maintenance of a routable road network whereby roads in the
+  completely segmented :ref:`segment` dataset can be dissolved into single features if, in reality, they are contiguous
+  and intersect at-grade.
+| **Coordinate reference system:** EPSG:3347
+| **Coordinate decimal precision:** 5
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -194,7 +223,9 @@ intersect at-grade.
 crossing_status_lookup
 ----------------------
 
-Code-value lookup dataset for crossing status.
+**Description:** Codeset lookup dataset for crossing status.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -205,7 +236,10 @@ Code-value lookup dataset for crossing status.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -216,7 +250,11 @@ Code-value lookup dataset for crossing status.
 ferry
 -----
 
-The average route of a ferryboat which transports vehicles.
+| **Description:** The average route of a ferryboat which transports vehicles.
+| **Coordinate reference system:** EPSG:3347
+| **Coordinate decimal precision:** 5
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -241,7 +279,9 @@ The average route of a ferryboat which transports vehicles.
 functional_road_class_lookup
 ----------------------------
 
-Code-value lookup dataset for functional road class.
+**Description:** Codeset lookup dataset for functional road class.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -252,7 +292,10 @@ Code-value lookup dataset for functional road class.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -288,7 +331,9 @@ Code-value lookup dataset for functional road class.
 house_number_structure_lookup
 -----------------------------
 
-Code-value lookup dataset for house number structure.
+**Description:** Codeset lookup dataset for house number structure.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -299,7 +344,10 @@ Code-value lookup dataset for house number structure.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -320,7 +368,9 @@ Code-value lookup dataset for house number structure.
 house_number_type_lookup
 ------------------------
 
-Code-value lookup dataset for house number type.
+**Description:** Codeset lookup dataset for house number type.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -331,17 +381,19 @@ Code-value lookup dataset for house number type.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
 
    -1, "Unknown", "Inconnu", "Value is unknown."
    0, "None", "Aucun", "Absence of a house."
-   1, "Actual Located", "Localisation réelle", "The house number is located at its \"real world\" position along the
-   road."
+   1, "Actual Located", "Localisation réelle", "The house number is located at its true position along the road."
    2, "Actual Unlocated", "Localisation présumée", "The house number is located at one end of the road which may or may
-   not be its \"real world\" position."
+   not be its true position."
    3, "Projected", "Projeté", "The house number is planned, figured or estimated for the future and is located at one
    end of the road."
    4, "Interpolated", "Interpolé", "The house number is calculated from two known house numbers which are located on
@@ -352,9 +404,13 @@ Code-value lookup dataset for house number type.
 junction
 --------
 
-A feature bounding one or more roads or ferries. A junction is defined at the intersection of three or more roads, at
-the junction of a road and a ferry, at the end of a dead end road, and at the junction of a road or ferry with a
-provincial, territorial, or national boundary.
+| **Description:** A feature bounding one or more roads or ferries. A junction is defined at the intersection of three
+  or more roads, at the junction of a road and a ferry, at the end of a dead end road, and at the junction of a road or
+  ferry with a provincial, territorial, or national boundary.
+| **Coordinate reference system:** EPSG:3347
+| **Coordinate decimal precision:** 5
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -363,7 +419,7 @@ provincial, territorial, or national boundary.
 
    "junction_id", False, True, ``gen_random_uuid()``, "Unique identifier of each record."
    "junction_type", False, False, "", "The classification of the junction."
-   "exit_number", False, False, "\"\"", "The identifying number of an exit on a controlled access thoroughfare."
+   "exit_number", False, False, "Unknown", "The identifying number of an exit on a controlled access thoroughfare."
    "province", False, False, "", "Province or Territory where the feature is located."
    "acquisition_technique", False, False, "", "The type of data source or technique used to populate (create or revise)
    the dataset."
@@ -378,7 +434,9 @@ provincial, territorial, or national boundary.
 junction_type_lookup
 --------------------
 
-Code-value lookup dataset for junction type.
+**Description:** Codeset lookup dataset for junction type.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -389,7 +447,10 @@ Code-value lookup dataset for junction type.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -404,7 +465,9 @@ Code-value lookup dataset for junction type.
 language_code_lookup
 --------------------
 
-Code-value lookup dataset for language code.
+**Description:** Codeset lookup dataset for language code.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -415,7 +478,10 @@ Code-value lookup dataset for language code.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -456,7 +522,9 @@ Code-value lookup dataset for language code.
 provider_lookup
 ---------------
 
-Code-value lookup dataset for provider.
+**Description:** Codeset lookup dataset for provider.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -467,7 +535,10 @@ Code-value lookup dataset for provider.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -481,7 +552,9 @@ Code-value lookup dataset for provider.
 province_lookup
 ---------------
 
-Code-value lookup dataset for province.
+**Description:** Codeset lookup dataset for province.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -492,7 +565,10 @@ Code-value lookup dataset for province.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -514,7 +590,9 @@ Code-value lookup dataset for province.
 reference_system_indicator_lookup
 ---------------------------------
 
-Code-value lookup dataset for reference system indicator.
+**Description:** Codeset lookup dataset for reference system indicator.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -525,7 +603,10 @@ Code-value lookup dataset for reference system indicator.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -541,7 +622,9 @@ Code-value lookup dataset for reference system indicator.
 road_surface_type_lookup
 ------------------------
 
-Code-value lookup dataset for road surface type.
+**Description:** Codeset lookup dataset for road surface type.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -552,7 +635,10 @@ Code-value lookup dataset for road surface type.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -573,7 +659,9 @@ Code-value lookup dataset for road surface type.
 route_name
 ----------
 
-A set of attributes representing a particular route name in the road network.
+**Description:** A set of attributes representing a particular route name in the road network.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -581,15 +669,18 @@ A set of attributes representing a particular route name in the road network.
    :align: left
 
    "route_name_id", False, True, ``gen_random_uuid()``, "Unique identifier of each record."
-   "route_name_en", False, False, "\"\"", "The official English version of the route name."
-   "route_name_fr", False, False, "\"\"", "The official French version of the route name."
+   "route_name_en", False, False, "Unknown", "The official English version of the route name."
+   "route_name_fr", False, False, "Unknown", "The official French version of the route name."
    "creation_date", False, False, ``now()``, "The date of data creation."
    "revision_date", False, False, ``now()``, "The date of data revision."
 
 route_name_link
 ---------------
 
-A dataset facilitating plural linkages of roads and ferries with a particular route name in the road network.
+**Description:** A dataset facilitating plural linkages of roads and ferries with a particular route name in the road
+network.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -603,7 +694,9 @@ A dataset facilitating plural linkages of roads and ferries with a particular ro
 route_number
 ------------
 
-A set of attributes representing a particular route number in the road network.
+**Description:** A set of attributes representing a particular route number in the road network.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -611,14 +704,17 @@ A set of attributes representing a particular route number in the road network.
    :align: left
 
    "route_number_id", False, True, ``gen_random_uuid()``, "Unique identifier of each record."
-   "route_number", False, False, "\"\"", "The official route number."
+   "route_number", False, False, "Unknown", "The official route number."
    "creation_date", False, False, ``now()``, "The date of data creation."
    "revision_date", False, False, ``now()``, "The date of data revision."
 
 route_number_link
 -----------------
 
-A dataset facilitating plural linkages of roads and ferries with a particular route number in the road network.
+**Description:** A dataset facilitating plural linkages of roads and ferries with a particular route number in the road
+network.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -634,7 +730,11 @@ A dataset facilitating plural linkages of roads and ferries with a particular ro
 segment
 -------
 
-A road or boundary feature with uniform characteristics.
+| **Description:** A road or boundary feature with uniform characteristics.
+| **Coordinate reference system:** EPSG:3347
+| **Coordinate decimal precision:** 5
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -649,10 +749,10 @@ A road or boundary feature with uniform characteristics.
    "routable_element_id", False, False, "", "Non-unique identifier used to identify contiguous road features which
    intersect at-grade via :ref:`crossing` points."
    "segment_type", False, False, "", "The classification of the feature."
-   "exit_number", False, False, "\"\"", "The identifying number of an exit on a controlled access thoroughfare."
+   "exit_number", False, False, "Unknown", "The identifying number of an exit on a controlled access thoroughfare."
    "speed", False, False, -1, "The maximum speed allowed on the road, expressed in kilometers per hour."
    "number_of_lanes", False, False, -1, "The number of lanes existing on the road."
-   "road_jurisdiction", False, False, "\"\"", "The agency with the responsibility / authority to ensure maintenance
+   "road_jurisdiction", False, False, "Unknown", "The agency with the responsibility / authority to ensure maintenance
    occurs but is not necessarily the one who undertakes the maintenance directly."
    "closing_period", False, False, "", "The period in which the road or ferry is not available to the public."
    "functional_road_class", False, False, "", "A classification based on the role that the road or ferry performs in
@@ -677,7 +777,9 @@ A road or boundary feature with uniform characteristics.
 segment_type_lookup
 -------------------
 
-Code-value lookup dataset for segment type.
+**Description:** Codeset lookup dataset for segment type.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -688,7 +790,10 @@ Code-value lookup dataset for segment type.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -700,7 +805,9 @@ Code-value lookup dataset for segment type.
 street_article_lookup
 ---------------------
 
-Code-value lookup dataset for street article.
+**Description:** Codeset lookup dataset for street article.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -711,7 +818,10 @@ Code-value lookup dataset for street article.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -741,7 +851,9 @@ Code-value lookup dataset for street article.
 street_direction_lookup
 -----------------------
 
-Code-value lookup dataset for street direction.
+**Description:** Codeset lookup dataset for street direction.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -752,7 +864,10 @@ Code-value lookup dataset for street direction.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -781,7 +896,9 @@ Code-value lookup dataset for street direction.
 street_name
 -----------
 
-A set of attributes representing a particular street name in the road network.
+**Description:** A set of attributes representing a particular street name in the road network.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -789,13 +906,14 @@ A set of attributes representing a particular street name in the road network.
    :align: left
 
    "street_name_id", False, True, ``gen_random_uuid()``, "Unique identifier of each record."
-   "street_name_concatenated", False, False, "\"\"", "The official concatenation of all components of the street name."
+   "street_name_concatenated", False, False, "Unknown", "The official concatenation of all components of the street
+   name."
    "street_direction_prefix", False, False, "", "A geographic direction that is part of the street name and precedes
    the street name body."
    "street_type_prefix", False, False, "", "The portion of the street name identifying the street type and precedes the
    street name body."
    "street_article", False, False, "", "An article that is part of the street name and precedes the street name body."
-   "street_name_body", False, False, "\"\"", "The portion of the street name that has the most identifying power,
+   "street_name_body", False, False, "Unknown", "The portion of the street name that has the most identifying power,
    excluding the street direction prefix and suffix, street type prefix and suffix, and street article."
    "street_type_suffix", False, False, "", "The portion of the street name identifying the street type and succeeds the
    street name body."
@@ -807,7 +925,9 @@ A set of attributes representing a particular street name in the road network.
 street_name_link
 ----------------
 
-A dataset facilitating plural linkages of roads with a particular street name in the road network.
+**Description:** A dataset facilitating plural linkages of roads with a particular street name in the road network.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -821,7 +941,10 @@ A dataset facilitating plural linkages of roads with a particular street name in
 street_name_translation
 -----------------------
 
-A set of attributes representing a recognized translation of a particular street name in the road network.
+**Description:** A set of attributes representing a recognized translation of a particular street name in the road
+network.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -830,7 +953,8 @@ A set of attributes representing a recognized translation of a particular street
 
    "street_name_translation_id", False, True, ``gen_random_uuid()``, "Unique identifier of each record."
    "street_name_id", False, False, "", "Unique identifier of the corresponding street name."
-   "street_name_concatenated", False, False, "\"\"", "The official concatenation of all components of the street name."
+   "street_name_concatenated", False, False, "Unknown", "The official concatenation of all components of the street
+   name."
    "language_code", False, False, "", "Three-letter code identifying the language of the street name translation in
    accordance with ISO 639-3."
    "creation_date", False, False, ``now()``, "The date of data creation."
@@ -839,7 +963,9 @@ A set of attributes representing a recognized translation of a particular street
 street_type_lookup
 ------------------
 
-Code-value lookup dataset for street type.
+**Description:** Codeset lookup dataset for street type.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -850,7 +976,10 @@ Code-value lookup dataset for street type.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -1140,7 +1269,9 @@ Code-value lookup dataset for street type.
 structure
 ---------
 
-A set of attributes representing a particular structure in the road network.
+**Description:** A set of attributes representing a particular structure in the road network.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -1149,15 +1280,17 @@ A set of attributes representing a particular structure in the road network.
 
    "structure_id", False, True, ``gen_random_uuid()``, "Unique identifier of each record."
    "structure_type", False, False, "", "The classification of the structure."
-   "structure_name_en", False, False, "\"\"", "The official English version of the structure name."
-   "structure_name_fr", False, False, "\"\"", "The official French version of the structure name."
+   "structure_name_en", False, False, "Unknown", "The official English version of the structure name."
+   "structure_name_fr", False, False, "Unknown", "The official French version of the structure name."
    "creation_date", False, False, ``now()``, "The date of data creation."
    "revision_date", False, False, ``now()``, "The date of data revision."
 
 structure_type_lookup
 ---------------------
 
-Code-value lookup dataset for structure type.
+**Description:** Codeset lookup dataset for structure type.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -1168,7 +1301,10 @@ Code-value lookup dataset for structure type.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -1193,7 +1329,11 @@ Code-value lookup dataset for structure type.
 toll_point
 ----------
 
-Place where a right-of-way is charged to gain access to a road.
+| **Description:** Place where a right-of-way is charged to gain access to a road.
+| **Coordinate reference system:** EPSG:3347
+| **Coordinate decimal precision:** 5
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -1216,7 +1356,9 @@ Place where a right-of-way is charged to gain access to a road.
 toll_point_type_lookup
 ----------------------
 
-Code-value lookup dataset for toll point type.
+**Description:** Codeset lookup dataset for toll point type.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -1227,7 +1369,10 @@ Code-value lookup dataset for toll point type.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
@@ -1243,7 +1388,9 @@ Code-value lookup dataset for toll point type.
 traffic_direction_lookup
 ------------------------
 
-Code-value lookup dataset for traffic direction.
+**Description:** Codeset lookup dataset for traffic direction.
+
+*Table: Attribute description and constraints.*
 
 .. csv-table::
    :header: "Attribute", "Nullable", "Unique", "Default", "Description"
@@ -1254,7 +1401,10 @@ Code-value lookup dataset for traffic direction.
    "value_en", False, True, "", "English version of the descriptive value."
    "value_fr", False, True, "", "French version of the descriptive value."
 
-.. csv-table:: Domains
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
    :header: "code", "value_en", "value_fr", "Description"
    :widths: auto
    :align: left
