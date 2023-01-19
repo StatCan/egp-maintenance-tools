@@ -6,9 +6,10 @@ import pandas as pd
 import sys
 from copy import deepcopy
 from itertools import tee
+from math import atan2, cos, dist, radians, sin
 from operator import attrgetter, itemgetter
 from pathlib import Path
-from shapely.geometry import MultiPoint
+from shapely.geometry import LineString, MultiPoint
 from shapely.ops import polygonize, unary_union
 from tabulate import tabulate
 from typing import List, Tuple
@@ -43,6 +44,8 @@ class SegmentValidation:
         self.id = "segment_id"
         self.dataset_meshblock = "basic_block"
         self.id_meshblock = "bb_uid"
+        self.id_meshblock_left = "bb_uid_l"
+        self.id_meshblock_right = "bb_uid_r"
 
         logger.info(f"Initializing dataset validation for: {self.dataset}.")
 
@@ -76,6 +79,7 @@ class SegmentValidation:
         # Load datasets.
         dfs = helpers.load_db_datasets(self.engine, subset=[self.dataset, self.dataset_meshblock], schema=self.schema,
                                        geom_col=self.geom_col)
+
         self.df = dfs[self.dataset].copy(deep=True)
         self.df.index = self.df[self.id]
 
@@ -91,6 +95,58 @@ class SegmentValidation:
         self._validate()
         self._update_meshblock()
         self._write_errors()
+
+    def _configure_meshblock_parity(self, pts: Tuple[tuple, ...], indexes: Tuple[int, ...]) -> Tuple[int, int]:
+        """
+        Returns the indexes of the meshblock polygons which are formed by the left and right sides of a LineString. The
+        process creates a LineString from the first point to halfway towards the second point and then, alternating
+        between the left and right sides, creates rotated LineStrings at decreasing angles until only 1 meshblock
+        polygon covers the LineString. This method accounts for complex meshblock polygons which may be formed by one
+        side of the LineString but wrap around to occupy space on the other side as well.
+
+        \b
+        :param Tuple[tuple, ...] pts: Tuple coordinate sequence extracted from a LineString.
+        :param Tuple[int, ...] indexes: Positional indexes of meshblock polygons which cover the LineString.
+        :return Tuple[int, int]: Positional index of left and right side meshblock polygons, in that order.
+        """
+
+        # Calculate angle (theta) and half distance of current vector.
+        pt1, pt2 = itemgetter(0, 1)(pts)
+        distance = dist(pt1, pt2) / 2
+        theta = atan2((itemgetter(1)(pt2) - itemgetter(1)(pt1)), (itemgetter(0)(pt2) - itemgetter(0)(pt1)))
+        if theta < 0:
+            theta += radians(360)
+
+        # Compile meshblock polygons associated with each index. Add null key for 1-sided arcs.
+        polys_lookup = {idx: itemgetter(idx)(self.meshblock_idx_geom_lookup) for idx in indexes}
+
+        # Iteratively rotate vector by decreasing angles starting from 1 degrees.
+        # Alternate between left (positive angle) and right (negative angle) sides to account for 1-sided arcs.
+        rotation = radians(1)
+        covers = [False, False]
+
+        while sum(covers) != 1:
+
+            # Rotate geometry.
+            g_rotated = LineString([pt1, (itemgetter(0)(pt1) + (distance * cos(theta + rotation)),
+                                          itemgetter(1)(pt1) + (distance * sin(theta + rotation)))])
+
+            # Test for covering polygons.
+            covers = [poly.covers(g_rotated) for idx, poly in polys_lookup.items()]
+
+            # Change sign of rotation angle for next iteration.
+            rotation = (rotation / 2) * -1
+
+        # Assign polygon indexes to left and right sides based on rotation sign.
+        # Assign index of -1 for side of 1-sided arcs without a meshblock polygon.
+        # Note: Since rotation sign is changed at the end of each iteration, the parity and signs are opposite (i.e.
+        #       positive sign = right, negative sign = left).
+        idx = itemgetter(covers.index(True))(list(polys_lookup))
+        idx_opposite = -1 if (len(indexes) == 1) else itemgetter(covers.index(False))(list(polys_lookup))
+        if rotation < 0:
+            return idx, idx_opposite
+        else:
+            return idx_opposite, idx
 
     def _gen_reusable_variables(self) -> None:
         """Generates reusable geometry attributes."""
@@ -109,10 +165,16 @@ class SegmentValidation:
 
         # Generate meshblock attributes as new columns.
         self.df["meshblock_covered_by"] = self.df[self.geom_col].map(
-            lambda g: set(self.meshblock.sindex.query(g, predicate="covered_by")))
+            lambda g: tuple(self.meshblock.sindex.query(g, predicate="covered_by")))
         meshblock_boundaries = self.meshblock.boundary
         self.df["meshblock_boundary_covered_by"] = self.df[self.geom_col].map(
-            lambda g: set(meshblock_boundaries.sindex.query(g, predicate="covered_by")))
+            lambda g: tuple(meshblock_boundaries.sindex.query(g, predicate="covered_by")))
+
+        # Generate meshblock index, identifier, and geometry lookups.
+        self.meshblock_idx_id_lookup = dict(zip(range(len(self.meshblock)), self.meshblock[self.id_meshblock]))
+        self.meshblock_idx_geom_lookup = dict(zip(range(len(self.meshblock)), self.meshblock[self.geom_col]))
+        self.meshblock_geom_id_lookup = dict(zip(self.meshblock[self.geom_col].to_wkt(),
+                                                 self.meshblock[self.id_meshblock]))
 
     @staticmethod
     def _ordered_pairs(coords: Tuple[tuple, ...]) -> List[Tuple[tuple, tuple]]:
@@ -137,12 +199,37 @@ class SegmentValidation:
 
         logger.info(f"Updating meshblock dataset: {self.dataset_meshblock}.")
 
-        # TODO - for self.meshblock:
-        #  bb_uid: restore existing bb_uids where unchanged and gen new ones for mods.
-        #  cb_uid: restore existing cb_uids where unchanged by comparing cb_uid-dissolved new and existing meshblocks, assign nil_uuid for mods.
-        # TODO - for self.df, assign bb_uid_l and bb_uid_r based on self.meshblock.
+        # Meshblock - Update / restore unique identifiers.
+        # TODO: wkt lookup for geometries (wkt-bb_uid dict), fillna with new uuid value (changed geometries).
 
-        # ...
+        # Meshblock - Update / restore higher-level identifiers.
+        # TODO: wkt lookup for geometries (wkt-cb_uid dict), fillna with nil uuid.
+        # TODO: dissolve meshblock on cb_uids, excluding nil uuids.
+        # TODO: wkt lookup for dissolved geometries (wkt-cb_uid), fillna with nil uuid.
+
+        # Arcs - Populate left and right-side meshblock identifiers.
+
+        # Classify arcs according to the amount of meshblock polygons they form (covered_by boundary results).
+        flag_contained = self.df["meshblock_boundary_covered_by"].map(len) == 0
+        flag_not_contained = self.df["meshblock_boundary_covered_by"].map(len) > 0
+
+        # Arc scenario: contained - Populate meshblock identifiers based on single result of non-boundary covered_by.
+        self.df.loc[flag_contained, self.id_meshblock_left] = self.df.loc[flag_contained, "meshblock_covered_by"]\
+            .map(lambda idxs: self.meshblock_idx_id_lookup[itemgetter(0)(idxs)])
+        self.df.loc[flag_contained, self.id_meshblock_right] = self.df.loc[flag_contained, self.id_meshblock_left]
+
+        # Arc scenario: not contained - Pass points tuple and meshblock covered_by indexes to configuration function.
+        df_not_contained = self.df.loc[flag_not_contained].copy(deep=True)
+        df_not_contained["_args"] = df_not_contained[["pts_tuple", "meshblock_covered_by"]].apply(
+            lambda row: (row[0], row[1]), axis=1)
+        df_not_contained["_results"] = df_not_contained["_args"].map(
+            lambda args: self._configure_meshblock_parity(*args))
+
+        # Arc scenario: not contained - Assign parity results (indexes) as meshblock identifiers.
+        self.df.loc[df_not_contained.index, self.id_meshblock_left] = df_not_contained["_results"].map(
+            lambda idx: self.meshblock_idx_id_lookup[itemgetter(0)(idx)])
+        self.df.loc[df_not_contained.index, self.id_meshblock_right] = df_not_contained["_results"].map(
+            lambda idx: self.meshblock_idx_id_lookup[itemgetter(0)(idx)])
 
     def _validate(self) -> None:
         """Executes validations."""
