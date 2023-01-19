@@ -4,6 +4,7 @@ import logging
 import math
 import pandas as pd
 import sys
+import uuid
 from copy import deepcopy
 from itertools import tee
 from math import atan2, cos, dist, radians, sin
@@ -46,6 +47,7 @@ class SegmentValidation:
         self.id_meshblock = "bb_uid"
         self.id_meshblock_left = "bb_uid_l"
         self.id_meshblock_right = "bb_uid_r"
+        self.id_meshblock_parent = "cb_uid"
 
         logger.info(f"Initializing dataset validation for: {self.dataset}.")
 
@@ -80,9 +82,11 @@ class SegmentValidation:
         dfs = helpers.load_db_datasets(self.engine, subset=[self.dataset, self.dataset_meshblock], schema=self.schema,
                                        geom_col=self.geom_col)
 
+        # Load dataset - Arcs.
         self.df = dfs[self.dataset].copy(deep=True)
         self.df.index = self.df[self.id]
 
+        # Load dataset - Meshblock.
         self.meshblock_existing = dfs[self.dataset_meshblock].copy(deep=True)
         self.meshblock_existing.index = self.meshblock_existing[self.id_meshblock]
 
@@ -93,8 +97,9 @@ class SegmentValidation:
         """Executes the class."""
 
         self._validate()
-        self._update_meshblock()
         self._write_errors()
+        self._update_meshblock()
+        # TODO: export updated meshblock layer and segment meshblock identifiers.
 
     def _configure_meshblock_parity(self, pts: Tuple[tuple, ...], indexes: Tuple[int, ...]) -> Tuple[int, int]:
         """
@@ -170,11 +175,19 @@ class SegmentValidation:
         self.df["meshblock_boundary_covered_by"] = self.df[self.geom_col].map(
             lambda g: tuple(meshblock_boundaries.sindex.query(g, predicate="covered_by")))
 
-        # Generate meshblock index, identifier, and geometry lookups.
-        self.meshblock_idx_id_lookup = dict(zip(range(len(self.meshblock)), self.meshblock[self.id_meshblock]))
-        self.meshblock_idx_geom_lookup = dict(zip(range(len(self.meshblock)), self.meshblock[self.geom_col]))
-        self.meshblock_geom_id_lookup = dict(zip(self.meshblock[self.geom_col].to_wkt(),
-                                                 self.meshblock[self.id_meshblock]))
+        # Generate placeholder variable for to-be-generated meshblock index and geometry lookup.
+        self.meshblock_idx_geom_lookup = dict()
+
+        # Generate existing meshblock identifier and geometry lookups.
+        self.meshblock_existing_id_parent_id_lookup = dict(zip(self.meshblock_existing[self.id_meshblock],
+                                                               self.meshblock_existing[self.id_meshblock_parent]))
+        self.meshblock_existing_geom_id_lookup = dict(zip(self.meshblock_existing[self.geom_col].to_wkt(),
+                                                          self.meshblock_existing[self.id_meshblock]))
+
+        # Generate existing meshblock parent geometry and identifier lookup.
+        meshblock_existing_dissolve = self.meshblock_existing.dissolve(by=self.id_meshblock_parent, as_index=False)
+        self.meshblock_existing_parent_geom_id_lookup = dict(zip(meshblock_existing_dissolve[self.geom_col].to_wkt(),
+                                                                 meshblock_existing_dissolve[self.id_meshblock_parent]))
 
     @staticmethod
     def _ordered_pairs(coords: Tuple[tuple, ...]) -> List[Tuple[tuple, tuple]]:
@@ -199,13 +212,24 @@ class SegmentValidation:
 
         logger.info(f"Updating meshblock dataset: {self.dataset_meshblock}.")
 
-        # Meshblock - Update / restore unique identifiers.
-        # TODO: wkt lookup for geometries (wkt-bb_uid dict), fillna with new uuid value (changed geometries).
+        # Meshblock - Restore unique identifiers. For non-matches, generate a new identifier.
+        self.meshblock[self.id_meshblock] = self.meshblock[self.geom_col].to_wkt()\
+            .map(self.meshblock_existing_geom_id_lookup)\
+            .fillna(dict(zip(self.meshblock.index, [uuid.uuid4() for _ in range(len(self.meshblock))])))
 
-        # Meshblock - Update / restore higher-level identifiers.
-        # TODO: wkt lookup for geometries (wkt-cb_uid dict), fillna with nil uuid.
-        # TODO: dissolve meshblock on cb_uids, excluding nil uuids.
-        # TODO: wkt lookup for dissolved geometries (wkt-cb_uid), fillna with nil uuid.
+        # Meshblock - Restore parent unique identifiers. Populate non-matches with the Nil UUID.
+        self.meshblock[self.id_meshblock_parent] = self.meshblock[self.id_meshblock]\
+            .map(self.meshblock_existing_id_parent_id_lookup).fillna(uuid.UUID(int=0))
+
+        # Meshblock - Assign the Nil UUID to all parent unique identifiers where any constituent meshblock polygons
+        # failed to match.
+        meshblock_dissolve = self.meshblock.dissolve(by=self.id_meshblock_parent, as_index=False)
+        meshblock_invalid_parent_ids = set(meshblock_dissolve.loc[
+            meshblock_dissolve[self.geom_col].to_wkt().map(self.meshblock_existing_parent_geom_id_lookup).isna(),
+            self.id_meshblock_parent
+        ])
+        self.meshblock.loc[self.meshblock[self.id_meshblock_parent].isin(meshblock_invalid_parent_ids),
+                           self.id_meshblock_parent] = uuid.UUID(int=0)
 
         # Arcs - Populate left and right-side meshblock identifiers.
 
@@ -213,9 +237,13 @@ class SegmentValidation:
         flag_contained = self.df["meshblock_boundary_covered_by"].map(len) == 0
         flag_not_contained = self.df["meshblock_boundary_covered_by"].map(len) > 0
 
+        # Generate meshblock index, identifier, and geometry lookups.
+        meshblock_idx_id_lookup = dict(zip(range(len(self.meshblock)), self.meshblock[self.id_meshblock]))
+        self.meshblock_idx_geom_lookup = dict(zip(range(len(self.meshblock)), self.meshblock[self.geom_col]))
+
         # Arc scenario: contained - Populate meshblock identifiers based on single result of non-boundary covered_by.
         self.df.loc[flag_contained, self.id_meshblock_left] = self.df.loc[flag_contained, "meshblock_covered_by"]\
-            .map(lambda idxs: self.meshblock_idx_id_lookup[itemgetter(0)(idxs)])
+            .map(lambda idxs: meshblock_idx_id_lookup[itemgetter(0)(idxs)])
         self.df.loc[flag_contained, self.id_meshblock_right] = self.df.loc[flag_contained, self.id_meshblock_left]
 
         # Arc scenario: not contained - Pass points tuple and meshblock covered_by indexes to configuration function.
@@ -227,9 +255,19 @@ class SegmentValidation:
 
         # Arc scenario: not contained - Assign parity results (indexes) as meshblock identifiers.
         self.df.loc[df_not_contained.index, self.id_meshblock_left] = df_not_contained["_results"].map(
-            lambda idx: self.meshblock_idx_id_lookup[itemgetter(0)(idx)])
+            lambda idx: meshblock_idx_id_lookup[itemgetter(0)(idx)])
         self.df.loc[df_not_contained.index, self.id_meshblock_right] = df_not_contained["_results"].map(
-            lambda idx: self.meshblock_idx_id_lookup[itemgetter(0)(idx)])
+            lambda idx: meshblock_idx_id_lookup[itemgetter(-1)(idx)])
+
+        # Log meshblock results.
+        summary = tabulate([list(zip(
+            ("Unchanged", "Added", "Removed"),
+            (len(set(self.meshblock[self.id_meshblock]) & set(self.meshblock_existing[self.id_meshblock])),
+             len(set(self.meshblock[self.id_meshblock]) - set(self.meshblock_existing[self.id_meshblock])),
+             len(set(self.meshblock_existing[self.id_meshblock]) - set(self.meshblock[self.id_meshblock]))
+             )))], headers=["Status", "Count"], tablefmt="rst", colalign=("left", "right"))
+
+        logger.info(f"Meshblock ({self.dataset_meshblock}) update results:\n" + summary)
 
     def _validate(self) -> None:
         """Executes validations."""
@@ -251,7 +289,7 @@ class SegmentValidation:
                 sys.exit(1)
 
     def _write_errors(self) -> None:
-        """Write validation error flags to DataFrame(s) as integer columns."""
+        """Write validation error flags to dataset as integer columns."""
 
         logger.info(f"Writing error flags to dataset: {self.schema}.{self.dataset}.")
 
