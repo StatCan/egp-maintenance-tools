@@ -95,7 +95,7 @@ def execute_db_statements(engine: Engine, statements: Union[str, List[str, ...]]
 
             # Iterate statements.
             for statement in statements:
-                _ = con.execute(text(statement))
+                _ = con.execute(text(statement.replace(",)", ")")))
 
     except exc.SQLAlchemyError as e:
         logger.exception(f"Unable to execute statement.")

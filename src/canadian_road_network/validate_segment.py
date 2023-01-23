@@ -99,7 +99,7 @@ class SegmentValidation:
         self._validate()
         self._write_errors()
         self._update_meshblock()
-        # TODO: export updated meshblock layer and segment meshblock identifiers.
+        self._write_meshblock_updates()
 
     def _configure_meshblock_parity(self, pts: Tuple[tuple, ...], indexes: Tuple[int, ...]) -> Tuple[int, int]:
         """
@@ -206,7 +206,7 @@ class SegmentValidation:
 
     def _update_meshblock(self) -> None:
         f"""
-        Updates meshblock dataset ({self.dataset_meshblock}) based on dataset {self.dataset} and their attribute 
+        Updates meshblock dataset based on changes to the underlying arc dataset and repairs their attribute 
         linkages.
         """
 
@@ -239,6 +239,7 @@ class SegmentValidation:
 
         # Generate meshblock index, identifier, and geometry lookups.
         meshblock_idx_id_lookup = dict(zip(range(len(self.meshblock)), self.meshblock[self.id_meshblock]))
+        meshblock_idx_id_lookup[-1] = uuid.UUID(int=0)
         self.meshblock_idx_geom_lookup = dict(zip(range(len(self.meshblock)), self.meshblock[self.geom_col]))
 
         # Arc scenario: contained - Populate meshblock identifiers based on single result of non-boundary covered_by.
@@ -258,16 +259,6 @@ class SegmentValidation:
             lambda idx: meshblock_idx_id_lookup[itemgetter(0)(idx)])
         self.df.loc[df_not_contained.index, self.id_meshblock_right] = df_not_contained["_results"].map(
             lambda idx: meshblock_idx_id_lookup[itemgetter(-1)(idx)])
-
-        # Log meshblock results.
-        summary = tabulate([list(zip(
-            ("Unchanged", "Added", "Removed"),
-            (len(set(self.meshblock[self.id_meshblock]) & set(self.meshblock_existing[self.id_meshblock])),
-             len(set(self.meshblock[self.id_meshblock]) - set(self.meshblock_existing[self.id_meshblock])),
-             len(set(self.meshblock_existing[self.id_meshblock]) - set(self.meshblock[self.id_meshblock]))
-             )))], headers=["Status", "Count"], tablefmt="rst", colalign=("left", "right"))
-
-        logger.info(f"Meshblock ({self.dataset_meshblock}) update results:\n" + summary)
 
     def _validate(self) -> None:
         """Executes validations."""
@@ -306,7 +297,7 @@ class SegmentValidation:
                 statements.append(f"""
                 ALTER TABLE {self.schema}.{self.dataset} ADD COLUMN v{code} INTEGER DEFAULT 0;
                 UPDATE {self.schema}.{self.dataset} SET v{code} = 1 WHERE {self.id} IN {*vals,};
-                """.replace(",)", ")"))
+                """)
 
         # Execute statements.
         helpers.execute_db_statements(engine=self.engine, statements=statements)
@@ -317,6 +308,90 @@ class SegmentValidation:
             headers=["Validation", "Invalid Count"], tablefmt="rst", colalign=("left", "right"))
 
         logger.info("Validation results:\n" + summary)
+
+    def _write_meshblock_updates(self) -> None:
+        f"""Write meshblock updates to datasets {self.dataset_meshblock} and {self.dataset}."""
+
+        logger.info(f"Writing meshblock updates to dataset: {self.schema}.{self.dataset_meshblock} and underlying "
+                    f"dataset: {self.schema}.{self.dataset}.")
+
+        statements = dict()
+
+        # Compile meshblock updates.
+        meshblock_added = set(self.meshblock[self.id_meshblock]) - set(self.meshblock_existing[self.id_meshblock])
+        meshblock_removed = set(self.meshblock_existing[self.id_meshblock]) - set(self.meshblock[self.id_meshblock])
+
+        # Create SQL statements for added meshblock records.
+        if len(meshblock_added):
+
+            values = self.meshblock.loc[self.meshblock[self.id_meshblock].isin(meshblock_added),
+                                        [self.id_meshblock, self.id_meshblock_parent, self.geom_col]].apply(
+                lambda row: f"({itemgetter(0)(row)}, {itemgetter(1)(row)}, {itemgetter(2)(row).wkt})", axis=1)
+
+            statements["meshblock_added"] = [f"""
+            INSERT INTO {self.schema}.{self.dataset_meshblock} ({self.id_meshblock}, {self.id_meshblock_parent}, 
+            {self.geom_col}) VALUES {', '.join(values)};
+            """]
+
+        # Create SQL statements for removed meshblock records.
+        if len(meshblock_removed):
+
+            statements["meshblock_removed"] = [f"""
+            DELETE FROM {self.schema}.{self.dataset_meshblock} WHERE {self.id_meshblock} IN {*meshblock_removed,};
+            """]
+
+        # Compile arc-meshblock identifier updates.
+        meshblock_left_lookup = dict(zip(self.df[self.id], self.df[self.id_meshblock_left]))
+        meshblock_right_lookup = dict(zip(self.df[self.id], self.df[self.id_meshblock_right]))
+        df_updated = self.df.loc[
+            (self.df[self.id_meshblock_left] != self.df[self.id].map(meshblock_left_lookup)) |
+            (self.df[self.id_meshblock_right] != self.df[self.id].map(meshblock_right_lookup))].copy(deep=True)
+
+        # Create SQL statements for arc-meshblock identifier updates.
+        if len(df_updated):
+
+            values = df_updated[[self.id, self.id_meshblock_left, self.id_meshblock_right]].apply(
+                lambda row: f"{itemgetter(0, 1, 2)(row)}", axis=1)
+
+            statements["arcs_modified"] = [
+                f"""
+                CREATE TABLE {self.schema}._ ({self.id} uuid, {self.id_meshblock_left} uuid, {self.id_meshblock_right} 
+                uuid);
+                """,
+                f"""
+                INSERT INTO {self.schema}._ ({self.id}, {self.id_meshblock_left}, {self.id_meshblock_right}) VALUES 
+                {', '.join(values)};
+                """,
+                f"""
+                UPDATE {self.schema}.{self.dataset} AS dst SET {self.id_meshblock_left} = src.{self.id_meshblock_left} 
+                FROM {self.schema}._ AS src WHERE dst.{self.id} = src.{self.id};
+                """,
+                f"""
+                UPDATE {self.schema}.{self.dataset} AS dst SET {self.id_meshblock_right} = src.{self.id_meshblock_right} 
+                FROM {self.schema}._ AS src WHERE dst.{self.id} = src.{self.id};
+                """,
+                f"""
+                DROP TABLE {self.schema}._;
+                """
+            ]
+
+        # Execute statements.
+        for update_type in [k for k in ("meshblock_added", "arcs_modified", "meshblock_removed") if k in statements]:
+            helpers.execute_db_statements(engine=self.engine, statements=statements[update_type])
+
+        # Log meshblock updates.
+        summary = tabulate([["Added", len(meshblock_added)],
+                            ["Removed", len(meshblock_removed)],
+                            ["Unchanged", len(self.meshblock) - len(meshblock_added) - len(meshblock_removed)]],
+                           headers=["Status", "Count"], tablefmt="rst", colalign=("left", "right"))
+        logger.info(f"Meshblock ({self.dataset_meshblock}) updates:\n" + summary)
+
+        # Log arc-meshblock identifier updates.
+        summary = tabulate([["Modified", len(df_updated)],
+                            ["Unchanged", len(self.df) - len(df_updated)]],
+                           headers=["Status", "Count"], tablefmt="rst", colalign=("left", "right"))
+        logger.info(f"Arc-meshblock identifier ({self.dataset}.{self.id_meshblock_left}/{self.id_meshblock_right}) "
+                    f"updates:\n" + summary)
 
     def connectivity_node_intersection(self) -> set:
         """
