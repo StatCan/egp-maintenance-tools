@@ -8,7 +8,7 @@ import yaml
 from pathlib import Path
 from sqlalchemy import create_engine, exc, inspect, text
 from sqlalchemy.engine.base import Engine
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, Sequence, Tuple, Union
 
 
 # Set logger.
@@ -60,33 +60,36 @@ def create_db_engine(url: str) -> Engine:
 
     logger.info(f"Creating database engine: {url}.")
 
-    # Create database engine.
     try:
 
+        # Create database engine.
         engine = create_engine(url)
 
+        # Test database connection.
+        _ = inspect(engine)
+
     except exc.SQLAlchemyError as e:
-        logger.exception(f"Unable to create database engine: {url}.")
-        logger.exception(e)
+        logger.exception(f"Unable to create database engine. Exception details:\n{type(e).__name__}: {e}",
+                         exc_info=False)
         sys.exit(1)
 
     return engine
 
 
-def execute_db_statements(engine: Engine, statements: Union[str, List[str, ...]]) -> None:
+def execute_db_statements(engine: Engine, statements: Union[str, Tuple[str, ...]]) -> None:
     """
     Executes one or more SQL statements as a database transaction.
 
     \b
     :param sqlalchemy.engine.base.Engine engine: database engine.
-    :param Union[str, List[str, ...]] statements: SQl statement or list of statements to be executed.
+    :param Union[str, Tuple[str, ...]] statements: SQl statement or sequence of statements to be executed.
     """
 
     logger.info("Executing SQL statements.")
 
     # Resolve statement inputs.
     if isinstance(statements, str):
-        statements = [statements]
+        statements = (statements,)
 
     # Run and commit transaction.
     try:
@@ -98,19 +101,19 @@ def execute_db_statements(engine: Engine, statements: Union[str, List[str, ...]]
                 _ = con.execute(text(statement.replace(",)", ")")))
 
     except exc.SQLAlchemyError as e:
-        logger.exception(f"Unable to execute statement.")
-        logger.exception(e)
+        logger.exception(f"Unable to execute SQL statement. Exception details:\n{type(e).__name__}: {e}",
+                         exc_info=False)
         sys.exit(1)
 
 
-def load_db_datasets(engine: Engine, subset: List[str] = None, schema: str = "public", geom_col: str = "geom") -> \
+def load_db_datasets(engine: Engine, subset: Sequence[str] = None, schema: str = "public", geom_col: str = "geom") -> \
         Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]]:
     """
     Loads all or a specified subset of datasets from a given database.
 
     \b
     :param sqlalchemy.engine.base.Engine engine: database engine.
-    :param List[str] subset: list of dataset names, default=None.
+    :param Sequence[str] subset: sequence of dataset names, default=None.
     :param str schema: database schema, default=public.
     :param str geom_col: geometry column for spatial datasets, default=geom.
     :return Dict[str, Union[gpd.GeoDataFrame, pd.DataFrame]]: dictionary of dataset names and (Geo)DataFrames.
@@ -151,8 +154,9 @@ def load_db_datasets(engine: Engine, subset: List[str] = None, schema: str = "pu
 
             logger.info(f"Successfully loaded {len(dfs[dataset])} records from {schema}.{dataset}.")
 
-        except (exc.SQLAlchemyError, TypeError, ValueError):
-            logger.exception(f"Failed to load dataset: {schema}.{dataset}.")
+        except (exc.SQLAlchemyError, TypeError, ValueError) as e:
+            logger.exception(f"Failed to load dataset: {schema}.{dataset}. Exception details:\n{type(e).__name__}: {e}",
+                             exc_info=False)
             sys.exit(1)
 
     return dfs
@@ -175,5 +179,7 @@ def load_yaml(path: Union[Path, str]) -> Any:
 
             return yaml.safe_load(f)
 
-        except (ValueError, yaml.YAMLError):
-            logger.exception(f"Unable to load yaml: {path}.")
+        except (ValueError, yaml.YAMLError) as e:
+            logger.exception(f"Unable to load yaml: {path}. Exception details:\n{type(e).__name__}: {e}",
+                             exc_info=False)
+            sys.exit(1)

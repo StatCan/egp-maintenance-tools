@@ -1,7 +1,5 @@
-# TODO: data model validations may not be needed at all since all domains and constraints, including defaults can be managed by postgresql.
-#       Perhaps adding the contents of domains.yaml and constraints.yaml to the data model draw.io file (on separate tabs) is sufficient.
-#       Only dataset specific tools are required (e.g. validate_segment.py, validate_crossing.py, validate_basic_block.py).
-#       Modify this script to execute all individual validation scripts within data model directory.
+# TODO: Modify this script to compile and execute all individual validation scripts within the directory of the given data model.
+#       The only question mark is how to handle validation scripts with different inputs.
 
 import click
 import logging
@@ -48,13 +46,7 @@ class DataModelValidation:
 
         # Define validations.
         self.validations = {
-            110: self.existence_exists,
-            210: self.domains_domain,
-            310: self.constraints_nullable,
-            320: self.constraints_unique,
-            330: self.constraints_dtype,
-            340: self.constraints_default,
-            350: self.constraints_foreign_keys
+            #TODO - may not be needed.
         }
 
     def __call__(self) -> None:
@@ -68,95 +60,6 @@ class DataModelValidation:
         ...
 
     def _write_errors(self) -> None:
-        ...
-
-    def constraints_default(self) -> set:
-        """
-        Validation: Data type.
-
-        \b
-        :return set: set containing unique identifiers of erroneous records.
-        """
-
-        errors = set()
-
-        # Placeholder validation. Constraint managed by PostgreSQL.
-
-        return errors
-
-    def constraints_dtype(self) -> set:
-        """
-        Validation: Data type.
-
-        \b
-        :return set: set containing unique identifiers of erroneous records.
-        """
-
-        errors = set()
-
-        # Placeholder validation. Constraint managed by PostgreSQL.
-
-        return errors
-
-    def constraints_foreign_keys(self) -> set:
-        """
-        Validation: Data type.
-
-        \b
-        :return set: set containing unique identifiers of erroneous records.
-        """
-
-        errors = set()
-
-        # Placeholder validation. Constraint managed by PostgreSQL.
-
-        return errors
-
-    def constraints_nullable(self) -> set:
-        """
-        Validation: Data type.
-
-        \b
-        :return set: set containing unique identifiers of erroneous records.
-        """
-
-        errors = set()
-
-        # Placeholder validation. Constraint managed by PostgreSQL.
-
-        return errors
-
-    def constraints_unique(self) -> set:
-        """
-        Validation: Data type.
-
-        \b
-        :return set: set containing unique identifiers of erroneous records.
-        """
-
-        errors = set()
-
-        # Placeholder validation. Constraint managed by PostgreSQL.
-
-        return errors
-
-    def domains_domain(self) -> set:
-        """
-        Validation: Data type.
-
-        \b
-        :return set: set containing unique identifiers of erroneous records.
-        """
-
-        errors = set()
-
-        # Placeholder validation. Constraint managed by PostgreSQL.
-
-        return errors
-
-    def existence_exists(self) -> set:
-
-        # Placeholder validation. Builtin to each script and may not be needed.
         ...
 
 
@@ -184,8 +87,9 @@ def main(model: str, url: str, schema: str = "public", geom_col: str = "geom") -
             validation = DataModelValidation(model, url, schema, geom_col)
             validation()
 
-    except KeyboardInterrupt:
-        logger.exception("KeyboardInterrupt: Exiting program.")
+    except Exception as e:
+        logger.exception(f"Unhandled exception encountered. Exception details:\n{type(e).__name__}: {e}",
+                         exc_info=False)
         sys.exit(1)
 
 

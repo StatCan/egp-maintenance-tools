@@ -16,7 +16,7 @@ from tabulate import tabulate
 from typing import List, Tuple
 
 filepath = Path(__file__).resolve()
-sys.path.insert(1, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(1, str(Path(__file__).resolve().parents[1]))
 import helpers
 
 # Set logger.
@@ -28,15 +28,15 @@ handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s: %(message)s
 logger.addHandler(handler)
 
 
-class SegmentValidation:
-    """Validates dataset: segment."""
+class DatasetValidation:
+    """Validates a dataset."""
 
     def __init__(self, url: str, schema: str = "public", geom_col: str = "geom") -> None:
         """
         Class initialization.
 
         \b
-        :param str url: database URL.
+        :param str url: database URL. General format: postgresql://[user[:password]@][netloc][:port][/dbname]
         :param str schema: database schema, default=public.
         :param str geom_col: geometry column for spatial datasets, default=geom.
         """
@@ -98,8 +98,11 @@ class SegmentValidation:
 
         self._validate()
         self._write_errors()
-        self._update_meshblock()
-        self._write_meshblock_updates()
+
+        # Update meshblock only if no errors remain on the primary arc dataset.
+        if not any(map(len, self.errors.values())):
+            self._update_meshblock()
+            self._write_meshblock_updates()
 
     def _configure_meshblock_parity(self, pts: Tuple[tuple, ...], indexes: Tuple[int, ...]) -> Tuple[int, int]:
         """
@@ -275,8 +278,8 @@ class SegmentValidation:
                 self.errors[code] = deepcopy(func())
 
             except (KeyError, SyntaxError, ValueError) as e:
-                logger.exception(f"Unable to apply validation {code}: {func.__name__}.")
-                logger.exception(e)
+                logger.exception(f"Unable to apply validation {code}: {func.__name__}. Exception details:\n"
+                                 f"{type(e).__name__}: {e}", exc_info=False)
                 sys.exit(1)
 
     def _write_errors(self) -> None:
@@ -300,7 +303,7 @@ class SegmentValidation:
                 """)
 
         # Execute statements.
-        helpers.execute_db_statements(engine=self.engine, statements=statements)
+        helpers.execute_db_statements(engine=self.engine, statements=tuple(statements))
 
         # Log validation results summary.
         summary = tabulate(
@@ -325,20 +328,20 @@ class SegmentValidation:
         if len(meshblock_added):
 
             values = self.meshblock.loc[self.meshblock[self.id_meshblock].isin(meshblock_added),
-                                        [self.id_meshblock, self.id_meshblock_parent, self.geom_col]].apply(
-                lambda row: f"({itemgetter(0)(row)}, {itemgetter(1)(row)}, {itemgetter(2)(row).wkt})", axis=1)
+                                        [self.id_meshblock, self.id_meshblock_parent, self.geom_col]]\
+                .apply(lambda row: f"({itemgetter(0)(row)}, {itemgetter(1)(row)}, {itemgetter(2)(row)})", axis=1)
 
-            statements["meshblock_added"] = [f"""
+            statements["meshblock_added"] = f"""
             INSERT INTO {self.schema}.{self.dataset_meshblock} ({self.id_meshblock}, {self.id_meshblock_parent}, 
             {self.geom_col}) VALUES {', '.join(values)};
-            """]
+            """
 
         # Create SQL statements for removed meshblock records.
         if len(meshblock_removed):
 
-            statements["meshblock_removed"] = [f"""
+            statements["meshblock_removed"] = f"""
             DELETE FROM {self.schema}.{self.dataset_meshblock} WHERE {self.id_meshblock} IN {*meshblock_removed,};
-            """]
+            """
 
         # Compile arc-meshblock identifier updates.
         meshblock_left_lookup = dict(zip(self.df[self.id], self.df[self.id_meshblock_left]))
@@ -353,7 +356,7 @@ class SegmentValidation:
             values = df_updated[[self.id, self.id_meshblock_left, self.id_meshblock_right]].apply(
                 lambda row: f"{itemgetter(0, 1, 2)(row)}", axis=1)
 
-            statements["arcs_modified"] = [
+            statements["arcs_modified"] = (
                 f"""
                 CREATE TABLE {self.schema}._ ({self.id} uuid, {self.id_meshblock_left} uuid, {self.id_meshblock_right} 
                 uuid);
@@ -373,7 +376,7 @@ class SegmentValidation:
                 f"""
                 DROP TABLE {self.schema}._;
                 """
-            ]
+            )
 
         # Execute statements.
         for update_type in [k for k in ("meshblock_added", "arcs_modified", "meshblock_removed") if k in statements]:
@@ -605,17 +608,17 @@ class SegmentValidation:
 
 
 @click.command()
-@click.argument("url", type=click.STRING,
-                help="General format: postgresql://[user[:password]@][netloc][:port][/dbname]")
-@click.option("--schema", default="public", show_default=True,
-              help="Database schema. Will detect and use the default schema if none is provided.")
+@click.argument("url", type=click.STRING)
+@click.option("--schema", default="public", show_default=True, help="Database schema.")
 @click.option("--geom_col", default="geom", show_default=True, help="Geometry column for spatial datasets.")
 def main(url: str, schema: str = "public", geom_col: str = "geom") -> None:
     """
     Validates dataset: segment.
 
-    \b
-    :param str url: database URL.
+    URL: Database URL. General format: postgresql://[user[:password]@][netloc][:port][/dbname]
+
+    \f\b
+    :param str url: database URL. General format: postgresql://[user[:password]@][netloc][:port][/dbname]
     :param str schema: database schema, default=public.
     :param str geom_col: geometry column for spatial datasets, default=geom.
     """
@@ -623,11 +626,12 @@ def main(url: str, schema: str = "public", geom_col: str = "geom") -> None:
     try:
 
         with helpers.Timer():
-            validation = SegmentValidation(url, schema, geom_col)
+            validation = DatasetValidation(url, schema, geom_col)
             validation()
 
-    except KeyboardInterrupt:
-        logger.exception("KeyboardInterrupt: Exiting program.")
+    except Exception as e:
+        logger.exception(f"Unhandled exception encountered. Exception details:\n{type(e).__name__}: {e}",
+                         exc_info=False)
         sys.exit(1)
 
 
