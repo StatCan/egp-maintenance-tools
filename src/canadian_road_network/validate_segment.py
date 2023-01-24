@@ -15,7 +15,6 @@ from shapely.ops import polygonize, unary_union
 from tabulate import tabulate
 from typing import List, Tuple
 
-filepath = Path(__file__).resolve()
 sys.path.insert(1, str(Path(__file__).resolve().parents[1]))
 import helpers
 
@@ -598,7 +597,7 @@ class DatasetValidation:
         errors = set()
 
         # Flag arcs which form an invalid amount of meshblock polygons.
-        flag = ~self.df["meshblock_covered_by"].map(len).between(1, 2, inclusive=True)
+        flag = ~self.df["meshblock_covered_by"].map(len).between(1, 2, inclusive="both")
 
         # Compile error logs.
         if sum(flag):

@@ -58,7 +58,7 @@ def create_db_engine(url: str) -> Engine:
     :return sqlalchemy.engine.base.Engine: database engine.
     """
 
-    logger.info(f"Creating database engine: {url}.")
+    logger.info(f"Creating database engine for: {url}.")
 
     try:
 

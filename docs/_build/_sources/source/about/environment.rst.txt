@@ -93,3 +93,16 @@ Update the ``conda`` environment via (only required if dependencies change)::
 
     conda env update -f C:/egp-maintenance-tools/environment.yml --prune
 
+Documentation
+=============
+
+Documentation is written in reStructuredText (RST), a markup language developed for technical documentation
+(specifically Python projects), and rendered as HTML via ``sphinx``. Updates to documentation requires a rebuild with
+the ``sphinx-build`` command-line tool using the following parameters::
+
+    sphinx-build -b html egp-crn/docs egp-crn/docs/_build
+
+.. admonition:: Note
+
+    Various warnings and errors may be logged during the documentation build. These are not always an indication of
+    true errors and can largely be ignored so long as the resulting documentation actually gets built correctly.

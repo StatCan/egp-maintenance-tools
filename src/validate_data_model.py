@@ -2,13 +2,10 @@
 #       The only question mark is how to handle validation scripts with different inputs.
 
 import click
+import helpers
 import logging
 import sys
 from pathlib import Path
-
-filepath = Path(__file__).resolve()
-sys.path.insert(1, str(Path(__file__).resolve().parents[1]))
-import helpers
 
 # Set logger.
 logger = logging.getLogger(__name__)
