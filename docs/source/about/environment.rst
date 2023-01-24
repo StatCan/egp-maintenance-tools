@@ -100,7 +100,7 @@ Documentation is written in reStructuredText (RST), a markup language developed 
 (specifically Python projects), and rendered as HTML via ``sphinx``. Updates to documentation requires a rebuild with
 the ``sphinx-build`` command-line tool using the following parameters::
 
-    sphinx-build -b html egp-crn/docs egp-crn/docs/_build
+    sphinx-build -b html docs docs/_build
 
 .. admonition:: Note
 
