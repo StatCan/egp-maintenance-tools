@@ -346,6 +346,18 @@
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#database-trigger-functions">
+   Database Trigger Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#snap-coords">
+     snap_coords
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
 </nav>
@@ -368,51 +380,56 @@
               <div>
                 
   <section id="canadian-road-network">
-<h1><a class="toc-backref" href="#id6" role="doc-backlink">Canadian Road Network</a><a class="headerlink" href="#canadian-road-network" title="Permalink to this heading">¶</a></h1>
+<h1><a class="toc-backref" href="#id7" role="doc-backlink">Canadian Road Network</a><a class="headerlink" href="#canadian-road-network" title="Permalink to this heading">¶</a></h1>
 <nav class="contents" id="contents">
 <p class="topic-title">Contents:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#canadian-road-network" id="id6">Canadian Road Network</a></p>
+<li><p><a class="reference internal" href="#canadian-road-network" id="id7">Canadian Road Network</a></p>
 <ul>
-<li><p><a class="reference internal" href="#diagram" id="id7">Diagram</a></p></li>
-<li><p><a class="reference internal" href="#data-dictionary" id="id8">Data Dictionary</a></p>
+<li><p><a class="reference internal" href="#diagram" id="id8">Diagram</a></p></li>
+<li><p><a class="reference internal" href="#data-dictionary" id="id9">Data Dictionary</a></p>
 <ul>
-<li><p><a class="reference internal" href="#acquisition-technique-lookup" id="id9">acquisition_technique_lookup</a></p></li>
-<li><p><a class="reference internal" href="#address-range" id="id10">address_range</a></p></li>
-<li><p><a class="reference internal" href="#basic-block" id="id11">basic_block</a></p></li>
-<li><p><a class="reference internal" href="#blocked-passage" id="id12">blocked_passage</a></p></li>
-<li><p><a class="reference internal" href="#blocked-passage-type-lookup" id="id13">blocked_passage_type_lookup</a></p></li>
-<li><p><a class="reference internal" href="#closing-period-lookup" id="id14">closing_period_lookup</a></p></li>
-<li><p><a class="reference internal" href="#crossing" id="id15">crossing</a></p></li>
-<li><p><a class="reference internal" href="#crossing-status-lookup" id="id16">crossing_status_lookup</a></p></li>
-<li><p><a class="reference internal" href="#ferry" id="id17">ferry</a></p></li>
-<li><p><a class="reference internal" href="#functional-road-class-lookup" id="id18">functional_road_class_lookup</a></p></li>
-<li><p><a class="reference internal" href="#house-number-structure-lookup" id="id19">house_number_structure_lookup</a></p></li>
-<li><p><a class="reference internal" href="#house-number-type-lookup" id="id20">house_number_type_lookup</a></p></li>
-<li><p><a class="reference internal" href="#junction" id="id21">junction</a></p></li>
-<li><p><a class="reference internal" href="#junction-type-lookup" id="id22">junction_type_lookup</a></p></li>
-<li><p><a class="reference internal" href="#language-code-lookup" id="id23">language_code_lookup</a></p></li>
-<li><p><a class="reference internal" href="#provider-lookup" id="id24">provider_lookup</a></p></li>
-<li><p><a class="reference internal" href="#province-lookup" id="id25">province_lookup</a></p></li>
-<li><p><a class="reference internal" href="#reference-system-indicator-lookup" id="id26">reference_system_indicator_lookup</a></p></li>
-<li><p><a class="reference internal" href="#road-surface-type-lookup" id="id27">road_surface_type_lookup</a></p></li>
-<li><p><a class="reference internal" href="#route-name" id="id28">route_name</a></p></li>
-<li><p><a class="reference internal" href="#route-name-link" id="id29">route_name_link</a></p></li>
-<li><p><a class="reference internal" href="#route-number" id="id30">route_number</a></p></li>
-<li><p><a class="reference internal" href="#route-number-link" id="id31">route_number_link</a></p></li>
-<li><p><a class="reference internal" href="#segment" id="id32">segment</a></p></li>
-<li><p><a class="reference internal" href="#segment-type-lookup" id="id33">segment_type_lookup</a></p></li>
-<li><p><a class="reference internal" href="#street-article-lookup" id="id34">street_article_lookup</a></p></li>
-<li><p><a class="reference internal" href="#street-direction-lookup" id="id35">street_direction_lookup</a></p></li>
-<li><p><a class="reference internal" href="#street-name" id="id36">street_name</a></p></li>
-<li><p><a class="reference internal" href="#street-name-link" id="id37">street_name_link</a></p></li>
-<li><p><a class="reference internal" href="#street-name-translation" id="id38">street_name_translation</a></p></li>
-<li><p><a class="reference internal" href="#street-type-lookup" id="id39">street_type_lookup</a></p></li>
-<li><p><a class="reference internal" href="#structure" id="id40">structure</a></p></li>
-<li><p><a class="reference internal" href="#structure-type-lookup" id="id41">structure_type_lookup</a></p></li>
-<li><p><a class="reference internal" href="#toll-point" id="id42">toll_point</a></p></li>
-<li><p><a class="reference internal" href="#toll-point-type-lookup" id="id43">toll_point_type_lookup</a></p></li>
-<li><p><a class="reference internal" href="#traffic-direction-lookup" id="id44">traffic_direction_lookup</a></p></li>
+<li><p><a class="reference internal" href="#acquisition-technique-lookup" id="id10">acquisition_technique_lookup</a></p></li>
+<li><p><a class="reference internal" href="#address-range" id="id11">address_range</a></p></li>
+<li><p><a class="reference internal" href="#basic-block" id="id12">basic_block</a></p></li>
+<li><p><a class="reference internal" href="#blocked-passage" id="id13">blocked_passage</a></p></li>
+<li><p><a class="reference internal" href="#blocked-passage-type-lookup" id="id14">blocked_passage_type_lookup</a></p></li>
+<li><p><a class="reference internal" href="#closing-period-lookup" id="id15">closing_period_lookup</a></p></li>
+<li><p><a class="reference internal" href="#crossing" id="id16">crossing</a></p></li>
+<li><p><a class="reference internal" href="#crossing-status-lookup" id="id17">crossing_status_lookup</a></p></li>
+<li><p><a class="reference internal" href="#ferry" id="id18">ferry</a></p></li>
+<li><p><a class="reference internal" href="#functional-road-class-lookup" id="id19">functional_road_class_lookup</a></p></li>
+<li><p><a class="reference internal" href="#house-number-structure-lookup" id="id20">house_number_structure_lookup</a></p></li>
+<li><p><a class="reference internal" href="#house-number-type-lookup" id="id21">house_number_type_lookup</a></p></li>
+<li><p><a class="reference internal" href="#junction" id="id22">junction</a></p></li>
+<li><p><a class="reference internal" href="#junction-type-lookup" id="id23">junction_type_lookup</a></p></li>
+<li><p><a class="reference internal" href="#language-code-lookup" id="id24">language_code_lookup</a></p></li>
+<li><p><a class="reference internal" href="#provider-lookup" id="id25">provider_lookup</a></p></li>
+<li><p><a class="reference internal" href="#province-lookup" id="id26">province_lookup</a></p></li>
+<li><p><a class="reference internal" href="#reference-system-indicator-lookup" id="id27">reference_system_indicator_lookup</a></p></li>
+<li><p><a class="reference internal" href="#road-surface-type-lookup" id="id28">road_surface_type_lookup</a></p></li>
+<li><p><a class="reference internal" href="#route-name" id="id29">route_name</a></p></li>
+<li><p><a class="reference internal" href="#route-name-link" id="id30">route_name_link</a></p></li>
+<li><p><a class="reference internal" href="#route-number" id="id31">route_number</a></p></li>
+<li><p><a class="reference internal" href="#route-number-link" id="id32">route_number_link</a></p></li>
+<li><p><a class="reference internal" href="#segment" id="id33">segment</a></p></li>
+<li><p><a class="reference internal" href="#segment-type-lookup" id="id34">segment_type_lookup</a></p></li>
+<li><p><a class="reference internal" href="#street-article-lookup" id="id35">street_article_lookup</a></p></li>
+<li><p><a class="reference internal" href="#street-direction-lookup" id="id36">street_direction_lookup</a></p></li>
+<li><p><a class="reference internal" href="#street-name" id="id37">street_name</a></p></li>
+<li><p><a class="reference internal" href="#street-name-link" id="id38">street_name_link</a></p></li>
+<li><p><a class="reference internal" href="#street-name-translation" id="id39">street_name_translation</a></p></li>
+<li><p><a class="reference internal" href="#street-type-lookup" id="id40">street_type_lookup</a></p></li>
+<li><p><a class="reference internal" href="#structure" id="id41">structure</a></p></li>
+<li><p><a class="reference internal" href="#structure-type-lookup" id="id42">structure_type_lookup</a></p></li>
+<li><p><a class="reference internal" href="#toll-point" id="id43">toll_point</a></p></li>
+<li><p><a class="reference internal" href="#toll-point-type-lookup" id="id44">toll_point_type_lookup</a></p></li>
+<li><p><a class="reference internal" href="#traffic-direction-lookup" id="id45">traffic_direction_lookup</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#database-trigger-functions" id="id46">Database Trigger Functions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#snap-coords" id="id47">snap_coords</a></p></li>
 </ul>
 </li>
 </ul>
@@ -420,22 +437,22 @@
 </ul>
 </nav>
 <section id="diagram">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">Diagram</a><a class="headerlink" href="#diagram" title="Permalink to this heading">¶</a></h2>
-<figure class="align-default" id="id4">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Diagram</a><a class="headerlink" href="#diagram" title="Permalink to this heading">¶</a></h2>
+<figure class="align-default" id="id5">
 <img alt="Canadian Road Network diagram (primary datasets)." src="../../_images/canadian_road_network-primary_datasets.svg" /><figcaption>
-<p><span class="caption-text">Figure: Canadian Road Network diagram (primary datasets).</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text">Figure: Canadian Road Network diagram (primary datasets).</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
-<figure class="align-default" id="id5">
+<figure class="align-default" id="id6">
 <img alt="Canadian Road Network diagram (lookup datasets)." src="../../_images/canadian_road_network-lookup_datasets.svg" /><figcaption>
-<p><span class="caption-text">Figure: Canadian Road Network diagram (lookup datasets).</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text">Figure: Canadian Road Network diagram (lookup datasets).</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="data-dictionary">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">Data Dictionary</a><a class="headerlink" href="#data-dictionary" title="Permalink to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Data Dictionary</a><a class="headerlink" href="#data-dictionary" title="Permalink to this heading">¶</a></h2>
 <section id="acquisition-technique-lookup">
-<h3><a class="toc-backref" href="#id9" role="doc-backlink">acquisition_technique_lookup</a><a class="headerlink" href="#acquisition-technique-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">acquisition_technique_lookup</a><a class="headerlink" href="#acquisition-technique-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for acquisition technique.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -550,7 +567,7 @@
 </table>
 </section>
 <section id="address-range">
-<h3><a class="toc-backref" href="#id10" role="doc-backlink">address_range</a><a class="headerlink" href="#address-range" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">address_range</a><a class="headerlink" href="#address-range" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> A set of attributes representing the address of the first and last building located along the side of
 the entire road or a portion of it.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
@@ -650,7 +667,7 @@ contents.</p></td>
 </table>
 </section>
 <section id="basic-block">
-<h3><a class="toc-backref" href="#id11" role="doc-backlink">basic_block</a><a class="headerlink" href="#basic-block" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">basic_block</a><a class="headerlink" href="#basic-block" title="Permalink to this heading">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Description:</strong> Geographic areas formed by all roads and boundaries in <a class="reference internal" href="#segment"><span class="std std-ref">segment</span></a>.</div>
 <div class="line"><strong>Coordinate reference system:</strong> EPSG:3347</div>
@@ -687,9 +704,15 @@ contents.</p></td>
 </tr>
 </tbody>
 </table>
+<p><em>Trigger: Enforcing coordinate decimal precision for new and updated geometries. Refer to:</em> <a class="reference internal" href="#snap-coords"><span class="std std-ref">snap_coords</span></a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">TRIGGER</span> <span class="n">basic_block_snap_coords</span>
+<span class="n">BEFORE</span> <span class="n">INSERT</span> <span class="n">OR</span> <span class="n">UPDATE</span> <span class="n">ON</span> <span class="n">basic_block</span>
+<span class="n">FOR</span> <span class="n">EACH</span> <span class="n">ROW</span> <span class="n">EXECUTE</span> <span class="n">PROCEDURE</span> <span class="n">snap_coords</span> <span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</pre></div>
+</div>
 </section>
 <section id="blocked-passage">
-<h3><a class="toc-backref" href="#id12" role="doc-backlink">blocked_passage</a><a class="headerlink" href="#blocked-passage" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">blocked_passage</a><a class="headerlink" href="#blocked-passage" title="Permalink to this heading">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Description:</strong> Indication of a physical barrier on a road built to prevent or control further access.</div>
 <div class="line"><strong>Coordinate reference system:</strong> EPSG:3347</div>
@@ -765,9 +788,15 @@ contents.</p></td>
 </tr>
 </tbody>
 </table>
+<p><em>Trigger: Enforcing coordinate decimal precision for new and updated geometries. Refer to:</em> <a class="reference internal" href="#snap-coords"><span class="std std-ref">snap_coords</span></a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">TRIGGER</span> <span class="n">blocked_passage_snap_coords</span>
+<span class="n">BEFORE</span> <span class="n">INSERT</span> <span class="n">OR</span> <span class="n">UPDATE</span> <span class="n">ON</span> <span class="n">blocked_passage</span>
+<span class="n">FOR</span> <span class="n">EACH</span> <span class="n">ROW</span> <span class="n">EXECUTE</span> <span class="n">PROCEDURE</span> <span class="n">snap_coords</span> <span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</pre></div>
+</div>
 </section>
 <section id="blocked-passage-type-lookup">
-<h3><a class="toc-backref" href="#id13" role="doc-backlink">blocked_passage_type_lookup</a><a class="headerlink" href="#blocked-passage-type-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">blocked_passage_type_lookup</a><a class="headerlink" href="#blocked-passage-type-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for blocked passage type.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -834,7 +863,7 @@ blocking and further access is easily allowed when so desired.</p></td>
 </table>
 </section>
 <section id="closing-period-lookup">
-<h3><a class="toc-backref" href="#id14" role="doc-backlink">closing_period_lookup</a><a class="headerlink" href="#closing-period-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id15" role="doc-backlink">closing_period_lookup</a><a class="headerlink" href="#closing-period-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for closing period.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -904,7 +933,7 @@ blocking and further access is easily allowed when so desired.</p></td>
 </table>
 </section>
 <section id="crossing">
-<span id="id1"></span><h3><a class="toc-backref" href="#id15" role="doc-backlink">crossing</a><a class="headerlink" href="#crossing" title="Permalink to this heading">¶</a></h3>
+<span id="id1"></span><h3><a class="toc-backref" href="#id16" role="doc-backlink">crossing</a><a class="headerlink" href="#crossing" title="Permalink to this heading">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Description:</strong> All intersection points involving 4 or more roads, used for the identification of grade separated
 intersections (overpasses). This dataset exists for the maintenance of a routable road network whereby roads in the
@@ -962,9 +991,15 @@ and intersect at-grade.</div>
 </tr>
 </tbody>
 </table>
+<p><em>Trigger: Enforcing coordinate decimal precision for new and updated geometries. Refer to:</em> <a class="reference internal" href="#snap-coords"><span class="std std-ref">snap_coords</span></a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">TRIGGER</span> <span class="n">crossing_snap_coords</span>
+<span class="n">BEFORE</span> <span class="n">INSERT</span> <span class="n">OR</span> <span class="n">UPDATE</span> <span class="n">ON</span> <span class="n">crossing</span>
+<span class="n">FOR</span> <span class="n">EACH</span> <span class="n">ROW</span> <span class="n">EXECUTE</span> <span class="n">PROCEDURE</span> <span class="n">snap_coords</span> <span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</pre></div>
+</div>
 </section>
 <section id="crossing-status-lookup">
-<h3><a class="toc-backref" href="#id16" role="doc-backlink">crossing_status_lookup</a><a class="headerlink" href="#crossing-status-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">crossing_status_lookup</a><a class="headerlink" href="#crossing-status-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for crossing status.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -1024,7 +1059,7 @@ and intersect at-grade.</div>
 </table>
 </section>
 <section id="ferry">
-<h3><a class="toc-backref" href="#id17" role="doc-backlink">ferry</a><a class="headerlink" href="#ferry" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">ferry</a><a class="headerlink" href="#ferry" title="Permalink to this heading">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Description:</strong> The average route of a ferryboat which transports vehicles.</div>
 <div class="line"><strong>Coordinate reference system:</strong> EPSG:3347</div>
@@ -1107,9 +1142,15 @@ contents.</p></td>
 </tr>
 </tbody>
 </table>
+<p><em>Trigger: Enforcing coordinate decimal precision for new and updated geometries. Refer to:</em> <a class="reference internal" href="#snap-coords"><span class="std std-ref">snap_coords</span></a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">TRIGGER</span> <span class="n">ferry_snap_coords</span>
+<span class="n">BEFORE</span> <span class="n">INSERT</span> <span class="n">OR</span> <span class="n">UPDATE</span> <span class="n">ON</span> <span class="n">ferry</span>
+<span class="n">FOR</span> <span class="n">EACH</span> <span class="n">ROW</span> <span class="n">EXECUTE</span> <span class="n">PROCEDURE</span> <span class="n">snap_coords</span> <span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</pre></div>
+</div>
 </section>
 <section id="functional-road-class-lookup">
-<h3><a class="toc-backref" href="#id18" role="doc-backlink">functional_road_class_lookup</a><a class="headerlink" href="#functional-road-class-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id19" role="doc-backlink">functional_road_class_lookup</a><a class="headerlink" href="#functional-road-class-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for functional road class.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -1246,7 +1287,7 @@ rivers, and wetlands.</p></td>
 </table>
 </section>
 <section id="house-number-structure-lookup">
-<h3><a class="toc-backref" href="#id19" role="doc-backlink">house_number_structure_lookup</a><a class="headerlink" href="#house-number-structure-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id20" role="doc-backlink">house_number_structure_lookup</a><a class="headerlink" href="#house-number-structure-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for house number structure.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -1332,7 +1373,7 @@ is sequentially sorted is valid. Examples are the series (5, 6, 7, 9, 10, 13) an
 </table>
 </section>
 <section id="house-number-type-lookup">
-<h3><a class="toc-backref" href="#id20" role="doc-backlink">house_number_type_lookup</a><a class="headerlink" href="#house-number-type-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id21" role="doc-backlink">house_number_type_lookup</a><a class="headerlink" href="#house-number-type-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for house number type.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -1415,7 +1456,7 @@ either side.</p></td>
 </table>
 </section>
 <section id="junction">
-<span id="id2"></span><h3><a class="toc-backref" href="#id21" role="doc-backlink">junction</a><a class="headerlink" href="#junction" title="Permalink to this heading">¶</a></h3>
+<span id="id2"></span><h3><a class="toc-backref" href="#id22" role="doc-backlink">junction</a><a class="headerlink" href="#junction" title="Permalink to this heading">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Description:</strong> A feature bounding one or more roads or ferries. A junction is defined at the intersection of three
 or more roads, at the junction of a road and a ferry, at the end of a dead end road, and at the junction of a road or
@@ -1499,9 +1540,15 @@ contents.</p></td>
 </tr>
 </tbody>
 </table>
+<p><em>Trigger: Enforcing coordinate decimal precision for new and updated geometries. Refer to:</em> <a class="reference internal" href="#snap-coords"><span class="std std-ref">snap_coords</span></a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">TRIGGER</span> <span class="n">junction_snap_coords</span>
+<span class="n">BEFORE</span> <span class="n">INSERT</span> <span class="n">OR</span> <span class="n">UPDATE</span> <span class="n">ON</span> <span class="n">junction</span>
+<span class="n">FOR</span> <span class="n">EACH</span> <span class="n">ROW</span> <span class="n">EXECUTE</span> <span class="n">PROCEDURE</span> <span class="n">snap_coords</span> <span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</pre></div>
+</div>
 </section>
 <section id="junction-type-lookup">
-<h3><a class="toc-backref" href="#id22" role="doc-backlink">junction_type_lookup</a><a class="headerlink" href="#junction-type-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id23" role="doc-backlink">junction_type_lookup</a><a class="headerlink" href="#junction-type-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for junction type.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -1573,7 +1620,7 @@ or ferry continues into the adjacent province, territory, or country.</p></td>
 </table>
 </section>
 <section id="language-code-lookup">
-<h3><a class="toc-backref" href="#id23" role="doc-backlink">language_code_lookup</a><a class="headerlink" href="#language-code-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id24" role="doc-backlink">language_code_lookup</a><a class="headerlink" href="#language-code-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for language code.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -1783,7 +1830,7 @@ or ferry continues into the adjacent province, territory, or country.</p></td>
 </table>
 </section>
 <section id="provider-lookup">
-<h3><a class="toc-backref" href="#id24" role="doc-backlink">provider_lookup</a><a class="headerlink" href="#provider-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id25" role="doc-backlink">provider_lookup</a><a class="headerlink" href="#provider-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for provider.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -1858,7 +1905,7 @@ or ferry continues into the adjacent province, territory, or country.</p></td>
 </table>
 </section>
 <section id="province-lookup">
-<h3><a class="toc-backref" href="#id25" role="doc-backlink">province_lookup</a><a class="headerlink" href="#province-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id26" role="doc-backlink">province_lookup</a><a class="headerlink" href="#province-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for province.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -1973,7 +2020,7 @@ or ferry continues into the adjacent province, territory, or country.</p></td>
 </table>
 </section>
 <section id="reference-system-indicator-lookup">
-<h3><a class="toc-backref" href="#id26" role="doc-backlink">reference_system_indicator_lookup</a><a class="headerlink" href="#reference-system-indicator-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id27" role="doc-backlink">reference_system_indicator_lookup</a><a class="headerlink" href="#reference-system-indicator-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for reference system indicator.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -2058,7 +2105,7 @@ or ferry continues into the adjacent province, territory, or country.</p></td>
 </table>
 </section>
 <section id="road-surface-type-lookup">
-<h3><a class="toc-backref" href="#id27" role="doc-backlink">road_surface_type_lookup</a><a class="headerlink" href="#road-surface-type-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id28" role="doc-backlink">road_surface_type_lookup</a><a class="headerlink" href="#road-surface-type-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for road surface type.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -2156,7 +2203,7 @@ but for which the actual material is unknown.</p></td>
 </table>
 </section>
 <section id="route-name">
-<h3><a class="toc-backref" href="#id28" role="doc-backlink">route_name</a><a class="headerlink" href="#route-name" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id29" role="doc-backlink">route_name</a><a class="headerlink" href="#route-name" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> A set of attributes representing a particular route name in the road network.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -2203,7 +2250,7 @@ but for which the actual material is unknown.</p></td>
 </table>
 </section>
 <section id="route-name-link">
-<h3><a class="toc-backref" href="#id29" role="doc-backlink">route_name_link</a><a class="headerlink" href="#route-name-link" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id30" role="doc-backlink">route_name_link</a><a class="headerlink" href="#route-name-link" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> A dataset facilitating plural linkages of roads and ferries with a particular route name in the road
 network.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
@@ -2239,7 +2286,7 @@ network.</p>
 </table>
 </section>
 <section id="route-number">
-<h3><a class="toc-backref" href="#id30" role="doc-backlink">route_number</a><a class="headerlink" href="#route-number" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id31" role="doc-backlink">route_number</a><a class="headerlink" href="#route-number" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> A set of attributes representing a particular route number in the road network.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -2280,7 +2327,7 @@ network.</p>
 </table>
 </section>
 <section id="route-number-link">
-<h3><a class="toc-backref" href="#id31" role="doc-backlink">route_number_link</a><a class="headerlink" href="#route-number-link" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id32" role="doc-backlink">route_number_link</a><a class="headerlink" href="#route-number-link" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> A dataset facilitating plural linkages of roads and ferries with a particular route number in the road
 network.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
@@ -2316,7 +2363,7 @@ network.</p>
 </table>
 </section>
 <section id="segment">
-<span id="id3"></span><h3><a class="toc-backref" href="#id32" role="doc-backlink">segment</a><a class="headerlink" href="#segment" title="Permalink to this heading">¶</a></h3>
+<span id="id3"></span><h3><a class="toc-backref" href="#id33" role="doc-backlink">segment</a><a class="headerlink" href="#segment" title="Permalink to this heading">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Description:</strong> A road or boundary feature with uniform characteristics.</div>
 <div class="line"><strong>Coordinate reference system:</strong> EPSG:3347</div>
@@ -2482,9 +2529,15 @@ contents.</p></td>
 </tr>
 </tbody>
 </table>
+<p><em>Trigger: Enforcing coordinate decimal precision for new and updated geometries. Refer to:</em> <a class="reference internal" href="#snap-coords"><span class="std std-ref">snap_coords</span></a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">TRIGGER</span> <span class="n">segment_snap_coords</span>
+<span class="n">BEFORE</span> <span class="n">INSERT</span> <span class="n">OR</span> <span class="n">UPDATE</span> <span class="n">ON</span> <span class="n">segment</span>
+<span class="n">FOR</span> <span class="n">EACH</span> <span class="n">ROW</span> <span class="n">EXECUTE</span> <span class="n">PROCEDURE</span> <span class="n">snap_coords</span> <span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</pre></div>
+</div>
 </section>
 <section id="segment-type-lookup">
-<h3><a class="toc-backref" href="#id33" role="doc-backlink">segment_type_lookup</a><a class="headerlink" href="#segment-type-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id34" role="doc-backlink">segment_type_lookup</a><a class="headerlink" href="#segment-type-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for segment type.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -2545,7 +2598,7 @@ geographic area.</p></td>
 </table>
 </section>
 <section id="street-article-lookup">
-<h3><a class="toc-backref" href="#id34" role="doc-backlink">street_article_lookup</a><a class="headerlink" href="#street-article-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id35" role="doc-backlink">street_article_lookup</a><a class="headerlink" href="#street-article-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for street article.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -2700,7 +2753,7 @@ geographic area.</p></td>
 </table>
 </section>
 <section id="street-direction-lookup">
-<h3><a class="toc-backref" href="#id35" role="doc-backlink">street_direction_lookup</a><a class="headerlink" href="#street-direction-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id36" role="doc-backlink">street_direction_lookup</a><a class="headerlink" href="#street-direction-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for street direction.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -2850,7 +2903,7 @@ geographic area.</p></td>
 </table>
 </section>
 <section id="street-name">
-<h3><a class="toc-backref" href="#id36" role="doc-backlink">street_name</a><a class="headerlink" href="#street-name" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id37" role="doc-backlink">street_name</a><a class="headerlink" href="#street-name" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> A set of attributes representing a particular street name in the road network.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -2933,7 +2986,7 @@ the street name body.</p></td>
 </table>
 </section>
 <section id="street-name-link">
-<h3><a class="toc-backref" href="#id37" role="doc-backlink">street_name_link</a><a class="headerlink" href="#street-name-link" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id38" role="doc-backlink">street_name_link</a><a class="headerlink" href="#street-name-link" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> A dataset facilitating plural linkages of roads with a particular street name in the road network.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -2968,7 +3021,7 @@ the street name body.</p></td>
 </table>
 </section>
 <section id="street-name-translation">
-<h3><a class="toc-backref" href="#id38" role="doc-backlink">street_name_translation</a><a class="headerlink" href="#street-name-translation" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id39" role="doc-backlink">street_name_translation</a><a class="headerlink" href="#street-name-translation" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> A set of attributes representing a recognized translation of a particular street name in the road
 network.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
@@ -3024,7 +3077,7 @@ accordance with ISO 639-3.</p></td>
 </table>
 </section>
 <section id="street-type-lookup">
-<h3><a class="toc-backref" href="#id39" role="doc-backlink">street_type_lookup</a><a class="headerlink" href="#street-type-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id40" role="doc-backlink">street_type_lookup</a><a class="headerlink" href="#street-type-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for street type.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -4479,7 +4532,7 @@ accordance with ISO 639-3.</p></td>
 </table>
 </section>
 <section id="structure">
-<h3><a class="toc-backref" href="#id40" role="doc-backlink">structure</a><a class="headerlink" href="#structure" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id41" role="doc-backlink">structure</a><a class="headerlink" href="#structure" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> A set of attributes representing a particular structure in the road network.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -4532,7 +4585,7 @@ accordance with ISO 639-3.</p></td>
 </table>
 </section>
 <section id="structure-type-lookup">
-<h3><a class="toc-backref" href="#id41" role="doc-backlink">structure_type_lookup</a><a class="headerlink" href="#structure-type-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id42" role="doc-backlink">structure_type_lookup</a><a class="headerlink" href="#structure-type-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for structure type.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -4634,7 +4687,7 @@ and supporting a road for motor vehicles.</p></td>
 </table>
 </section>
 <section id="toll-point">
-<h3><a class="toc-backref" href="#id42" role="doc-backlink">toll_point</a><a class="headerlink" href="#toll-point" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id43" role="doc-backlink">toll_point</a><a class="headerlink" href="#toll-point" title="Permalink to this heading">¶</a></h3>
 <div class="line-block">
 <div class="line"><strong>Description:</strong> Place where a right-of-way is charged to gain access to a road.</div>
 <div class="line"><strong>Coordinate reference system:</strong> EPSG:3347</div>
@@ -4710,9 +4763,15 @@ contents.</p></td>
 </tr>
 </tbody>
 </table>
+<p><em>Trigger: Enforcing coordinate decimal precision for new and updated geometries. Refer to:</em> <a class="reference internal" href="#snap-coords"><span class="std std-ref">snap_coords</span></a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">TRIGGER</span> <span class="n">toll_point_snap_coords</span>
+<span class="n">BEFORE</span> <span class="n">INSERT</span> <span class="n">OR</span> <span class="n">UPDATE</span> <span class="n">ON</span> <span class="n">toll_point</span>
+<span class="n">FOR</span> <span class="n">EACH</span> <span class="n">ROW</span> <span class="n">EXECUTE</span> <span class="n">PROCEDURE</span> <span class="n">snap_coords</span> <span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</pre></div>
+</div>
 </section>
 <section id="toll-point-type-lookup">
-<h3><a class="toc-backref" href="#id43" role="doc-backlink">toll_point_type_lookup</a><a class="headerlink" href="#toll-point-type-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id44" role="doc-backlink">toll_point_type_lookup</a><a class="headerlink" href="#toll-point-type-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for toll point type.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -4785,7 +4844,7 @@ automatic registration of the passing vehicle by subscription or invoice.</p></t
 </table>
 </section>
 <section id="traffic-direction-lookup">
-<h3><a class="toc-backref" href="#id44" role="doc-backlink">traffic_direction_lookup</a><a class="headerlink" href="#traffic-direction-lookup" title="Permalink to this heading">¶</a></h3>
+<h3><a class="toc-backref" href="#id45" role="doc-backlink">traffic_direction_lookup</a><a class="headerlink" href="#traffic-direction-lookup" title="Permalink to this heading">¶</a></h3>
 <p><strong>Description:</strong> Codeset lookup dataset for traffic direction.</p>
 <p><em>Table: Attribute description and constraints.</em></p>
 <table class="table">
@@ -4860,6 +4919,24 @@ digitizing direction of the road.</p></td>
 </tr>
 </tbody>
 </table>
+</section>
+</section>
+<section id="database-trigger-functions">
+<h2><a class="toc-backref" href="#id46" role="doc-backlink">Database Trigger Functions</a><a class="headerlink" href="#database-trigger-functions" title="Permalink to this heading">¶</a></h2>
+<p>Trigger functions must be created prior to creating a trigger on a database table. This section details all trigger
+functions used by the CRN data model and the corresponding PostgreSQL syntax to create them.</p>
+<section id="snap-coords">
+<span id="id4"></span><h3><a class="toc-backref" href="#id47" role="doc-backlink">snap_coords</a><a class="headerlink" href="#snap-coords" title="Permalink to this heading">¶</a></h3>
+<p><strong>Description:</strong> Rounds geometry coordinates to a given decimal precision.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>CREATE OR REPLACE FUNCTION snap_coords ()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.geom := ST_AsEWKT(ST_ReducePrecision(NEW.geom, 1 / (10 ^ TG_ARGV[0]::float)), TG_ARGV[0]::int);
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+</pre></div>
+</div>
 </section>
 </section>
 </section>

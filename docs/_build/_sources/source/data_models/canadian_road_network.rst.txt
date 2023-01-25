@@ -108,6 +108,14 @@ basic_block
    "cb_uid", False, False, "", "Unique identifier of the corresponding census block."
    "geom", False, True, "", "Geometry column."
 
+*Trigger: Enforcing coordinate decimal precision for new and updated geometries. Refer to:* :ref:`snap_coords`
+
+.. code-block::
+
+   CREATE TRIGGER basic_block_snap_coords
+   BEFORE INSERT OR UPDATE ON basic_block
+   FOR EACH ROW EXECUTE PROCEDURE snap_coords (5);
+
 blocked_passage
 ---------------
 
@@ -134,6 +142,14 @@ blocked_passage
    "creation_date", False, False, ``now()``, "The date of data creation."
    "revision_date", False, False, ``now()``, "The date of data revision."
    "geom", False, True, "", "Geometry column."
+
+*Trigger: Enforcing coordinate decimal precision for new and updated geometries. Refer to:* :ref:`snap_coords`
+
+.. code-block::
+
+   CREATE TRIGGER blocked_passage_snap_coords
+   BEFORE INSERT OR UPDATE ON blocked_passage
+   FOR EACH ROW EXECUTE PROCEDURE snap_coords (5);
 
 blocked_passage_type_lookup
 ---------------------------
@@ -220,6 +236,14 @@ crossing
    "revision_date", False, False, ``now()``, "The date of data revision."
    "geom", False, True, "", "Geometry column."
 
+*Trigger: Enforcing coordinate decimal precision for new and updated geometries. Refer to:* :ref:`snap_coords`
+
+.. code-block::
+
+   CREATE TRIGGER crossing_snap_coords
+   BEFORE INSERT OR UPDATE ON crossing
+   FOR EACH ROW EXECUTE PROCEDURE snap_coords (5);
+
 crossing_status_lookup
 ----------------------
 
@@ -275,6 +299,14 @@ ferry
    "creation_date", False, False, ``now()``, "The date of data creation."
    "revision_date", False, False, ``now()``, "The date of data revision."
    "geom", False, True, "", "Geometry column."
+
+*Trigger: Enforcing coordinate decimal precision for new and updated geometries. Refer to:* :ref:`snap_coords`
+
+.. code-block::
+
+   CREATE TRIGGER ferry_snap_coords
+   BEFORE INSERT OR UPDATE ON ferry
+   FOR EACH ROW EXECUTE PROCEDURE snap_coords (5);
 
 functional_road_class_lookup
 ----------------------------
@@ -430,6 +462,14 @@ junction
    "creation_date", False, False, ``now()``, "The date of data creation."
    "revision_date", False, False, ``now()``, "The date of data revision."
    "geom", False, False, "", "Geometry column."
+
+*Trigger: Enforcing coordinate decimal precision for new and updated geometries. Refer to:* :ref:`snap_coords`
+
+.. code-block::
+
+   CREATE TRIGGER junction_snap_coords
+   BEFORE INSERT OR UPDATE ON junction
+   FOR EACH ROW EXECUTE PROCEDURE snap_coords (5);
 
 junction_type_lookup
 --------------------
@@ -773,6 +813,14 @@ segment
    "creation_date", False, False, ``now()``, "The date of data creation."
    "revision_date", False, False, ``now()``, "The date of data revision."
    "geom", False, True, "", "Geometry column."
+
+*Trigger: Enforcing coordinate decimal precision for new and updated geometries. Refer to:* :ref:`snap_coords`
+
+.. code-block::
+
+   CREATE TRIGGER segment_snap_coords
+   BEFORE INSERT OR UPDATE ON segment
+   FOR EACH ROW EXECUTE PROCEDURE snap_coords (5);
 
 segment_type_lookup
 -------------------
@@ -1353,6 +1401,14 @@ toll_point
    "revision_date", False, False, ``now()``, "The date of data revision."
    "geom", False, True, "", "Geometry column."
 
+*Trigger: Enforcing coordinate decimal precision for new and updated geometries. Refer to:* :ref:`snap_coords`
+
+.. code-block::
+
+   CREATE TRIGGER toll_point_snap_coords
+   BEFORE INSERT OR UPDATE ON toll_point
+   FOR EACH ROW EXECUTE PROCEDURE snap_coords (5);
+
 toll_point_type_lookup
 ----------------------
 
@@ -1416,3 +1472,26 @@ traffic_direction_lookup
    direction of the road."
    3, "Opposite direction", "Direction contraire", "The direction of one way traffic flow is opposite to the
    digitizing direction of the road."
+
+Database Trigger Functions
+==========================
+
+Trigger functions must be created prior to creating a trigger on a database table. This section details all trigger
+functions used by the CRN data model and the corresponding PostgreSQL syntax to create them.
+
+.. _snap_coords:
+
+snap_coords
+-----------
+
+**Description:** Rounds geometry coordinates to a given decimal precision.
+
+.. code-block::
+
+   CREATE OR REPLACE FUNCTION snap_coords ()
+   RETURNS TRIGGER AS $$
+   BEGIN
+       NEW.geom := ST_AsEWKT(ST_ReducePrecision(NEW.geom, 1 / (10 ^ TG_ARGV[0]::float)), TG_ARGV[0]::int);
+       RETURN NEW;
+   END;
+   $$ LANGUAGE plpgsql;
