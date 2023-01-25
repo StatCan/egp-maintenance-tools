@@ -102,6 +102,10 @@ class DatasetValidation:
         if not any(map(len, self.errors.values())):
             self._update_meshblock()
             self._write_meshblock_updates()
+        else:
+            logger.warning(f"Regeneration of the meshblock dataset ({self.dataset_meshblock}) and associated "
+                           f"identifier linkages with ({self.dataset}) will not commence until all validation errors "
+                           f"are resolved.")
 
     def _configure_meshblock_parity(self, pts: Tuple[tuple, ...], indexes: Tuple[int, ...]) -> Tuple[int, int]:
         """
