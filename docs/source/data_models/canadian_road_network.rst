@@ -800,9 +800,9 @@ segment
    "traffic_direction", False, False, "", "The direction(s) of traffic flow allowed on the road."
    "road_surface_type", False, False, "", "The type of surface covering a road."
    "structure_id", False, False, "", "Unique identifier of the corresponding structure."
-   "bb_uid_l", False, False, ``uuid_nil()``, "Unique identifier of the corresponding basic block on the left side of
+   "bb_uid_l", True, False, ``uuid_nil()``, "Unique identifier of the corresponding basic block on the left side of
    each feature."
-   "bb_uid_r", False, False, ``uuid_nil()``, "Unique identifier of the corresponding basic block on the right side of
+   "bb_uid_r", True, False, ``uuid_nil()``, "Unique identifier of the corresponding basic block on the right side of
    each feature."
    "acquisition_technique", False, False, "", "The type of data source or technique used to populate (create or revise)
    the dataset."

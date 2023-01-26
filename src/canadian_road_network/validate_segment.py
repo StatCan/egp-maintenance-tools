@@ -169,6 +169,10 @@ class DatasetValidation:
         self.df["pt_end"] = self.df["pts_tuple"].map(itemgetter(-1))
         self.df["pts_ordered_pairs"] = self.df["pts_tuple"].map(self._ordered_pairs)
 
+        # Generate original arc-meshblock identifier lookups.
+        self.arc_id_meshblock_left_lookup = dict(zip(self.df[self.id], self.df[self.id_meshblock_left]))
+        self.arc_id_meshblock_right_lookup = dict(zip(self.df[self.id], self.df[self.id_meshblock_right]))
+
         # Generate meshblock.
         self.meshblock = gpd.GeoDataFrame(geometry=list(polygonize(unary_union(self.df[self.geom_col].to_list()))),
                                           crs=self.df.crs)
@@ -245,7 +249,7 @@ class DatasetValidation:
 
         # Generate meshblock index, identifier, and geometry lookups.
         meshblock_idx_id_lookup = dict(zip(range(len(self.meshblock)), self.meshblock[self.id_meshblock]))
-        meshblock_idx_id_lookup[-1] = uuid.UUID(int=0)
+        meshblock_idx_id_lookup[-1] = None
         self.meshblock_idx_geom_lookup = dict(zip(range(len(self.meshblock)), self.meshblock[self.geom_col]))
 
         # Arc scenario: contained - Populate meshblock identifiers based on single result of non-boundary covered_by.
@@ -347,17 +351,17 @@ class DatasetValidation:
             """
 
         # Compile arc-meshblock identifier updates.
-        meshblock_left_lookup = dict(zip(self.df[self.id], self.df[self.id_meshblock_left]))
-        meshblock_right_lookup = dict(zip(self.df[self.id], self.df[self.id_meshblock_right]))
         df_updated = self.df.loc[
-            (self.df[self.id_meshblock_left] != self.df[self.id].map(meshblock_left_lookup)) |
-            (self.df[self.id_meshblock_right] != self.df[self.id].map(meshblock_right_lookup))].copy(deep=True)
+            (self.df[self.id_meshblock_left] != self.df[self.id].map(self.arc_id_meshblock_left_lookup)) |
+            (self.df[self.id_meshblock_right] != self.df[self.id].map(self.arc_id_meshblock_right_lookup))
+        ].copy(deep=True)
 
         # Create SQL statements for arc-meshblock identifier updates.
         if len(df_updated):
 
-            values = df_updated[[self.id, self.id_meshblock_left, self.id_meshblock_right]].apply(
-                lambda row: f"('{itemgetter(0)(row)}', '{itemgetter(1)(row)}', '{itemgetter(2)(row)}')", axis=1)
+            values = df_updated[[self.id, self.id_meshblock_left, self.id_meshblock_right]]\
+                .apply(lambda row: f"('{itemgetter(0)(row)}', '{itemgetter(1)(row)}', '{itemgetter(2)(row)}')", axis=1)\
+                .map(lambda val: val.replace("'None'", "NULL"))
 
             statements["arcs_modified"] = (
                 f"""
@@ -383,12 +387,14 @@ class DatasetValidation:
 
         # Execute statements.
         for update_type in [k for k in ("meshblock_added", "arcs_modified", "meshblock_removed") if k in statements]:
+            logger.info(f"Writing meshblock updates for: {update_type}.")
             helpers.execute_sql(engine=self.engine, statements=statements[update_type])
 
         # Log meshblock updates.
         summary = tabulate([["Added", len(meshblock_added)],
                             ["Removed", len(meshblock_removed)],
-                            ["Unchanged", len(self.meshblock) - len(meshblock_added) - len(meshblock_removed)]],
+                            ["Unchanged", len(set(self.meshblock[self.id_meshblock])
+                                              .intersection(set(self.meshblock_existing[self.id_meshblock])))]],
                            headers=["Status", "Count"], tablefmt="rst", colalign=("left", "right"))
         logger.info(f"Meshblock ({self.dataset_meshblock}) updates:\n" + summary)
 
