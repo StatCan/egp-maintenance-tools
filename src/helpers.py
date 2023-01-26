@@ -76,7 +76,7 @@ def create_db_engine(url: str) -> Engine:
     return engine
 
 
-def execute_db_statements(engine: Engine, statements: Union[str, Tuple[str, ...]]) -> None:
+def execute_sql(engine: Engine, statements: Union[str, Tuple[str, ...]]) -> None:
     """
     Executes one or more SQL statements as a database transaction.
 

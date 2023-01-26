@@ -10,7 +10,7 @@ from itertools import tee
 from math import atan2, cos, dist, radians, sin
 from operator import attrgetter, itemgetter
 from pathlib import Path
-from shapely.geometry import LineString, MultiPoint
+from shapely.geometry import LineString
 from shapely.ops import polygonize, unary_union
 from tabulate import tabulate
 from typing import List, Tuple
@@ -56,7 +56,6 @@ class DatasetValidation:
 
         # Define outputs.
         self.errors = dict()
-        self.export = dict()
 
         # Create database engine.
         self.engine = helpers.create_db_engine(self.url)
@@ -173,6 +172,7 @@ class DatasetValidation:
         # Generate meshblock.
         self.meshblock = gpd.GeoDataFrame(geometry=list(polygonize(unary_union(self.df[self.geom_col].to_list()))),
                                           crs=self.df.crs)
+        self.meshblock.rename_geometry(self.geom_col, inplace=True)
 
         # Generate meshblock attributes as new columns.
         self.df["meshblock_covered_by"] = self.df[self.geom_col].map(
@@ -306,7 +306,7 @@ class DatasetValidation:
                 """)
 
         # Execute statements.
-        helpers.execute_db_statements(engine=self.engine, statements=tuple(statements))
+        helpers.execute_sql(engine=self.engine, statements=tuple(statements))
 
         # Log validation results summary.
         summary = tabulate(
@@ -332,7 +332,7 @@ class DatasetValidation:
 
             values = self.meshblock.loc[self.meshblock[self.id_meshblock].isin(meshblock_added),
                                         [self.id_meshblock, self.id_meshblock_parent, self.geom_col]]\
-                .apply(lambda row: f"({itemgetter(0)(row)}, {itemgetter(1)(row)}, {itemgetter(2)(row)})", axis=1)
+                .apply(lambda row: f"('{itemgetter(0)(row)}', '{itemgetter(1)(row)}', '{itemgetter(2)(row)}')", axis=1)
 
             statements["meshblock_added"] = f"""
             INSERT INTO {self.schema}.{self.dataset_meshblock} ({self.id_meshblock}, {self.id_meshblock_parent}, 
@@ -357,7 +357,7 @@ class DatasetValidation:
         if len(df_updated):
 
             values = df_updated[[self.id, self.id_meshblock_left, self.id_meshblock_right]].apply(
-                lambda row: f"{itemgetter(0, 1, 2)(row)}", axis=1)
+                lambda row: f"('{itemgetter(0)(row)}', '{itemgetter(1)(row)}', '{itemgetter(2)(row)}')", axis=1)
 
             statements["arcs_modified"] = (
                 f"""
@@ -383,7 +383,7 @@ class DatasetValidation:
 
         # Execute statements.
         for update_type in [k for k in ("meshblock_added", "arcs_modified", "meshblock_removed") if k in statements]:
-            helpers.execute_db_statements(engine=self.engine, statements=statements[update_type])
+            helpers.execute_sql(engine=self.engine, statements=statements[update_type])
 
         # Log meshblock updates.
         summary = tabulate([["Added", len(meshblock_added)],
@@ -421,8 +421,8 @@ class DatasetValidation:
         invalid_pts = nodes.intersection(non_nodes)
         if len(invalid_pts):
 
-            # Filter arcs to those with an invalid vertex as a node.
-            flag = self.df.loc[(self.df["pt_start"].isin(invalid_pts)) | (self.df["pt_end"].isin(invalid_pts))]
+            # Flag arcs with an invalid vertex as a node.
+            flag = (self.df["pt_start"].isin(invalid_pts)) | (self.df["pt_end"].isin(invalid_pts))
 
             # Compile errors.
             if sum(flag):
@@ -476,11 +476,6 @@ class DatasetValidation:
             # Compile errors.
             if sum(flag):
                 errors.update(set(coord_pairs.loc[flag].index))
-
-                # Export invalid pairs as MultiPoint geometries.
-                pts = coord_pairs.loc[flag].map(MultiPoint)
-                pts_df = gpd.GeoDataFrame({self.id: pts.index.values}, geometry=[*pts], crs=self.df.crs)
-                self.export[f"reference_cluster_tolerance"] = pts_df.copy(deep=True)
 
         return errors
 
