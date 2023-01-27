@@ -2475,14 +2475,14 @@ the connectivity of the road network.</p></td>
 <td><p>Unique identifier of the corresponding structure.</p></td>
 </tr>
 <tr class="row-odd"><td><p>bb_uid_l</p></td>
-<td><p>False</p></td>
+<td><p>True</p></td>
 <td><p>False</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">uuid_nil()</span></code></p></td>
 <td><p>Unique identifier of the corresponding basic block on the left side of
 each feature.</p></td>
 </tr>
 <tr class="row-even"><td><p>bb_uid_r</p></td>
-<td><p>False</p></td>
+<td><p>True</p></td>
 <td><p>False</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">uuid_nil()</span></code></p></td>
 <td><p>Unique identifier of the corresponding basic block on the right side of
@@ -4931,7 +4931,7 @@ functions used by the CRN data model and the corresponding PostgreSQL syntax to 
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>CREATE OR REPLACE FUNCTION snap_coords ()
 RETURNS TRIGGER AS $$
 BEGIN
-    NEW.geom := ST_AsEWKT(ST_ReducePrecision(NEW.geom, 1 / (10 ^ TG_ARGV[0]::float)), TG_ARGV[0]::int);
+    NEW.geom := ST_AsText(ST_ReducePrecision(NEW.geom, 1 / (10 ^ TG_ARGV[0]::float)), TG_ARGV[0]::int);
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
