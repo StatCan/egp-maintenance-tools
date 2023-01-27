@@ -185,19 +185,19 @@ class DatasetValidation:
         self.df["meshblock_boundary_covered_by"] = self.df[self.geom_col].map(
             lambda g: tuple(meshblock_boundaries.sindex.query(g, predicate="covered_by")))
 
-        # Generate placeholder variable for to-be-generated meshblock index and geometry lookup.
+        # Generate placeholder variable for to-be-generated meshblock lookup.
         self.meshblock_idx_geom_lookup = dict()
 
-        # Generate existing meshblock identifier and geometry lookups.
+        # Generate existing meshblock lookups.
+        self.meshblock_existing_idx_id_lookup = dict(zip(range(len(self.meshblock_existing)),
+                                                         self.meshblock_existing[self.id_meshblock]))
         self.meshblock_existing_id_parent_id_lookup = dict(zip(self.meshblock_existing[self.id_meshblock],
                                                                self.meshblock_existing[self.id_meshblock_parent]))
-        self.meshblock_existing_geom_id_lookup = dict(zip(self.meshblock_existing[self.geom_col].to_wkt(),
-                                                          self.meshblock_existing[self.id_meshblock]))
 
-        # Generate existing meshblock parent geometry and identifier lookup.
-        meshblock_existing_dissolve = self.meshblock_existing.dissolve(by=self.id_meshblock_parent, as_index=False)
-        self.meshblock_existing_parent_geom_id_lookup = dict(zip(meshblock_existing_dissolve[self.geom_col].to_wkt(),
-                                                                 meshblock_existing_dissolve[self.id_meshblock_parent]))
+        # Generate existing meshblock parent dataset and lookup.
+        self.meshblock_parent = self.meshblock_existing.dissolve(by=self.id_meshblock_parent, as_index=False)
+        self.meshblock_parent_idx_id_lookup = dict(zip(range(len(self.meshblock_parent)),
+                                                       self.meshblock_parent[self.id_meshblock_parent]))
 
     @staticmethod
     def _ordered_pairs(coords: Tuple[tuple, ...]) -> List[Tuple[tuple, tuple]]:
@@ -223,21 +223,21 @@ class DatasetValidation:
         logger.info(f"Updating meshblock dataset: {self.dataset_meshblock}.")
 
         # Meshblock - Restore unique identifiers. For non-matches, generate a new identifier.
-        self.meshblock[self.id_meshblock] = self.meshblock[self.geom_col].to_wkt()\
-            .map(self.meshblock_existing_geom_id_lookup)\
-            .fillna(dict(zip(self.meshblock.index, [uuid.uuid4() for _ in range(len(self.meshblock))])))
+        self.meshblock[self.id_meshblock] = self.meshblock[self.geom_col]\
+            .map(lambda g: self.meshblock_existing.sindex.query(g, predicate="covers"))\
+            .map(lambda idxs: itemgetter(itemgetter(0)(idxs))(self.meshblock_existing_idx_id_lookup)\
+            if len(idxs) else uuid.uuid4())
 
         # Meshblock - Restore parent unique identifiers. Populate non-matches with the Nil UUID.
         self.meshblock[self.id_meshblock_parent] = self.meshblock[self.id_meshblock]\
             .map(self.meshblock_existing_id_parent_id_lookup).fillna(uuid.UUID(int=0))
 
-        # Meshblock - Assign the Nil UUID to all parent unique identifiers where any constituent meshblock polygons
-        # failed to match.
+        # Meshblock - Assign the Nil UUID to all parent unique identifiers where the dissolved meshblock polygons no
+        # longer match.
         meshblock_dissolve = self.meshblock.dissolve(by=self.id_meshblock_parent, as_index=False)
-        meshblock_invalid_parent_ids = set(meshblock_dissolve.loc[
-            meshblock_dissolve[self.geom_col].to_wkt().map(self.meshblock_existing_parent_geom_id_lookup).isna(),
-            self.id_meshblock_parent
-        ])
+        meshblock_invalid_parent_ids = set(meshblock_dissolve.loc[meshblock_dissolve[self.geom_col]
+                                           .map(lambda g: self.meshblock_parent.sindex.query(g, predicate="covers"))
+                                           .map(len) == 0, self.id_meshblock_parent])
         self.meshblock.loc[self.meshblock[self.id_meshblock_parent].isin(meshblock_invalid_parent_ids),
                            self.id_meshblock_parent] = uuid.UUID(int=0)
 
@@ -352,8 +352,10 @@ class DatasetValidation:
 
         # Compile arc-meshblock identifier updates.
         df_updated = self.df.loc[
-            (self.df[self.id_meshblock_left] != self.df[self.id].map(self.arc_id_meshblock_left_lookup)) |
-            (self.df[self.id_meshblock_right] != self.df[self.id].map(self.arc_id_meshblock_right_lookup))
+            (self.df[self.id_meshblock_left].fillna(-1) !=
+             self.df[self.id].map(self.arc_id_meshblock_left_lookup).fillna(-1)) |
+            (self.df[self.id_meshblock_right].fillna(-1) !=
+             self.df[self.id].map(self.arc_id_meshblock_right_lookup).fillna(-1))
         ].copy(deep=True)
 
         # Create SQL statements for arc-meshblock identifier updates.

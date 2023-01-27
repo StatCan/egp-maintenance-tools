@@ -1491,7 +1491,7 @@ snap_coords
    CREATE OR REPLACE FUNCTION snap_coords ()
    RETURNS TRIGGER AS $$
    BEGIN
-       NEW.geom := ST_AsEWKT(ST_ReducePrecision(NEW.geom, 1 / (10 ^ TG_ARGV[0]::float)), TG_ARGV[0]::int);
+       NEW.geom := ST_AsText(ST_ReducePrecision(NEW.geom, 1 / (10 ^ TG_ARGV[0]::float)), TG_ARGV[0]::int);
        RETURN NEW;
    END;
    $$ LANGUAGE plpgsql;
