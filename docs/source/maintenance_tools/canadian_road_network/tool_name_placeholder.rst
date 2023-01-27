@@ -1,5 +1,5 @@
 *********************
-Data Model Validation
+Tool Name Placeholder
 *********************
 
 .. contents:: Contents:
