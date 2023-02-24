@@ -1,19 +1,5 @@
-Maintenance Tools
+Maintenance Tools Site
 =================
 
-.. image:: https://img.shields.io/badge/Repository-egp--maintenance--tools-brightgreen.svg?style=flat-square&logo=github
-   :target: https://github.com/StatCan/egp-maintenance-tools
-.. image:: https://img.shields.io/badge/License-BSD%203--Clause-blue.svg?style=flat-square
-   :target: https://opensource.org/licenses/BSD-3-Clause
-
-Description
------------
-
-Repository for the Maintenance Tools project, part of the Enterprise Geospatial Platform (EGP). The Maintenance Tools
-combines the core requirements of existing NGDv2 editor with the new requirements of the EGP in a completely new suite
-of custom maintenance tools.
-
-Setup / Installation
---------------------
-
-See :doc:`/source/about/environment` for setup and installation details.
+Warning: Do NOT merge this branch to the master.
+The folder strcutire in this branch has been modified to allow for easier GitHub Pages publishing.
