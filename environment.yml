@@ -8,15 +8,14 @@ dependencies:
   - gdal=3.5.0
   - geoalchemy2=0.12.5
   - geopandas=0.11.0
-  - matplotlib=3.5.2
   - pandas=1.4.3
   - psycopg2=2.9.3
-  - pydata-sphinx-theme=0.7.2
+  - pydata-sphinx-theme=0.13.3
   - pygeos=0.12.0
   - python=3.9.13
   - pyyaml=6.0
   - shapely=1.8.2
-  - sphinx=4.0.0
+  - sphinx=5.3.0
   - sqlalchemy=1.4.41
   - tabulate=0.8.10
   - tqdm=4.64.0

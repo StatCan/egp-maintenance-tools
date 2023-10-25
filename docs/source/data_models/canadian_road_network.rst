@@ -559,6 +559,34 @@ language_code_lookup
    tli, "Tlingit", "Tlingit", ""
    xsl, "South Slavey", "Esclave du Sud", ""
 
+national_highway_system_lookup
+------------------------------
+
+**Description:** Codeset lookup dataset for national highway system.
+
+*Table: Attribute description and constraints.*
+
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
+
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
+
+   -1, "Unknown", "Inconnu", "Value is unknown."
+   1, "Yes", "Oui", "Part of the National Highway System."
+   2, "No", "Non", "Not part of the National Highway System."
+
 provider_lookup
 ---------------
 
@@ -800,6 +828,8 @@ segment
    "traffic_direction", False, False, "", "The direction(s) of traffic flow allowed on the road."
    "road_surface_type", False, False, "", "The type of surface covering a road."
    "structure_id", False, False, "", "Unique identifier of the corresponding structure."
+   "trans_canada_highway", False, False, "", "Indicates the inclusion of the feature in the Trans-Canada Highway."
+   "national_highway_system", False, False, "", "Indicates the inclusion of the feature in the National Highway System."
    "bb_uid_l", True, False, "", "Unique identifier of the corresponding basic block on the left side of each feature."
    "bb_uid_r", True, False, "", "Unique identifier of the corresponding basic block on the right side of each feature."
    "acquisition_technique", False, False, "", "The type of data source or technique used to populate (create or revise)
@@ -1470,6 +1500,34 @@ traffic_direction_lookup
    direction of the road."
    3, "Opposite direction", "Direction contraire", "The direction of one way traffic flow is opposite to the
    digitizing direction of the road."
+
+trans_canada_highway_lookup
+---------------------------
+
+**Description:** Codeset lookup dataset for trans-canada highway.
+
+*Table: Attribute description and constraints.*
+
+.. csv-table::
+   :header: "Attribute", "Nullable", "Unique", "Default", "Description"
+   :widths: auto
+   :align: left
+
+   "code", False, True, "", "Concise code used in place of a more descriptive value."
+   "value_en", False, True, "", "English version of the descriptive value."
+   "value_fr", False, True, "", "French version of the descriptive value."
+
+|
+| *Table: Codeset domain.*
+
+.. csv-table::
+   :header: "code", "value_en", "value_fr", "Description"
+   :widths: auto
+   :align: left
+
+   -1, "Unknown", "Inconnu", "Value is unknown."
+   1, "Yes", "Oui", "Part of the Trans-Canada Highway."
+   2, "No", "Non", "Not part of the Trans-Canada Highway."
 
 Database Trigger Functions
 ==========================
